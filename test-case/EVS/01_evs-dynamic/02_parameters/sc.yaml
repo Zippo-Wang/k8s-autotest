@@ -1,0 +1,12 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: evs-sc-paras
+provisioner: evs.csi.huaweicloud.com
+allowVolumeExpansion: true
+parameters:
+  type: SSD
+  availability: eu-west-0a
+  scsi: "true"
+  kmsId: 7e2125cb-1f24-4f4a-bd7c-e4acd4e9b811
+reclaimPolicy: Delete

@@ -1,0 +1,14 @@
+# when removing SC or PVC, the bucket resources will be cleared and deleted together.
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvc-obs-default
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      # when the used storage space in a bucket reaches the upper limit of the bucket storage quota,
+      # it will be unable to continue to write data.
+      storage: 500Gi
+  storageClassName: obs-sc-default

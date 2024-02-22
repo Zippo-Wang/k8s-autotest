@@ -1,0 +1,10 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: evs-sc-rwx
+provisioner: evs.csi.huaweicloud.com
+allowVolumeExpansion: true
+parameters:
+  type: SSD
+  multiattach: "true"
+reclaimPolicy: Delete

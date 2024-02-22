@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sfs-turbo-static
+spec:
+  capacity:
+    storage: 500Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Delete
+  csi:
+    driver: sfsturbo.csi.huaweicloud.com
+    volumeHandle: 55b096c6-0b6b-4499-8f30-7893fb090a92  # 这个值需要修改，创建对应集群的SFS文件系统

@@ -1,0 +1,8 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="ShellCheck" enabled="true" level="ERROR" enabled_by_default="true">
+      <shellcheck_settings value="SC2005,SC2006,SC2046,SC2059,SC2068,SC2076,SC2145,SC2154,SC2164,SC2183" />
+    </inspection_tool>
+  </profile>
+</component>

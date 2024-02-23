@@ -25,6 +25,10 @@ dir_sfs_turbo="${kt_project_path}/test-case/SFS-Turbo"
 k8s_pod="pod"
 k8s_pvc="pvc"
 k8s_pv="pv"
+k8s_sc="sc"
+
+k8s_pvc2="pvc2"
+k8s_snapshotx="snapshotx"
 
 # debug常量
 info_msg="\033[1;32m[INFO]\033[0m"  # 绿色加粗

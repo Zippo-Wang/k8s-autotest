@@ -27,7 +27,7 @@ case ${operate1} in
       ${service_evs} )        f_create ${dir_evs};;
       ${service_obs} )        f_create ${dir_obs};;
       ${service_sfs_turbo} )  f_create ${dir_sfs_turbo};;
-      $*)                     f_create ${operate2};;
+      *)                      f_delete ${operate2};;  # 注意不是$*
     esac ;;
 
   # delete
@@ -36,7 +36,7 @@ case ${operate1} in
       ${service_evs} )        f_delete ${dir_evs} ;;
       ${service_obs} )        f_delete ${dir_obs} ;;
       ${service_sfs_turbo} )  f_delete ${dir_sfs_turbo} ;;
-      $*)                     f_delete ${operate2};;
+      *)                      f_delete ${operate2};;
     esac ;;
 
   # watch

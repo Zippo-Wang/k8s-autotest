@@ -14,10 +14,19 @@ function f_create() {
   pvc2=$(find ${yaml_dir} -name pvc2.yaml -type f)
   snapshotx=$(find ${yaml_dir} -name snapshotx -type f)
 
+  printf "${font_green1}${k8s_sc}↓↓↓${cend}------------------------------------------------------------------------- \n"
   if [[ ! ${#sc[@]} -eq 0 ]]; then for x in ${sc[@]}; do kubectl apply -f ${x}; done; fi;
+
+  printf "${font_green1}${k8s_pv}↓↓↓${cend}------------------------------------------------------------------------- \n"
   if [[ ! ${#pv[@]} -eq 0 ]]; then for x in ${pv[@]}; do kubectl apply -f ${x}; done; fi;
+
+  printf "${font_green1}${k8s_pvc}↓↓↓${cend}------------------------------------------------------------------------ \n"
   if [[ ! ${#pvc[@]} -eq 0 ]]; then for x in ${pvc[@]}; do kubectl apply -f ${x}; done; fi;
+
+  printf "${font_green1}${k8s_pod}↓↓↓${cend}------------------------------------------------------------------------ \n"
   if [[ ! ${#pod[@]} -eq 0 ]]; then for x in ${pod[@]}; do kubectl apply -f ${x}; done; fi;
+
+  printf "${font_green1}${k8s_snapshotx}↓↓↓${cend}------------------------------------------------------------------ \n"
   if [[ ! ${#evs_snapshot_array[@]} -eq 0 ]]; then for x in ${evs_snapshot_array[@]}; do kubectl apply -f ${x}; done; fi;
 
   printf "${info_msg}The cmd have been executed successfully, please wait for resources be created completely. \n"
@@ -42,11 +51,22 @@ function f_delete() {
   pvc2=$(find ${yaml_dir} -name pvc2.yaml -type f)
   snapshotx=$(find ${yaml_dir} -name snapshotx -type f)
 
+  printf "${font_green1}${k8s_pod}↓↓↓${cend}------------------------------------------------------------------------ \n"
   if [[ ! ${#pod[@]} -eq 0 ]]; then for x in ${pod[@]}; do kubectl delete -f ${x}; done; fi;
+
+  printf "${font_green1}${k8s_pvc}↓↓↓${cend}------------------------------------------------------------------------ \n"
   if [[ ! ${#pvc[@]} -eq 0 ]]; then for x in ${pvc[@]}; do kubectl delete -f ${x}; done; fi;
+
+  printf "${font_green1}${k8s_pvc2}↓↓↓${cend}----------------------------------------------------------------------- \n"
   if [[ ! ${#pvc2[@]} -eq 0 ]]; then for x in ${pvc2[@]}; do kubectl delete -f ${x}; done; fi;
+
+  printf "${font_green1}${k8s_sc}↓↓↓${cend}------------------------------------------------------------------------- \n"
   if [[ ! ${#sc[@]} -eq 0 ]]; then for x in ${sc[@]}; do kubectl delete -f ${x}; done; fi;
+
+  printf "${font_green1}${k8s_pv}↓↓↓${cend}------------------------------------------------------------------------- \n"
   if [[ ! ${#pv[@]} -eq 0 ]]; then for x in ${pv[@]}; do kubectl delete -f ${x}; done; fi;
+
+  printf "${font_green1}${k8s_snapshotx}↓↓↓${cend}------------------------------------------------------------------ \n"
   if [[ ! ${#snapshotx[@]} -eq 0 ]]; then for x in ${snapshotx[@]}; do kubectl delete -f ${x}; done; fi;
 
   printf "${info_msg}The cmd have been executed successfully, please wait for resources be deleted completely. \n"

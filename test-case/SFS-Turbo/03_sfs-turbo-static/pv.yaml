@@ -10,4 +10,6 @@ spec:
   persistentVolumeReclaimPolicy: Delete
   csi:
     driver: sfsturbo.csi.huaweicloud.com
-    volumeHandle: 55b096c6-0b6b-4499-8f30-7893fb090a92  # 这个值需要修改，创建对应集群的SFS文件系统
+    volumeHandle: cb6e75f0-3562-4534-bcdf-60a0568f4a21  # 1.27
+    #volumeHandle: 55b096c6-0b6b-4499-8f30-7893fb090a92 # 1.28
+    #volumeHandle: 21d1446f-627f-434f-828b-4bfa917d24c9 # 1.29

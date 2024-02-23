@@ -3,7 +3,7 @@
 ### test-case
 EVS、OBS、SFS-Turbo
 
-### test-script
+### script
 
 1.create
 ```bash

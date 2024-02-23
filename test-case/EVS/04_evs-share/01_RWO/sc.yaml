@@ -6,4 +6,5 @@ provisioner: evs.csi.huaweicloud.com
 allowVolumeExpansion: true
 parameters:
   type: SSD
+  multiattach: "true"
 reclaimPolicy: Delete

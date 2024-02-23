@@ -9,9 +9,9 @@ function f_init() {
   script_directory="/etc/bash_completion.d/"      # 存放脚本的目录
   env_directory="/usr/share/bash-completion/bash_completion"  # 使脚本生效的目录
 
-  if [ -f ${env_directory} ]; then `yum -y install bash-completion` ; fi
+  if [ ! -f ${env_directory} ]; then yum install bash-completion -y ; fi
 
-  if [ ! -d ${script_directory}]
+  if [ ! -d ${script_directory} ]
   then
     echo "该目录不存在，您的Linux系统不支持使用该脚本的自动补全功能，但不影响脚本使用。${script_directory}"
   fi

@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 source ${kt_project_path}/script/constants.sh
-source ${kt_project_path}/cmds/apply.sh
-source ${kt_project_path}/cmds/watch.sh
+source ${kt_project_path}/cmds/action.sh
 source ${kt_project_path}/cmds/other.sh
 
 # 用户输入 ---------------------------------------------------------------------------------------------------------------
@@ -22,17 +21,33 @@ current_cmd="${kt_main} $*" # 获取用户所有输入
 #if [[ ${cmd_list1[*]} =~ ${operate1} && ${cmd_list2[*]} =~ ${operate2} && ! ${operate3} ]]; then
 if [[ ${cmd_list1[*]} =~ ${operate1} && ! ${operate3} ]]; then
 case ${operate1} in
-  # 执行
-  ${kt_create}) f_kubectl_apply ${operate2} ;;
-  ${kt_delete}) f_kubectl_delete ${operate2} ;;
-  ${kt_watch})  f_kubectl_get ${operate2} ;;
+  # create
+  ${kt_create})
+    case ${operate2} in
+      ${service_evs} )        f_create ${dir_evs};;
+      ${service_obs} )        f_create ${dir_obs};;
+      ${service_sfs_turbo} )  f_create ${dir_sfs_turbo};;
+      $*)                     f_create ${operate2};;
+    esac ;;
+
+  # delete
+  ${kt_delete})
+    case ${operate2} in
+      ${service_evs} )        f_delete ${dir_evs} ;;
+      ${service_obs} )        f_delete ${dir_obs} ;;
+      ${service_sfs_turbo} )  f_delete ${dir_sfs_turbo} ;;
+      $*)                     f_delete ${operate2};;
+    esac ;;
+
+  # watch
+  ${kt_watch})  f_watch ${operate2} ;;
 
   # help
   ${kt_help1}) f_help ;;
   ${kt_help2}) f_help ;;
   ${kt_help3}) f_help ;;
 
-  # 其他
+  # other
   ${common_init}) f_init ;;
   ${common_none}) ;;
 esac

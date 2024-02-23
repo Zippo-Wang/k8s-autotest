@@ -25,7 +25,7 @@ function f_create() {
   # resize
   if [[ ! ${#pvc2[@]} -eq 0 ]]
   then
-    printf "${info_msg}\033[0;33mthese tests have resize, please execute manually. \033[0m\n"
+    printf "${info_msg}\033[0;33mthese tests have resize, please execute manually: \033[0m\n"
     for x in ${pvc2[@]}; do echo ${x}; done ;
   fi
 }

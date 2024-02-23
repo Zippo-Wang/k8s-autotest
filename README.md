@@ -45,6 +45,11 @@ kt create evs
 kt delete sfs-turbo
 ```
 
+3）自定义目录
+```bash
+kt create /root/code/k8s-autotest/test-case/OBS/01_obs-dynamic
+```
+
 3）另起窗口，监控pod
 ```bash
 # watch -n 1 -d kubectl get pod -o wide

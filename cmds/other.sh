@@ -9,7 +9,7 @@ function f_init() {
   script_directory="/etc/bash_completion.d/"      # 存放脚本的目录
   env_directory="/usr/share/bash-completion/bash_completion"  # 使脚本生效的目录
 
-  if [[ -f ${env_directory} ]]; then yum -y install bash-completion ; fi
+  if [ -f ${env_directory} ]; then `yum -y install bash-completion` ; fi
 
   if [ ! -d ${script_directory}]
   then

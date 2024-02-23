@@ -50,13 +50,13 @@ kt delete sfs-turbo
 kt create /root/code/k8s-autotest/test-case/OBS/01_obs-dynamic
 ```
 
-3）另起窗口，监控pod
+4）另起窗口，监控pod
 ```bash
 # watch -n 1 -d kubectl get pod -o wide
 kt watch pod
 ```
 
-4）查看帮助
+5）查看帮助
 ```bash
 kt --help
 ```

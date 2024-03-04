@@ -22,10 +22,12 @@ dir_obs="${kt_project_path}/test-case/OBS"
 dir_sfs_turbo="${kt_project_path}/test-case/SFS-Turbo"
 
 # k8s监控
+k8s_deployment="deployment"
 k8s_pod="pod"
 k8s_pvc="pvc"
 k8s_pv="pv"
 k8s_sc="sc"
+k8s_service="service"
 
 k8s_pvc2="pvc2"
 k8s_snapshotx="snapshotx"

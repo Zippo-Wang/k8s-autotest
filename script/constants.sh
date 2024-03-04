@@ -28,6 +28,7 @@ k8s_pvc="pvc"
 k8s_pv="pv"
 k8s_sc="sc"
 k8s_service="service"
+k8s_node="node"
 
 k8s_pvc2="pvc2"
 k8s_snapshotx="snapshotx"

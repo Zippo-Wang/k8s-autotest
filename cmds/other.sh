@@ -48,4 +48,5 @@ function f_help() {
   printf " ${font_green1}${k8s_pv}${cend}  \t      执行watch -n 1 -d kubectl get pv\n"
   printf " ${font_green1}${k8s_deployment}${cend}   执行watch -n 1 -d kubectl get deployment\n"
   printf " ${font_green1}${k8s_service}${cend}      执行watch -n 1 -d kubectl get service\n"
+  printf " ${font_green1}${k8s_node}${cend}         执行watch -n 1 -d kubectl get node\n"
 }

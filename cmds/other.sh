@@ -36,14 +36,21 @@ function f_help() {
   printf " ${font_green1}tab${cend}          ${font_blue1}自动补全${cend}。按tab键即可自动补全本系统支持的所有命令 \n"
   echo
 
-  printf "${font_yellow1}【二】[create][delete] ${cend}\n"
+  printf "${font_yellow1}【二】[install][uninstall] ${cend}\n"
+  printf " ${font_green1}${service_evs}${cend} \t      安装evs鉴权和插件 或 卸载evs鉴权和插件【不含cloud-config】\n"
+  printf " ${font_green1}${service_obs}${cend} \t      安装obs鉴权和插件 或 卸载obs鉴权和插件【不含cloud-config】 \n"
+  printf " ${font_green1}${service_sfs_turbo}${cend}    安装sfs-turbo鉴权和插件 或 卸载sfs-turbo鉴权和插件【不含cloud-config】\n"
+  printf " ${font_green1}${plugin_ccm}${cend}  \t      安装ccm鉴权和插件 或 卸载ccm鉴权和插件【不含cloud-config和lb-config】\n"
+  echo
+
+  printf "${font_yellow1}【三】[create][delete] ${cend}\n"
   printf " ${font_green1}${service_evs}${cend} \t      执行evs用例 或 删除evs用例创建的对象\n"
   printf " ${font_green1}${service_obs}${cend} \t      执行obs用例 或 删除obs用例创建的对象\n"
   printf " ${font_green1}${service_sfs_turbo}${cend}    执行sfs-turbo用例 或 删除sfs-turbo用例创建的对象\n"
   printf " ${font_green1}${plugin_ccm}${cend}  \t      执行ccm用例 或 删除ccm用例创建的对象\n"
   echo
 
-  printf "${font_yellow1}【三】[watch] ${cend}\n"
+  printf "${font_yellow1}【四】[watch] ${cend}\n"
   printf " ${font_green1}${k8s_pod}${cend} \t      执行watch -n 1 -d kubectl get pod -o wide\n"
   printf " ${font_green1}${k8s_pvc}${cend} \t      执行watch -n 1 -d kubectl get pvc\n"
   printf " ${font_green1}${k8s_pv}${cend}  \t      执行watch -n 1 -d kubectl get pv\n"

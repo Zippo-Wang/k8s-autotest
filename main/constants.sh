@@ -4,9 +4,11 @@
 kt="kt"
 
 # 系统命令
-kt_create="create"
-kt_delete="delete"
-kt_watch="watch"
+kt_create="create"      # 创建用例
+kt_delete="delete"      # 删除用例
+kt_install="install"    # 创建RBAC鉴权、安装插件【不包括cloud-config】
+kt_uninstall="uninstall"    # 删除RBAC鉴权、安装插件【不包括cloud-config】
+kt_watch="watch"        # 监控资源
 kt_help1="help"
 kt_help2="-help"
 kt_help3="--help"
@@ -43,8 +45,14 @@ dir_ccm="${kt_project_path}/test-case/ccm"
 common_none=""
 common_init="init"
 
-cmd_list1=(${kt_create} ${kt_delete} ${kt_watch} ${common_init} ${kt_help1} ${kt_help2} ${kt_help3})
-cmd_list2=(${service_evs} ${service_obs} ${service_sfs_turbo} ${k8s_pod} ${k8s_pvc} ${k8s_pv})
+cmd_list1=(
+    ${kt_create} ${kt_delete} ${kt_watch} ${kt_install} ${kt_uninstall}
+    ${common_init} ${kt_help1} ${kt_help2} ${kt_help3}
+)
+cmd_list2=(
+    ${service_evs} ${service_obs} ${service_sfs_turbo} ${k8s_pod} ${k8s_pvc} ${k8s_pv}
+    ${k8s_deployment} ${k8s_sc} ${k8s_service} ${k8s_node}
+)
 
 # debug常量
 info_msg="\033[1;32m[INFO]\033[0m"  # 绿色加粗

@@ -42,3 +42,13 @@ function f_delete_ccm() {
   echo
   printf "${info_msg}The cmd have been executed successfully, please wait for resources be created completely. \n"
 }
+
+function f_install_ccm() {
+kubectl apply -f  https://raw.githubusercontent.com/kubernetes-sigs/cloud-provider-huaweicloud/master/manifests/rbac-huawei-cloud-controller-manager.yaml
+kubectl apply -f  https://raw.githubusercontent.com/kubernetes-sigs/cloud-provider-huaweicloud/master/manifests/huawei-cloud-controller-manager.yaml
+}
+
+function f_uninstall_ccm() {
+kubectl delete -f  https://raw.githubusercontent.com/kubernetes-sigs/cloud-provider-huaweicloud/master/manifests/rbac-huawei-cloud-controller-manager.yaml
+kubectl delete -f  https://raw.githubusercontent.com/kubernetes-sigs/cloud-provider-huaweicloud/master/manifests/huawei-cloud-controller-manager.yaml
+}

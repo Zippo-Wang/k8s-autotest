@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source ${kt_project_path}/script/constants.sh
+source ${kt_project_path}/main/constants.sh
 
 function f_init() {
   for file in `find ${kt_project_path} -name *.sh -type f`; do vi $file -c 'set ff=unix | wq!'; done

@@ -17,9 +17,9 @@ service_obs="obs"
 service_sfs_turbo="sfs-turbo"
 
 # 脚本目录
-dir_evs="${kt_project_path}/test-case/EVS"
-dir_obs="${kt_project_path}/test-case/OBS"
-dir_sfs_turbo="${kt_project_path}/test-case/SFS-Turbo"
+dir_evs="${kt_project_path}/test-case/csi/EVS"
+dir_obs="${kt_project_path}/test-case/csi/OBS"
+dir_sfs_turbo="${kt_project_path}/test-case/csi/SFS-Turbo"
 
 # k8s监控
 k8s_deployment="deployment"

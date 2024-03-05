@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source ${kt_project_path}/script/constants.sh
+source ${kt_project_path}/main/constants.sh
 
 function f_create() {
   yaml_dir=${1}

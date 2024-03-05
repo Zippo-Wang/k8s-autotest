@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-source ${kt_project_path}/script/constants.sh
-source ${kt_project_path}/cmds/action.sh
-source ${kt_project_path}/cmds/other.sh
+source ${kt_project_path}/main/constants.sh
+source ${kt_project_path}/cmds/csi/action.sh
+source ${kt_project_path}/cmds/common/other.sh
 
 # 用户输入 ---------------------------------------------------------------------------------------------------------------
 operate1=${1} # create/delete/watch/help

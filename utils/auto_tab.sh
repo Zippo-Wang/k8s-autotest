@@ -6,7 +6,7 @@
 
 _kt_auto_tab(){
   opts1="create delete watch init help -help --help"
-  opts2="evs obs sfs-turbo"
+  opts2="evs obs sfs-turbo ccm"
   opts3="pod pvc pv deployment service node"
 	case ${COMP_CWORD} in
 	1)

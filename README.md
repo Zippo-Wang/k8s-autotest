@@ -1,17 +1,25 @@
 # k8s-autotest
 
-仅支持centos 7.9，其他系统可能存在不兼容
+仅支持centos 7.9，其他系统**可能**存在不兼容
 ### 1、test-case
 1）支持的服务
-```txt
+```bash
+# csi
 EVS
 OBS
 SFS-Turbo
+
+# ccm
+ccm
 ```
 
 2）测试用例的文件命名必须为以下几个
-```txt
+```bash
+# csi
 pv.yaml, sc.yaml, pvc.yaml, pvc2.yaml, pod.yaml
+
+# ccm
+elb-service.yaml
 ```
 
 3）特殊用例，特殊名字，特殊处理
@@ -34,30 +42,25 @@ kt init
 ```
 
 ### 3、script使用
-
-1）执行evs服务的测试用例，创建对象
 ```bash
+# 执行evs服务的测试用例，创建对象
 kt create evs
-```
 
-2）删除sfs-turbo服务测试用例创建的对象
-```bash
+# 删除sfs-turbo服务测试用例创建的对象
 kt delete sfs-turbo
-```
 
-3）自定义目录
-```bash
-# 绝对路径
+# 自定义目录
 kt create /root/code/k8s-autotest/test-case/csi/OBS/01_obs-dynamic
-```
 
-4）另起窗口，监控pod
-```bash
+# 执行ccm用例
+kt create ccm
+
+# 另起窗口，监控pod
 # watch -n 1 -d kubectl get pod -o wide
 kt watch pod
-```
 
-5）查看帮助
-```bash
+# 查看帮助
+kt help
+kt -help
 kt --help
 ```

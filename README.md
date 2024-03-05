@@ -25,7 +25,7 @@ snapshotx-xxx.yaml
 ```bash
 export kt_project_path="/root/code/k8s-autotest"
 export kt_main='kt'
-alias kt="source $kt_project_path/script/main.sh"
+alias kt="source $kt_project_path/main/main.sh"
 ```
 
 2）执行初始化，然后重新打开终端窗口使初始化生效
@@ -47,7 +47,8 @@ kt delete sfs-turbo
 
 3）自定义目录
 ```bash
-kt create /root/code/k8s-autotest/test-case/OBS/01_obs-dynamic
+# 绝对路径
+kt create /root/code/k8s-autotest/test-case/csi/OBS/01_obs-dynamic
 ```
 
 4）另起窗口，监控pod

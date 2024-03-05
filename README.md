@@ -43,6 +43,9 @@ kt init
 
 ### 3、script使用
 ```bash
+# 安装evs相关配置【不含cloud-config】
+kt install evs
+
 # 执行evs服务的测试用例，创建对象
 kt create evs
 

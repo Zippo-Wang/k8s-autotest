@@ -42,8 +42,28 @@ case ${operate1} in
       *)                      f_delete ${operate2};;
     esac ;;
 
+  # install
+  ${kt_install})
+    case ${operate2} in
+      ${service_evs} )        f_install_evs ;;
+      ${service_obs} )        f_install_obs ;;
+      ${service_sfs_turbo} )  f_install_sfs_turbo ;;
+      ${plugin_ccm})          f_install_ccm ;;
+      *)                      printf "${err_msg}没有这个命令：${current_cmd} \n" ;;
+    esac ;;
+
+  # uninstall
+  ${kt_uninstall})
+    case ${operate2} in
+      ${service_evs} )        f_uninstall_evs ;;
+      ${service_obs} )        f_uninstall_obs ;;
+      ${service_sfs_turbo} )  f_uninstall_sfs_turbo ;;
+      ${plugin_ccm})          f_uninstall_ccm ;;
+      *)                      printf "${err_msg}没有这个命令：${current_cmd} \n" ;;
+    esac ;;
+
   # watch
-  ${kt_watch})  f_watch ${operate2} ;;
+  ${kt_watch}) f_watch ${operate2} ;;
 
   # help
   ${kt_help1}) f_help ;;

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubernetes.io/elb.class: shared
+    kubernetes.io/elb.lb-algorithm: ROUND_ROBIN
+    kubernetes.io/elb.session-affinity-flag: 'on'
+    kubernetes.io/elb.session-affinity-option: >-
+      {"type": "SOURCE_IP", "persistence_timeout": 15}
+  labels:
+    app: nginx
+  name: lb-service-04
+  namespace: default
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: nginx
+  type: LoadBalancer

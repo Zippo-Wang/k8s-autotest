@@ -33,6 +33,19 @@ k8s_node="node"
 k8s_pvc2="pvc2"
 k8s_snapshotx="snapshotx"
 
+# ccm ------------------------------------------------------------------------------------------------------------------
+plugin_ccm="ccm"
+
+dir_ccm="${kt_project_path}/test-case/ccm"
+
+
+# 其他常量 --------------------------------------------------------------------------------------------------------------
+common_none=""
+common_init="init"
+
+cmd_list1=(${kt_create} ${kt_delete} ${kt_watch} ${common_init} ${kt_help1} ${kt_help2} ${kt_help3})
+cmd_list2=(${service_evs} ${service_obs} ${service_sfs_turbo} ${k8s_pod} ${k8s_pvc} ${k8s_pv})
+
 # debug常量
 info_msg="\033[1;32m[INFO]\033[0m"  # 绿色加粗
 err_msg="\033[1;31m[ERROR]\033[0m"  # 红色加粗
@@ -47,11 +60,3 @@ font_yellow='\033[0;33m'
 font_red1='\033[1;31m'
 font_green1='\033[1;32m'
 font_yellow1='\033[1;33m'
-
-# 其他常量
-common_none=""
-common_init="init"
-
-cmd_list1=(${kt_create} ${kt_delete} ${kt_watch} ${common_init} ${kt_help1} ${kt_help2} ${kt_help3})
-cmd_list2=(${service_evs} ${service_obs} ${service_sfs_turbo} ${k8s_pod} ${k8s_pvc} ${k8s_pv})
-

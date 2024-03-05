@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 source ${kt_project_path}/main/constants.sh
-source ${kt_project_path}/cmds/csi/action.sh
-source ${kt_project_path}/cmds/common/other.sh
+source ${kt_project_path}/cmds/csi.sh
+source ${kt_project_path}/cmds/ccm.sh
+source ${kt_project_path}/cmds/other.sh
 
 # 用户输入 ---------------------------------------------------------------------------------------------------------------
 operate1=${1} # create/delete/watch/help
@@ -27,6 +28,7 @@ case ${operate1} in
       ${service_evs} )        f_create ${dir_evs};;
       ${service_obs} )        f_create ${dir_obs};;
       ${service_sfs_turbo} )  f_create ${dir_sfs_turbo};;
+      ${plugin_ccm})          f_create_ccm ${dir_ccm};;
       *)                      f_create ${operate2};;  # 注意不是$*
     esac ;;
 
@@ -36,6 +38,7 @@ case ${operate1} in
       ${service_evs} )        f_delete ${dir_evs} ;;
       ${service_obs} )        f_delete ${dir_obs} ;;
       ${service_sfs_turbo} )  f_delete ${dir_sfs_turbo} ;;
+      ${plugin_ccm})          f_delete_ccm ${dir_ccm};;
       *)                      f_delete ${operate2};;
     esac ;;
 

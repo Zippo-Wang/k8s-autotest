@@ -40,6 +40,7 @@ function f_help() {
   printf " ${font_green1}${service_evs}${cend} \t      执行evs用例 或 删除evs用例创建的对象\n"
   printf " ${font_green1}${service_obs}${cend} \t      执行obs用例 或 删除obs用例创建的对象\n"
   printf " ${font_green1}${service_sfs_turbo}${cend}    执行sfs-turbo用例 或 删除sfs-turbo用例创建的对象\n"
+  printf " ${font_green1}${plugin_ccm}${cend}  \t      执行ccm用例 或 删除ccm用例创建的对象\n"
   echo
 
   printf "${font_yellow1}【三】[watch] ${cend}\n"

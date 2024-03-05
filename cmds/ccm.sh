@@ -6,7 +6,7 @@ function f_create_ccm() {
   yaml_dir=${1}
   # 一般
   deployment=$(find ${yaml_dir} -name deployment.yaml -type f)
-  service=$(find ${yaml_dir} -name elb.yaml -type f)
+  service=$(find ${yaml_dir} -name elb-service.yaml -type f)
 
   if [[ ! ${#deployment[@]} -eq 0 ]]; then
     printf "${font_green1}[${k8s_deployment}]↓↓↓${cend}----------------------------------------------------------------- \n"
@@ -26,7 +26,7 @@ function f_create_ccm() {
 function f_delete_ccm() {
   yaml_dir=${1}
   # 一般
-  service=$(find ${yaml_dir} -name elb.yaml -type f)
+  service=$(find ${yaml_dir} -name elb-service.yaml -type f)
   deployment=$(find ${yaml_dir} -name deployment.yaml -type f)
 
   if [[ ! ${#service[@]} -eq 0 ]]; then

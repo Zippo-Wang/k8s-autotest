@@ -3,7 +3,7 @@ kind: Service
 metadata:
   annotations:
     kubernetes.io/elb.class: shared
-    kubernetes.io/elb.id: f6d0c244-4857-477d-ae16-67ea015694ec  # Please replace xx with your ELB instance ID.
+    kubernetes.io/elb.id: 0fa23977-8030-483b-a551-9c1dcbd703d9  # Please replace xx with your ELB instance ID.
     kubernetes.io/elb.lb-algorithm: ROUND_ROBIN
   labels:
     app: nginx

@@ -5,7 +5,7 @@
 # 每次执行init都会重写该文件，如手动修改了本文件请及时保存
 
 _kt_auto_tab(){
-  opts1="create delete watch install uninstall init help -help --help"
+  opts1="create delete watch build install uninstall init help -help --help"
   opts2="evs obs sfs-turbo ccm"
   opts3="pod pvc pv deployment service node"
 	case ${COMP_CWORD} in

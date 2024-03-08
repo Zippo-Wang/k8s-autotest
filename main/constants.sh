@@ -9,6 +9,7 @@ kt_delete="delete"      # 删除用例
 kt_install="install"    # 创建RBAC鉴权、安装插件【不包括cloud-config】
 kt_uninstall="uninstall"    # 删除RBAC鉴权、安装插件【不包括cloud-config】
 kt_watch="watch"        # 监控资源
+kt_build="build"        # 构建csi包，然后发布到docker hub
 kt_help1="help"
 kt_help2="-help"
 kt_help3="--help"
@@ -46,7 +47,7 @@ common_none=""
 common_init="init"
 
 cmd_list1=(
-    ${kt_create} ${kt_delete} ${kt_watch} ${kt_install} ${kt_uninstall}
+    ${kt_create} ${kt_delete} ${kt_watch} ${kt_install} ${kt_uninstall} ${kt_build}
     ${common_init} ${kt_help1} ${kt_help2} ${kt_help3}
 )
 cmd_list2=(

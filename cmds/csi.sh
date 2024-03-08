@@ -160,3 +160,18 @@ kubectl delete -f https://raw.githubusercontent.com/huaweicloud/huaweicloud-csi-
 kubectl delete -f https://raw.githubusercontent.com/huaweicloud/huaweicloud-csi-driver/master/deploy/sfsturbo-csi-plugin/kubernetes/csi-sfsturbo-controller.yaml
 kubectl delete -f https://raw.githubusercontent.com/huaweicloud/huaweicloud-csi-driver/master/deploy/sfsturbo-csi-plugin/kubernetes/csi-sfsturbo-node.yaml
 }
+
+function f_build_evs() {
+    VERSION=${1} make image-evs-csi-plugin
+    VERSION=${1} make push-image-evs-csi-plugin
+}
+
+function f_build_obs() {
+    VERSION=${1} make image-obs-csi-plugin
+    VERSION=${1} make push-image-obs-csi-plugin
+}
+
+function f_build_sfs_turbo() {
+    VERSION=${1} make image-sfsturbo-csi-plugin
+    VERSION=${1} make push-image-sfsturbo-csi-plugin
+}

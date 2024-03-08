@@ -16,6 +16,8 @@ _kt_auto_tab(){
 		  COMPREPLY=($(compgen -W "${opts2}" -- ${COMP_WORDS[COMP_CWORD]}))
 		elif [[ ${COMP_WORDS[1]} == "install" || ${COMP_WORDS[1]} == "uninstall" ]]; then
 		  COMPREPLY=($(compgen -W "${opts2}" -- ${COMP_WORDS[COMP_CWORD]}))
+        elif [[ ${COMP_WORDS[1]} == "build" ]]; then
+		  COMPREPLY=($(compgen -W "${opts2}" -- ${COMP_WORDS[COMP_CWORD]}))
         elif [ ${COMP_WORDS[1]} == "watch" ]; then
 		  COMPREPLY=($(compgen -W "${opts3}" -- ${COMP_WORDS[COMP_CWORD]}))
 		fi

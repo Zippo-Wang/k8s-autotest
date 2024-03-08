@@ -20,7 +20,8 @@ fi
 # 支持的命令 -------------------------------------------------------------------------------------------------------------
 current_cmd="${kt_main} $*" # 获取用户所有输入
 #if [[ ${cmd_list1[*]} =~ ${operate1} && ${cmd_list2[*]} =~ ${operate2} && ! ${operate3} ]]; then
-if [[ ${cmd_list1[*]} =~ ${operate1} && ! ${operate3} ]]; then
+#if [[ ${cmd_list1[*]} =~ ${operate1} && ! ${operate3} ]]; then
+if [[ ${cmd_list1[*]} =~ ${operate1} ]]; then
 case ${operate1} in
   # create
   ${kt_create})
@@ -62,6 +63,15 @@ case ${operate1} in
       *)                      printf "${err_msg}没有这个命令：${current_cmd} \n" ;;
     esac ;;
 
+  # build
+  ${kt_build})
+    case ${operate2} in
+      ${service_evs} )        f_build_evs ${operate3} ;;
+      ${service_obs} )        f_build_obs ${operate3} ;;
+      ${service_sfs_turbo} )  f_build_sfs_turbo ${operate3} ;;
+      *)                      printf "${err_msg}没有这个命令：${current_cmd} \n" ;;
+    esac ;;
+
   # watch
   ${kt_watch}) f_watch ${operate2} ;;
 
@@ -77,3 +87,4 @@ esac
 else
   printf "${err_msg}没有这个命令：${current_cmd} \n"
 fi
+

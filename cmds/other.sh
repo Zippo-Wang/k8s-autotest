@@ -50,7 +50,13 @@ function f_help() {
   printf " ${font_green1}${plugin_ccm}${cend}  \t      执行ccm用例 或 删除ccm用例创建的对象\n"
   echo
 
-  printf "${font_yellow1}【四】[watch] ${cend}\n"
+  printf "${font_yellow1}【四】[build] ${cend}示例：kt build obs v0.0.2 \n"
+  printf " ${font_green1}${service_evs}${cend} \t      打包evs插件成docker镜像，并推送到docker hub \n"
+  printf " ${font_green1}${service_obs}${cend} \t      打包obs插件成docker镜像，并推送到docker hub \n"
+  printf " ${font_green1}${service_sfs_turbo}${cend}    打包sfs-turbo插件成docker镜像，并推送到docker hub \n"
+  echo
+
+  printf "${font_yellow1}【五】[watch] ${cend}\n"
   printf " ${font_green1}${k8s_pod}${cend} \t      执行watch -n 1 -d kubectl get pod -o wide\n"
   printf " ${font_green1}${k8s_pvc}${cend} \t      执行watch -n 1 -d kubectl get pvc\n"
   printf " ${font_green1}${k8s_pv}${cend}  \t      执行watch -n 1 -d kubectl get pv\n"

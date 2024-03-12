@@ -64,8 +64,7 @@ function f_delete() {
 
   if [[ ! ${#pod[@]} -eq 0 ]]; then
     printf "${font_green1}[${k8s_pod}]↓↓↓${cend}-------------------------------------------------------------------- \n"
-    for x in ${pod[@]}; do { kubectl delete -f $x }&; done;
-    wait
+    for x in ${pod[@]}; do kubectl delete -f ${x}; done;
   fi;
 
   if [[ ! ${#pvc[@]} -eq 0 ]]; then

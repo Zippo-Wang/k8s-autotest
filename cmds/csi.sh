@@ -67,10 +67,9 @@ function f_delete() {
     for x in ${pod[@]};
     do {
         kubectl delete -f ${x}
-        pid=$!
     }&
     done
-    wait ${pid}
+    wait > /dev/null 2>&1
   fi;
 
   if [[ ! ${#pvc[@]} -eq 0 ]]; then

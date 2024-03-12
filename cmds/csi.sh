@@ -68,8 +68,8 @@ function f_delete() {
     do {
         kubectl delete -f ${x}
     }&
-    done > /dev/null
-    wait
+    done
+    wait $!
   fi;
 
   if [[ ! ${#pvc[@]} -eq 0 ]]; then

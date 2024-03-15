@@ -19,7 +19,7 @@ function f_init() {
   # 如果支持，就写入自动补全脚本
   if sudo -v &>/dev/null;
   then
-    sudo cp ${kt_project_path}/utils/auto_tab.sh /etc/bash_completion.d/hh_auto_tab
+    sudo cp ${kt_project_path}/utils/auto_tab.sh /etc/bash_completion.d/kt_auto_tab
     . ${env_directory}  # 刷新自动补全的环境配置，使立即生效
     printf "${font_green1}k8s-autotest初始化成功，请重新打开终端窗口使配置生效！${cend}\n"
   else

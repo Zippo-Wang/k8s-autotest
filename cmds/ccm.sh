@@ -40,7 +40,7 @@ function f_delete_ccm() {
   fi;
 
   echo
-  printf "${info_msg}The cmd have been executed successfully, please wait for resources be created completely. \n"
+  printf "${info_msg}The cmd have been executed successfully, please wait for resources be deleted completely. \n"
 }
 
 function f_install_ccm() {
@@ -51,4 +51,11 @@ kubectl apply -f  https://raw.githubusercontent.com/kubernetes-sigs/cloud-provid
 function f_uninstall_ccm() {
 kubectl delete -f  https://raw.githubusercontent.com/kubernetes-sigs/cloud-provider-huaweicloud/master/manifests/rbac-huawei-cloud-controller-manager.yaml
 kubectl delete -f  https://raw.githubusercontent.com/kubernetes-sigs/cloud-provider-huaweicloud/master/manifests/huawei-cloud-controller-manager.yaml
+}
+
+function f_build_ccm() {
+    printf "${font_green1}make images↓↓↓${cend} \n"
+    VERSION=${1} make image-huawei-cloud-controller-manager
+    printf "${font_green1}push images↓↓↓${cend} \n"
+    VERSION=${1} make push-image-huawei-cloud-controller-manager
 }

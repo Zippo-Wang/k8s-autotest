@@ -2,6 +2,7 @@
 
 # 核心命令
 kt="kt"
+auth="zippowang"
 
 # 系统命令
 kt_create="create"      # 创建用例

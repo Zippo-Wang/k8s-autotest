@@ -57,5 +57,5 @@ function f_build_ccm() {
     printf "${font_green1}make images↓↓↓${cend} \n"
     VERSION=${1} make image-huawei-cloud-controller-manager
     printf "${font_green1}push images↓↓↓${cend} \n"
-    VERSION=${1} make push-image-huawei-cloud-controller-manager
+    docker push ${auth}/image-huawei-cloud-controller-manager:${1}
 }

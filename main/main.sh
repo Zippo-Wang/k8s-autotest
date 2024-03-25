@@ -69,6 +69,7 @@ case ${operate1} in
       ${service_evs} )        f_build_evs ${operate3} ;;
       ${service_obs} )        f_build_obs ${operate3} ;;
       ${service_sfs_turbo} )  f_build_sfs_turbo ${operate3} ;;
+      ${plugin_ccm} )         f_build_ccm ${operate3} ;;
       *)                      printf "${err_msg}没有这个命令：${current_cmd} \n" ;;
     esac ;;
 

@@ -167,22 +167,22 @@ kubectl delete -f https://raw.githubusercontent.com/huaweicloud/huaweicloud-csi-
 }
 
 function f_build_evs() {
-    printf "${font_green1}make images...${cend} \n"
+    printf "${font_green1}make images↓↓↓${cend} \n"
     VERSION=${1} make image-evs-csi-plugin
-    printf "${font_green1}push images...${cend} \n"
+    printf "${font_green1}push images↓↓↓${cend} \n"
     VERSION=${1} make push-image-evs-csi-plugin
 }
 
 function f_build_obs() {
-    printf "${font_green1}make images...${cend} \n"
+    printf "${font_green1}make images↓↓↓${cend} \n"
     VERSION=${1} make image-obs-csi-plugin
-    printf "${font_green1}push images...${cend} \n"
+    printf "${font_green1}push images↓↓↓${cend} \n"
     VERSION=${1} make push-image-obs-csi-plugin
 }
 
 function f_build_sfs_turbo() {
-    printf "${font_green1}make images...${cend} \n"
+    printf "${font_green1}make images↓↓↓${cend} \n"
     VERSION=${1} make image-sfsturbo-csi-plugin
-    printf "${font_green1}push images...${cend} \n"
+    printf "${font_green1}push images↓↓↓${cend} \n"
     VERSION=${1} make push-image-sfsturbo-csi-plugin
 }

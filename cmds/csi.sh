@@ -106,8 +106,13 @@ function f_watch() {
     ${k8s_pod} ) watch -n 1 -d kubectl get pod -o wide;;
     ${k8s_pvc} ) watch -n 1 -d kubectl get pvc ;;
     ${k8s_pv} )  watch -n 1 -d kubectl get pv ;;
+
     ${k8s_deployment} )  watch -n 1 -d kubectl get deployment ;;
-    ${k8s_service} )  watch -n 1 -d kubectl get service ;;
+    ${k8s_daemonset1} )  watch -n 1 -d kubectl get daemonset ;;
+    ${k8s_daemonset2} )  watch -n 1 -d kubectl get daemonset ;;
+    ${k8s_service1} )  watch -n 1 -d kubectl get service ;;
+    ${k8s_service2} )  watch -n 1 -d kubectl get service ;;
+
     ${k8s_node} )  watch -n 1 -d kubectl get node ;;
   esac
 }

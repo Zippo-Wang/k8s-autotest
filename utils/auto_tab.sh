@@ -7,7 +7,7 @@
 _kt_auto_tab(){
   opts1="create delete watch build install uninstall init help -help --help"
   opts2="evs obs sfs-turbo ccm"
-  opts3="pod pvc pv deployment service node"
+  opts3="pod pvc pv deployment daemonset service node ds svc"
 	case ${COMP_CWORD} in
 	1)
 		COMPREPLY=($(compgen -W "${opts1}" -- ${COMP_WORDS[COMP_CWORD]}));;

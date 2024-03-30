@@ -34,7 +34,7 @@ k8s_pvc="pvc"
 k8s_pv="pv"
 k8s_sc="sc"
 k8s_service1="service"
-k8s_service2="service"
+k8s_service2="svc"
 k8s_node="node"
 
 k8s_pvc2="pvc2"

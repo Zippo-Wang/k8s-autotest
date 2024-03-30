@@ -27,11 +27,14 @@ dir_sfs_turbo="${kt_project_path}/test-case/csi/SFS-Turbo"
 
 # k8s监控
 k8s_deployment="deployment"
+k8s_daemonset1="daemonset"
+k8s_daemonset2="ds"
 k8s_pod="pod"
 k8s_pvc="pvc"
 k8s_pv="pv"
 k8s_sc="sc"
-k8s_service="service"
+k8s_service1="service"
+k8s_service2="service"
 k8s_node="node"
 
 k8s_pvc2="pvc2"
@@ -53,7 +56,8 @@ cmd_list1=(
 )
 cmd_list2=(
     ${service_evs} ${service_obs} ${service_sfs_turbo} ${k8s_pod} ${k8s_pvc} ${k8s_pv}
-    ${k8s_deployment} ${k8s_sc} ${k8s_service} ${k8s_node}
+    ${k8s_deployment} ${k8s_sc} ${k8s_service1} ${k8s_service2} ${k8s_node}
+    ${k8s_daemonset1} ${k8s_daemonset2}
 )
 
 # debug常量

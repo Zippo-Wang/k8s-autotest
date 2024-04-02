@@ -26,20 +26,38 @@ case ${operate1} in
   # create
   ${kt_create})
     case ${operate2} in
+      # CSI
       ${service_evs} )        f_create ${dir_evs};;
       ${service_obs} )        f_create ${dir_obs};;
       ${service_sfs_turbo} )  f_create ${dir_sfs_turbo};;
-      ${plugin_ccm})          f_create_ccm ${dir_ccm};;
+
+      # CCM
+      ${plugin_ccm})   f_create_ccm ${dir_ccm};;
+      ${ccm_normal})   f_create_ccm ${dir_normal};;
+      ${ccm_eip})      f_create_ccm ${dir_eip};;
+      ${ccm_affinity}) f_create_ccm ${dir_affinity};;
+      ${ccm_existing}) f_create_ccm ${dir_existing};;
+
+      # 自定义
       *)                      f_create ${operate2};;  # 注意不是$*
     esac ;;
 
   # delete
   ${kt_delete})
     case ${operate2} in
+      # CSI
       ${service_evs} )        f_delete ${dir_evs} ;;
       ${service_obs} )        f_delete ${dir_obs} ;;
       ${service_sfs_turbo} )  f_delete ${dir_sfs_turbo} ;;
-      ${plugin_ccm})          f_delete_ccm ${dir_ccm};;
+
+      # CCM
+      ${plugin_ccm})   f_delete_ccm ${dir_ccm};;
+      ${ccm_normal})   f_create_ccm ${dir_normal};;
+      ${ccm_eip})      f_create_ccm ${dir_eip};;
+      ${ccm_affinity}) f_create_ccm ${dir_affinity};;
+      ${ccm_existing}) f_create_ccm ${dir_existing};;
+
+      # 自定义
       *)                      f_delete ${operate2};;
     esac ;;
 

@@ -42,8 +42,16 @@ k8s_snapshotx="snapshotx"
 
 # ccm ------------------------------------------------------------------------------------------------------------------
 plugin_ccm="ccm"
+ccm_normal="ccm-normal"
+ccm_eip="ccm-eip"
+ccm_affinity="ccm-affinity"
+ccm_existing="ccm-existing"
 
 dir_ccm="${kt_project_path}/test-case/ccm"
+dir_normal="${kt_project_path}/test-case/ccm/01_dynamic_elb_normal"
+dir_eip="${kt_project_path}/test-case/ccm/02_dynamic_elb_eip"
+dir_affinity="${kt_project_path}/test-case/ccm/03_session_affinity_elb"
+dir_existing="${kt_project_path}/test-case/ccm/04_existing_elb"
 
 
 # 其他常量 --------------------------------------------------------------------------------------------------------------

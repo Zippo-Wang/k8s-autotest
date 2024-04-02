@@ -14,7 +14,7 @@ function f_create_ccm() {
   fi;
 
   if [[ ! ${#service[@]} -eq 0 ]]; then
-    printf "${font_green1}[${k8s_service}]↓↓↓${cend}-------------------------------------------------------------------- \n"
+    printf "${font_green1}[${k8s_service1}]↓↓↓${cend}-------------------------------------------------------------------- \n"
     for x in ${service[@]}; do kubectl apply -f ${x}; done;
   fi;
 
@@ -30,7 +30,7 @@ function f_delete_ccm() {
   deployment=$(find ${yaml_dir} -name deployment.yaml -type f)
 
   if [[ ! ${#service[@]} -eq 0 ]]; then
-    printf "${font_green1}[${k8s_service}]↓↓↓${cend}-------------------------------------------------------------------- \n"
+    printf "${font_green1}[${k8s_service1}]↓↓↓${cend}-------------------------------------------------------------------- \n"
     for x in ${service[@]}; do kubectl delete -f ${x}; done;
   fi;
 

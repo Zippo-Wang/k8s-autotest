@@ -48,10 +48,10 @@ function f_help() {
   printf " ${font_green1}${service_obs}${cend} \t      执行obs用例 或 删除obs用例创建的对象\n"
   printf " ${font_green1}${service_sfs_turbo}${cend}    执行sfs-turbo用例 或 删除sfs-turbo用例创建的对象\n"
   printf " ${font_green1}${plugin_ccm}${cend}  \t      执行ccm所有用例 或 删除ccm所有用例创建的对象\n"
-  printf " ${font_green1}${ccm_normal}${cend}  \t      执行ccm基本用例 或 删除ccm基本用例创建的对象\n"
-  printf " ${font_green1}${ccm_eip}${cend}  \t         执行ccm eip用例 或 删除ccm eip用例创建的对象\n"
-  printf " ${font_green1}${ccm_affinity}${cend}  \t    执行ccm affinity用例 或 删除ccm affinity用例创建的对象\n"
-  printf " ${font_green1}${ccm_existing}${cend}  \t    执行ccm existing用例 或 删除ccm existing用例创建的对象\n"
+  printf " ${font_green1}${ccm_normal}${cend}    执行ccm基本用例 或 删除ccm基本用例创建的对象\n"
+  printf " ${font_green1}${ccm_eip}${cend}       执行ccm eip用例 或 删除ccm eip用例创建的对象\n"
+  printf " ${font_green1}${ccm_affinity}${cend}  执行ccm affinity用例 或 删除ccm affinity用例创建的对象\n"
+  printf " ${font_green1}${ccm_existing}${cend}  执行ccm existing用例 或 删除ccm existing用例创建的对象\n"
   echo
 
   printf "${font_yellow1}【四】[build] ${cend}示例：kt build obs v0.0.2 \n"

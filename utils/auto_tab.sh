@@ -6,7 +6,7 @@
 
 _kt_auto_tab(){
   opts1="create delete watch build install uninstall init help -help --help"
-  opts2="evs obs sfs-turbo ccm"
+  opts2="evs obs sfs-turbo ccm ccm-normal ccm-eip ccm-affinity ccm-existing"
   opts3="pod pvc pv deployment daemonset service node ds svc"
 	case ${COMP_CWORD} in
 	1)

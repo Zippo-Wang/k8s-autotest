@@ -8,7 +8,7 @@ function f_create_ccm() {
   deployment=$(find ${yaml_dir} -name deployment.yaml -type f)
   service=$(find ${yaml_dir} -name elb-service.yaml -type f)
 
-  if [[ ! ${#deployment[@]} -eq 0 ]]; then
+  if [[ ! ${#deployment[@]} -eq 0 && ${yaml_dir} != ${plugin_ccm} ]]; then
     printf "${font_green1}[${k8s_deployment}]↓↓↓${cend}----------------------------------------------------------------- \n"
     for x in ${deployment[@]}; do kubectl apply -f ${x}; done;
   fi;
@@ -34,7 +34,7 @@ function f_delete_ccm() {
     for x in ${service[@]}; do kubectl delete -f ${x}; done;
   fi;
 
-  if [[ ! ${#deployment[@]} -eq 0 ]]; then
+  if [[ ! ${#deployment[@]} -eq 0 && ${yaml_dir} != ${plugin_ccm} ]]; then
     printf "${font_green1}[${k8s_deployment}]↓↓↓${cend}----------------------------------------------------------------- \n"
     for x in ${deployment[@]}; do kubectl delete -f ${x}; done;
   fi;

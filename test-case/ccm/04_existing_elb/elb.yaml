@@ -7,7 +7,7 @@ metadata:
     kubernetes.io/elb.lb-algorithm: ROUND_ROBIN
   labels:
     app: nginx
-  name: lb-service-01
+  name: lb-service-04
   namespace: kube-system
 spec:
   ports:

@@ -9,7 +9,7 @@ metadata:
       {"ip_type": "5_bgp", "bandwidth_size": 5, "share_type": "PER"}
   labels:
     app: nginx
-  name: lb-service-03
+  name: lb-service-02
   namespace: kube-system
 spec:
   ports:

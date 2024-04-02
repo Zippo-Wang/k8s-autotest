@@ -9,7 +9,7 @@ metadata:
       {"type": "SOURCE_IP", "persistence_timeout": 15}
   labels:
     app: nginx
-  name: lb-service-04
+  name: lb-service-03
   namespace: kube-system
 spec:
   ports:

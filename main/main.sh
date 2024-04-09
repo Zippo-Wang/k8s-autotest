@@ -39,7 +39,7 @@ case ${operate1} in
       ${ccm_existing}) f_create_ccm ${dir_existing};;
 
       # 自定义
-      *)                      f_create ${operate2};;  # 注意不是$*
+      *) f_create ${operate2};;  # 注意不是$*
     esac ;;
 
   # delete
@@ -52,13 +52,13 @@ case ${operate1} in
 
       # CCM
       ${plugin_ccm})   f_delete_ccm ${dir_ccm};;
-      ${ccm_normal})   f_create_ccm ${dir_normal};;
-      ${ccm_eip})      f_create_ccm ${dir_eip};;
-      ${ccm_affinity}) f_create_ccm ${dir_affinity};;
-      ${ccm_existing}) f_create_ccm ${dir_existing};;
+      ${ccm_normal})   f_delete_ccm ${dir_normal};;
+      ${ccm_eip})      f_delete_ccm ${dir_eip};;
+      ${ccm_affinity}) f_delete_ccm ${dir_affinity};;
+      ${ccm_existing}) f_delete_ccm ${dir_existing};;
 
       # 自定义
-      *)                      f_delete ${operate2};;
+      *) f_delete ${operate2};;
     esac ;;
 
   # install

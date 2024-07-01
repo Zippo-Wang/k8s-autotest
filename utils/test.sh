@@ -6,4 +6,5 @@
 # arr=$(find /mnt/d/DOCS/study/k8s-autotest/test-case/OBS -name pvc.yaml -type f)
 # for x in $arr[@]; do echo $x; done;
 
+echo "我的"
 echo "hhh"

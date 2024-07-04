@@ -64,31 +64,32 @@ case ${operate1} in
   # install
   ${kt_install})
     case ${operate2} in
-      ${service_evs} )        f_install_evs ;;
-      ${service_obs} )        f_install_obs ;;
-      ${service_sfs_turbo} )  f_install_sfs_turbo ;;
-      ${plugin_ccm})          f_install_ccm ;;
-      *)                      printf "${err_msg}没有这个命令：${current_cmd} \n" ;;
+      ${service_evs} )       f_install_evs ;;
+      ${service_obs} )       f_install_obs ;;
+      ${service_sfs_turbo} ) f_install_sfs_turbo ;;
+      ${plugin_ccm})         f_install_ccm ;;
+      *)                     printf "${err_msg}没有这个命令：${current_cmd} \n" ;;
     esac ;;
 
   # uninstall
   ${kt_uninstall})
     case ${operate2} in
-      ${service_evs} )        f_uninstall_evs ;;
-      ${service_obs} )        f_uninstall_obs ;;
-      ${service_sfs_turbo} )  f_uninstall_sfs_turbo ;;
-      ${plugin_ccm})          f_uninstall_ccm ;;
-      *)                      printf "${err_msg}没有这个命令：${current_cmd} \n" ;;
+      ${service_evs} )       f_uninstall_evs ;;
+      ${service_obs} )       f_uninstall_obs ;;
+      ${service_sfs_turbo} ) f_uninstall_sfs_turbo ;;
+      ${plugin_ccm})         f_uninstall_ccm ;;
+      *)                     printf "${err_msg}没有这个命令：${current_cmd} \n" ;;
     esac ;;
 
   # build
   ${kt_build})
     case ${operate2} in
-      ${service_evs} )        f_build_evs ${operate3} ;;
-      ${service_obs} )        f_build_obs ${operate3} ;;
-      ${service_sfs_turbo} )  f_build_sfs_turbo ${operate3} ;;
-      ${plugin_ccm} )         f_build_ccm ${operate3} ;;
-      *)                      printf "${err_msg}没有这个命令：${current_cmd} \n" ;;
+      ${service_evs} )       f_build_evs ${operate3} ;;
+      ${service_obs} )       f_build_obs ${operate3} ;;
+      ${service_sfs_turbo} ) f_build_sfs_turbo ${operate3} ;;
+      ${plugin_ccm} )        f_build_ccm ${operate3} ;;
+      ${cluster} )           f_build_cluster ${operate3} ;;
+      *)                     printf "${err_msg}没有这个命令：${current_cmd} \n" ;;
     esac ;;
 
   # watch
@@ -98,6 +99,13 @@ case ${operate1} in
   ${kt_help1}) f_help ;;
   ${kt_help2}) f_help ;;
   ${kt_help3}) f_help ;;
+
+  # version
+  ${kt_version1}) f_version ;;
+  ${kt_version2}) f_version ;;
+  ${kt_version3}) f_version ;;
+  ${kt_version4}) f_version ;;
+  ${kt_version5}) f_version ;;
 
   # other
   ${common_init}) f_init ;;

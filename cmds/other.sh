@@ -27,11 +27,16 @@ function f_init() {
   fi
 }
 
+function f_version() {
+  printf "k8s-autotest_${sys_current_version} \n"
+  echo
+  printf "see the link for latest version: https://github.com/Zippo-Wang/k8s-autotest \n"
+}
 
 function f_help() {
   printf "${font_yellow1}【一】Usage: kt <cmd1> <cmd2> ${cend}\n"
-  printf "初次运行系统，请阅读${font_green1}Readme.md${cend}配置环境变量，然后进行初始化 \n"
-  printf " ${font_green1}${common_init}${cend}         ${font_blue1}系统初始化${cend}。初次运行系统，请先进行初始化 \n"
+  printf " 初次运行系统，请阅读${font_green1}Readme.md${cend}配置环境变量，然后进行初始化 \n"
+  printf " ${font_green1}${common_init}${cend}         ${font_blue1}系统初始化${cend}。\n"
   printf " ${font_green1}${kt_help1}${cend}         查看k8s-autotest使用帮助 \n"
   printf " ${font_green1}tab${cend}          ${font_blue1}自动补全${cend}。按tab键即可自动补全本系统支持的所有命令 \n"
   echo
@@ -59,14 +64,15 @@ function f_help() {
   printf " ${font_green1}${service_obs}${cend} \t      打包obs插件成docker镜像，并推送到docker hub \n"
   printf " ${font_green1}${service_sfs_turbo}${cend}    打包sfs-turbo插件成docker镜像，并推送到docker hub \n"
   printf " ${font_green1}${plugin_ccm}${cend}  \t      打包ccm插件成docker镜像，并推送到docker hub \n"
+  printf " ${font_green1}${cluster}${cend}      构建k8s集群，示例：kt build cluster /root/cluster-config \n"
   echo
 
   printf "${font_yellow1}【五】[watch] ${cend}\n"
-  printf " ${font_green1}${k8s_pod}${cend} \t      执行watch -n 1 -d kubectl get pod -o wide\n"
-  printf " ${font_green1}${k8s_pvc}${cend} \t      执行watch -n 1 -d kubectl get pvc\n"
-  printf " ${font_green1}${k8s_pv}${cend}  \t      执行watch -n 1 -d kubectl get pv\n"
-  printf " ${font_green1}${k8s_deployment}${cend}   执行watch -n 1 -d kubectl get deployment\n"
-  printf " ${font_green1}${k8s_daemonset1}${cend}    执行watch -n 1 -d kubectl get daemonset ${font_green}【支持简写：ds】${cend} \n"
-  printf " ${font_green1}${k8s_service1}${cend}      执行watch -n 1 -d kubectl get service ${font_green}【支持简写：svc】${cend} \n"
   printf " ${font_green1}${k8s_node}${cend}         执行watch -n 1 -d kubectl get node\n"
+  printf " ${font_green1}${k8s_deployment}${cend}   执行watch -n 1 -d kubectl get deployment ${font_green} 【支持简写：${k8s_deployment2}】${cend}\n"
+  printf " ${font_green1}${k8s_daemonset1}${cend}    执行watch -n 1 -d kubectl get daemonset ${font_green}  【支持简写：ds】${cend} \n"
+  printf " ${font_green1}${k8s_pod}${cend} \t      执行watch -n 1 -d kubectl get pod -o wide\n"
+  printf " ${font_green1}${k8s_service1}${cend}      执行watch -n 1 -d kubectl get service ${font_green}    【支持简写：svc】${cend} \n"
+  printf " ${font_green1}${k8s_pvc}${cend} \t      执行watch -n 1 -d kubectl get pvc ${font_green}\t【不支持：${k8s_pvc_all}】${cend}\n"
+  printf " ${font_green1}${k8s_pv}${cend}  \t      执行watch -n 1 -d kubectl get pv ${font_green} \t【不支持：${k8s_pv_all}】${cend}\n"
 }

@@ -3,8 +3,12 @@
 source ${kt_project_path}/main/constants.sh
 
 function f_init() {
-  for file in `find ${kt_project_path} -name *.sh -type f`; do vi $file -c 'set ff=unix | wq!'; done
-
+  # 修改换行符
+  for file in `find ${kt_project_path} -name *.sh -type f`;
+  do
+      sed -i 's/\r$//' ${file}
+  done
+  
   # 判断系统是否支持bash_completion
   script_directory="/etc/bash_completion.d/"      # 存放脚本的目录
   env_directory="/usr/share/bash-completion/bash_completion"  # 使脚本生效的目录

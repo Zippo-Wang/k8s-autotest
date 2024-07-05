@@ -5,12 +5,12 @@ kt="kt"
 auth="zippowang"
 
 # 系统命令
-kt_create="create"      # 创建用例
-kt_delete="delete"      # 删除用例
-kt_install="install"    # 创建RBAC鉴权、安装插件【不包括cloud-config】
-kt_uninstall="uninstall"    # 删除RBAC鉴权、安装插件【不包括cloud-config】
-kt_watch="watch"        # 监控资源
-kt_build="build"        # 构建csi包，然后发布到docker hub
+kt_create="create"       # 创建用例
+kt_delete="delete"       # 删除用例
+kt_install="install"     # 创建RBAC鉴权、安装插件【不包括cloud-config】
+kt_uninstall="uninstall" # 删除RBAC鉴权、安装插件【不包括cloud-config】
+kt_watch="watch"         # 监控资源
+kt_build="build"         # 构建csi包，然后发布到docker hub
 
 
 kt_help1="help"
@@ -65,7 +65,8 @@ dir_affinity="${kt_project_path}/test-case/ccm/03_session_affinity_elb"
 dir_existing="${kt_project_path}/test-case/ccm/04_existing_elb"
 
 # build k8s cluster  ---------------------------------------------------------------------------------------------------
-# 版本1：只支持 1master + 2node 规模
+# 当前版本：支持 1*master + n*node 规模
+# 未来版本：支持 n*master + n*node 规模
 cluster="cluster"
 cluster_config="cluster-config"     # 文件名，集群所有的参数都放在这个文件里面。类似cloud-config
 
@@ -73,10 +74,7 @@ cluster_config="cluster-config"     # 文件名，集群所有的参数都放在
 cluster2="[cluster]"
 k8s_version="k8s_version"           # 想要搭建的k8s集群版本【v1.24-v1.29】[只试过1.27.2]
 master_ip="master_ip"               # master节点的eip
-node1_ip="node1_ip"                 # node1节点的eip
-node2_ip="node2_ip"                 # node2节点的eip
-node1_pwd="node1_pwd"               # node1节点的ssh密码
-node2_pwd="node2_pwd"               # node2节点的ssh密码
+node_info="node_info"               # node节点的eip和密码{"ip1":"pwd1", "ip2":"pwd2"}
 docker_mirror="docker_mirror"       # docker的加速地址
 
 # git 目前的情况是：已经通过脚本搭建集群了，那肯定设置过username这些，所以只需要code_dir和github_repos
@@ -86,7 +84,7 @@ git_email="git_email"               # 本地git需要设置的邮箱
 code_dir="code_dir"                 # git下来的仓库放到哪个目录，默认/root/code，如果目录不存在，会自动创建
 github_repos="github_repos"         # 集群搭建完成后，需要git下来的仓库
 
-# dashboard，不支持指定版本，只支持v2.7
+# dashboard，不支持指定版本，只支持v2.7，未来会支持吗？看心情
 dashboard_config="[dashboard]"
 dash_port="dash_port"               # 开放的端口号【默认30011】
 dash_user="dash_user"               # 登录dashboard的用户名
@@ -94,8 +92,14 @@ dash_user="dash_user"               # 登录dashboard的用户名
 # cloud-config依赖的变量名
 repo_csi="csi"
 repo_ccm="ccm"
+repo_packer="packer"
 repo_k8s_autotest="k8s-autotest"
 repo_hh_system="hh-system"
+repo_csi_url=""
+repo_ccm=""
+repo_packer=""
+repo_k8s_autotest=""
+repo_hh_system=""
 
 # 其他常量 --------------------------------------------------------------------------------------------------------------
 common_none=""
@@ -114,11 +118,12 @@ cmd_list2=(
 )
 
 # debug常量
-info_msg="\033[1;32m[INFO]\033[0m"  # 绿色加粗
-err_msg="\033[1;31m[ERROR]\033[0m"  # 红色加粗
+info_msg="\033[1;32m[INFO]\033[0m"  # 绿色加粗, info
+warn_msg="\033[1;33m[WARN]\033[0m"  # 黄色加粗, warn
+err_msg="\033[1;31m[ERROR]\033[0m"  # 红色加粗, error
 
 # 颜色常量
-cend='\033[0m'
+cend='\033[0m'  # color end
 
 font_red='\033[0;31m'
 font_green='\033[0;32m'

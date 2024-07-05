@@ -68,7 +68,7 @@ function f_help() {
   printf " ${font_green1}${service_obs}${cend} \t      打包obs插件成docker镜像，并推送到docker hub \n"
   printf " ${font_green1}${service_sfs_turbo}${cend}    打包sfs-turbo插件成docker镜像，并推送到docker hub \n"
   printf " ${font_green1}${plugin_ccm}${cend}  \t      打包ccm插件成docker镜像，并推送到docker hub \n"
-  printf " ${font_green1}${cluster}${cend}      构建k8s集群，示例：kt build cluster /root/cluster-config \n"
+  printf " ${font_green1}${cluster}${cend}      构建k8s集群，示例：${font_green1}kt build cluster /root/cluster-config${cend}(绝对路径) \n"
   echo
 
   printf "${font_yellow1}【五】[watch] ${cend}\n"

@@ -8,3 +8,17 @@
 
 echo "我的"
 echo "hhh"
+
+# 获取一个命令的输出
+# output1=$(mkdir --help)
+# echo ${output1}
+
+# 判断一个命令是否安装了
+# ret='0'
+# command -v xxx >/dev/null 2>&1 || { ret='1'; }
+# if [ "$ret" -ne 0 ]; then
+# 	echo "xxx1"
+# 	exit
+# fi
+# echo "xxx2"
+

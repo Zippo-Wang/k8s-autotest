@@ -102,6 +102,9 @@ function f_delete() {
 }
 
 function f_watch() {
+  f_validate_cmd ${kt_build} ${operate2} ${operate3}
+  valid=$?
+  if [[ ${valid} = 0 ]]; then return; fi
   case ${1} in
     ${k8s_pod} ) watch -n 1 -d kubectl get pod -o wide;;
     ${k8s_pvc} ) watch -n 1 -d kubectl get pvc ;;
@@ -118,6 +121,30 @@ function f_watch() {
     # watch cmd help
     ${kt_help3}) f_watch_help ;;
   esac
+}
+
+function f_build_evs() {
+  dir="${kt_code_path}/${repo_csi_all}"
+  printf "${info_msg}${font_green1}make images↓↓↓${cend} \n"
+  (cd ${dir} && VERSION=${1} make image-evs-csi-plugin)
+  printf "${info_msg}${font_green1}push images↓↓↓${cend} \n"
+  (cd ${dir} && VERSION=${1} make push-image-evs-csi-plugin)
+}
+
+function f_build_obs() {
+  dir="${kt_code_path}/${repo_csi_all}"
+  printf "${info_msg}${font_green1}make images↓↓↓${cend} \n"
+  (cd ${dir} && VERSION=${1} make image-obs-csi-plugin)
+  printf "${info_msg}${font_green1}push images↓↓↓${cend} \n"
+  (cd ${dir} && VERSION=${1} make push-image-obs-csi-plugin)
+}
+
+function f_build_sfs_turbo() {
+  dir="${kt_code_path}/${repo_csi_all}"
+  printf "${info_msg}${font_green1}make images↓↓↓${cend} \n"
+  (cd ${dir} && VERSION=${1} make image-obs-sfsturbo-plugin)
+  printf "${info_msg}${font_green1}push images↓↓↓${cend} \n"
+  (cd ${dir} && VERSION=${1} make push-image-sfsturbo-csi-plugin)
 }
 
 function f_install_evs() {
@@ -174,23 +201,3 @@ kubectl delete -f https://raw.githubusercontent.com/huaweicloud/huaweicloud-csi-
 kubectl delete -f https://raw.githubusercontent.com/huaweicloud/huaweicloud-csi-driver/master/deploy/sfsturbo-csi-plugin/kubernetes/csi-sfsturbo-node.yaml
 }
 
-function f_build_evs() {
-    printf "${info_msg}${font_green1}make images↓↓↓${cend} \n"
-    (cd ${kt_code_path} && VERSION=${1} make image-evs-csi-plugin)
-    printf "${info_msg}${font_green1}push images↓↓↓${cend} \n"
-    (cd ${kt_code_path} && VERSION=${1} make push-image-evs-csi-plugin)
-}
-
-function f_build_obs() {
-    printf "${info_msg}${font_green1}make images↓↓↓${cend} \n"
-    (cd ${kt_code_path} && VERSION=${1} make image-obs-csi-plugin)
-    printf "${info_msg}${font_green1}push images↓↓↓${cend} \n"
-    (cd ${kt_code_path} && VERSION=${1} make push-image-obs-csi-plugin)
-}
-
-function f_build_sfs_turbo() {
-    printf "${info_msg}${font_green1}make images↓↓↓${cend} \n"
-    (cd ${kt_code_path} && VERSION=${1} make image-obs-sfsturbo-plugin)
-    printf "${info_msg}${font_green1}push images↓↓↓${cend} \n"
-    (cd ${kt_code_path} && VERSION=${1} make push-image-sfsturbo-csi-plugin)
-}

@@ -53,8 +53,9 @@ kubectl delete -f https://raw.githubusercontent.com/kubernetes-sigs/cloud-provid
 }
 
 function f_build_ccm() {
-    printf "${info_msg}${font_green1}make images↓↓↓${cend} \n"
-    (cd ${kt_code_path} && VERSION=${1} make image-huawei-cloud-controller-manager)
-    printf "${info_msg}${font_green1}push images↓↓↓${cend} \n"
-    (cd ${kt_code_path} && VERSION=${1} make huawei-cloud-controller-manager)
+  dir="${kt_code_path}/${repo_ccm_all}"
+  printf "${info_msg}${font_green1}make images↓↓↓${cend} \n"
+  (cd ${dir} && VERSION=${1} make image-huawei-cloud-controller-manager)
+  printf "${info_msg}${font_green1}push images↓↓↓${cend} \n"
+  (cd ${dir} && VERSION=${1} make huawei-cloud-controller-manager)
 }

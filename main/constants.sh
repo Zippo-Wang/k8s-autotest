@@ -130,11 +130,18 @@ repo_ccm="ccm"
 repo_packer="packer"
 repo_k8s_autotest="k8s-autotest"
 repo_hh_system="hh-system"
+
+repo_csi_all="huaweicloud-csi-driver"
+repo_ccm_all="cloud-provider-huaweicloud"
+
 repo_csi_url=""
 repo_ccm=""
 repo_packer=""
 repo_k8s_autotest=""
 repo_hh_system=""
+
+
+
 
 # 其他常量 --------------------------------------------------------------------------------------------------------------
 common_none=""
@@ -146,7 +153,7 @@ cmd_list1=(
     ${kt_version1} ${kt_version2} ${kt_version3} ${kt_version4} ${kt_version5}
 )
 cmd_list2=(
-    ${service_evs} ${service_obs} ${service_sfs_turbo} ${k8s_pod} ${k8s_pvc} ${k8s_pv}
+    ${service_evs} ${service_obs} ${service_sfs_turbo} ${k8s_pod} ${k8s_pvc} ${k8s_pv} ${kt_help3}
     ${evs_default} ${evs_parameter} ${evs_deny_resize} ${evs_allow_resize} ${evs_snapshot} ${evs_rwo} ${evs_rwx}
     ${obs_default} ${obs_parameter} ${obs_exist}
     ${sfs_turbo_default} ${sfs_turbo_performance} ${sfs_turbo_deny_resize} ${sfs_turbo_allow_resize} ${sfs_turbo_static}

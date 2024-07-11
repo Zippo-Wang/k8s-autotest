@@ -91,3 +91,9 @@ function f_watch_help() {
   printf " ${font_green1}${k8s_pvc}${cend} \t      执行watch -n 1 -d kubectl get pvc ${font_green}\t【不支持：${k8s_pvc_all}】${cend}\n"
   printf " ${font_green1}${k8s_pv}${cend}  \t      执行watch -n 1 -d kubectl get pv ${font_green} \t【不支持：${k8s_pv_all}】${cend}\n"
 }
+
+function f_version() {
+  printf "k8s-autotest_${sys_current_version} \n"
+  echo
+  printf "see the link for latest version: https://github.com/Zippo-Wang/k8s-autotest \n"
+}

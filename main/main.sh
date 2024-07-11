@@ -11,7 +11,8 @@ source ${kt_project_path}/cmds/help.sh
 # 用户输入 ---------------------------------------------------------------------------------------------------------------
 operate1=${1} # create/delete/watch/help
 operate2=${2} # evs/obs/sfs-turbo，pod/pvc/pv
-operate3=${3} # 倚天屠龙，有始有终
+operate3=${3} # 倚天屠龙，有始有终(包含kt在内，一共3个参数)
+operate4=${4} # 倚天屠龙，有始有终(包含kt在内，一共4个参数)
 
 # 检查一波
 f_pre_check
@@ -24,12 +25,13 @@ fi
 
 # 支持的命令 -------------------------------------------------------------------------------------------------------------
 current_cmd="${kt_main} $*" # 获取用户所有输入
-#if [[ ${cmd_list1[*]} =~ ${operate1} && ${cmd_list2[*]} =~ ${operate2} && ! ${operate3} ]]; then
-#if [[ ${cmd_list1[*]} =~ ${operate1} && ! ${operate3} ]]; then
-if [[ ${cmd_list1[*]} =~ ${operate1} ]]; then
+if [[ ${cmd_list1[*]} =~ ${operate1} && ${cmd_list2[*]} =~ ${operate2} ]]; then
 case ${operate1} in
   # create
   ${kt_create})
+    f_validate_cmd ${kt_create} ${operate2} ${operate3}
+    valid=$?
+    if [[ ${valid} = 0 ]]; then return; fi
     case ${operate2} in
       # CSI
       ${service_evs} )      f_create ${dir_evs};;
@@ -69,6 +71,9 @@ case ${operate1} in
 
   # delete
   ${kt_delete})
+    f_validate_cmd ${kt_delete} ${operate2} ${operate3}
+    valid=$?
+    if [[ ${valid} = 0 ]]; then return; fi
     case ${operate2} in
       # CSI
       ${service_evs} )        f_delete ${dir_evs} ;;
@@ -91,6 +96,9 @@ case ${operate1} in
 
   # install
   ${kt_install})
+    f_validate_cmd ${kt_create} ${operate2} ${operate3}
+    valid=$?
+    if [[ ${valid} = 0 ]]; then return; fi
     case ${operate2} in
       ${service_evs})       f_install_evs ;;
       ${service_obs})       f_install_obs ;;
@@ -99,11 +107,13 @@ case ${operate1} in
 
       # install cmd help
       ${kt_help3}) f_install_uninstall_help ;;
-      *)           printf "${err_msg}没有这个命令：${current_cmd} \n" ;;
     esac ;;
 
   # uninstall
   ${kt_uninstall})
+    f_validate_cmd ${kt_create} ${operate2} ${operate3}
+    valid=$?
+    if [[ ${valid} = 0 ]]; then return; fi
     case ${operate2} in
       ${service_evs} )       f_uninstall_evs ;;
       ${service_obs} )       f_uninstall_obs ;;
@@ -112,11 +122,13 @@ case ${operate1} in
 
       # uninstall cmd help
       ${kt_help3}) f_install_uninstall_help ;;
-      *)           printf "${err_msg}没有这个命令：${current_cmd} \n" ;;
     esac ;;
 
   # build
   ${kt_build})
+    f_validate_build_cmd ${kt_build} ${operate2} ${operate3} ${operate4}
+    valid=$?
+    if [[ ${valid} = 0 ]]; then return; fi
     case ${operate2} in
       ${service_evs})       f_build_evs ${operate3} ;;
       ${service_obs})       f_build_obs ${operate3} ;;
@@ -126,7 +138,6 @@ case ${operate1} in
 
       # build cmd help
       ${kt_help3}) f_build_help ;;
-      *)           printf "${err_msg}没有这个命令：${current_cmd} \n" ;;
     esac ;;
 
   # watch

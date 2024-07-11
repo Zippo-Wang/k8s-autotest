@@ -2,7 +2,6 @@
 
 source ${kt_project_path}/main/constants.sh
 
-# 需要先看对应的系统，然后再去check env中的变量
 function f_check_os_type() {
   if grep -i -q "EulerOS" /etc/os-release; then
     # EulerOS
@@ -39,25 +38,23 @@ function f_check_os_type() {
 function f_check_os_supported() {
   if [ ${1} = 0 ]; then
     printf "${err_msg}你的系统不支持k8s-autotest \n"
-    sleep 5
-    exit
+    return 0
   fi
+  return 1
 }
 
 function f_check_env_vars() {
   if [ -z ${kt_project_path} ]; then
     printf "${err_msg}环境变量'kt_project_path'为空，请参考readme.md配置 \n"
-    sleep 5
-    exit
+    return 0
   elif [ -z ${kt_main} ]; then
     printf "${err_msg}环境变量'kt_main'为空，请参考readme.md配置 \n"
-    sleep 5
-    exit
+    return 0
   elif [ -z "$(alias kt 2>/dev/null)" ]; then
     printf "${err_msg}环境变量'alias kt'为空，请参考readme.md配置 \n"
-    sleep 5
-    exit
+    return 0
   fi
+  return 1
 }
 
 function f_pre_check() {
@@ -67,9 +64,14 @@ function f_pre_check() {
   # 2、检查os是否支持该脚本
   osCode=$?
   f_check_os_supported osCode
+  isSupported=$?
+  if [[ ${isSupported} == 0 ]]; then return 0; fi
 
   # 3、检查环境变量配置好了没
   f_check_env_vars
+  haveRightEnvVars=$?
+  if [[ ${haveRightEnvVars} == 0 ]]; then return 0; fi
+  return 1
 }
 
 function f_init() {

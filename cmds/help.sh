@@ -8,7 +8,7 @@ function f_help() {
   printf " ${font_green1}${common_init}${cend}         ${font_blue1}系统初始化${cend}\n"
   printf " ${font_green1}tab${cend}          ${font_blue1}自动补全。${cend}按tab键即可自动补全本系统支持的所有命令 \n"
   printf " ${font_green1}${kt_help1}${cend}         查看k8s-autotest使用帮助 \n"
-  printf " ${font_green1}${kt_help3}${cend}       查看某个命令具体使用帮助。${font_blue1}示例: kt create --help${cend} \n"
+  printf " ${font_green1}${kt_help3}${cend}       查看某个命令具体使用帮助。 ${flash_light}${font_blue1}示例: kt create --help${cend} \n"
   echo
 
   printf " ${font_green1}install${cend}      ${font_blue1}安装插件${cend} \n"

@@ -11,17 +11,27 @@ source ${kt_project_path}/cmds/help.sh
 # 用户输入 ---------------------------------------------------------------------------------------------------------------
 operate1=${1} # create/delete/watch/help
 operate2=${2} # evs/obs/sfs-turbo，pod/pvc/pv
-operate3=${3} # 倚天屠龙，有始有终(包含kt在内，一共3个参数)
-operate4=${4} # 倚天屠龙，有始有终(包含kt在内，一共4个参数)
+operate3=${3} # 倚天屠龙，有始有终(包含kt在内，一共3个参数, 比如kt create obs)
+operate4=${4} # 倚天屠龙，有始有终(包含kt在内，一共4个参数m 比如kt build obs v1.0)
 
 # 检查一波
 f_pre_check
+checkPassed=$?
+if [[ ${checkPassed} == 0 ]]; then return 0; fi
 
 # 判断第1个参数是否是kt ---------------------------------------------------------------------------------------------------
 if [[ ${kt_main} != ${kt} ]]; then
-  printf "[ERROR]请参考Readme.md配置环境变量：\n"
+  printf "${}err_msg请参考Readme.md配置环境变量：\n"
   return
 fi
+
+# 判断第1个参数是否是kt ---------------------------------------------------------------------------------------------------
+if [[ -z ${operate1} ]]; then
+  printf "${info_msg}欢迎使用k8s-autotest, 请使用${font_green1}${kt} ${kt_help1}${cend}查看使用帮助\n"
+  return
+fi
+
+
 
 # 支持的命令 -------------------------------------------------------------------------------------------------------------
 current_cmd="${kt_main} $*" # 获取用户所有输入

@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
 source ${kt_project_path}/main/constants.sh
-source ${kt_project_path}/cmds/csi.sh
-source ${kt_project_path}/cmds/ccm.sh
+source ${kt_project_path}/cmds/k8s/csi.sh
+source ${kt_project_path}/cmds/k8s/ccm.sh
+source ${kt_project_path}/cmds/cluster/cluster.sh
+source ${kt_project_path}/cmds/cluster/centos.sh
 source ${kt_project_path}/cmds/other.sh
 source ${kt_project_path}/cmds/help.sh
 

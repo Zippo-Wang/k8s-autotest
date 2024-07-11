@@ -7,7 +7,6 @@
 ```
 [cluster]
 cloud=
-os=
 k8s_version=
 master_ip=
 node_info=
@@ -29,7 +28,6 @@ dash_user=
 ```
 [cluster]
 cloud=flexibleengine
-os=centos
 k8s_version=1.27.2
 master_ip=master_eip
 node_info={"node1_eip":"node1_pwd", "node2_eip":"node2_pwd"}
@@ -55,8 +53,6 @@ dash_user=Tom
 特别说明，只支持同一类型的OS搭建成k8s集群，比如该集群中的机器都是CentOS；别整那既有CentOS，又有Ubuntu的。
 
 * `cloud` (List, Required). 用的哪个云。取值：**huaweicloud**, **flexibleengine**.
-
-* `os` (String, Required). 用的哪种操作系统。取值：**centos**.
 
 * `k8s_version` (String, Required). 想要搭建的k8s集群版本。
   - 小版本。写成1.27.2，就会去搭建v1.27.2版本的集群。支持的版本v1.25.x(含) - v1.29.x(含)

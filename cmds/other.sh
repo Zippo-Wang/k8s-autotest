@@ -101,9 +101,31 @@ function f_init() {
   fi
 }
 
-function f_version() {
-  printf "k8s-autotest_${sys_current_version} \n"
-  echo
-  printf "see the link for latest version: https://github.com/Zippo-Wang/k8s-autotest \n"
+# 适用create、delete、install、uninstall、watch
+function f_validate_cmd() {
+  if [ -z ${2} ]; then
+    printf "${err_msg}${1}后面必须跟有一个参数, 使用${font_green1}kt ${1} --help${cend}查看使用帮助 \n"
+    return 0
+  fi
+  if [ ! -z ${3} ]; then
+    printf "${err_msg}没有这个命令: ${kt} $* \n"
+    return 0
+  fi
+  return 1
+}
+
+# 适用build
+function f_validate_build_cmd() {
+  if [[ ${2} == ${kt_help3} && -z ${3} ]]; then return 1; fi
+  echo "${1} ${2} ${3} ${4}"
+  if [ -z ${3} ]; then
+    printf "${err_msg}${1}后面必须跟有2个参数, 使用${font_green1}kt ${1} --help${cend}查看使用帮助 \n"
+    return 0
+  fi
+  if [ ! -z ${4} ]; then
+    printf "${err_msg}没有这个命令: ${kt} $* \n"
+    return 0
+  fi
+  return 1
 }
 

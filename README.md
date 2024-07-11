@@ -28,12 +28,10 @@ git clone git@github.com:Zippo-Wang/k8s-autotest.git
 2）配置环境变量
 ```bash
 # centos。编辑`/etc/profile`，仅需修改`kt_project_path`变量值
-# 如果步骤1 clone下来的，就不用修改
+# 错误示例：kt_project_path="/root/code/k8s-autotest/"，即不要带最后面的斜线
 export kt_project_path="/root/code/k8s-autotest"
 export kt_main='kt'
 alias kt="source $kt_project_path/main/main.sh"
-
-# ubuntu。下个版本支持
 ```
 
 3）使环境变量立即生效

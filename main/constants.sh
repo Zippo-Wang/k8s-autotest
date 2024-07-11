@@ -106,7 +106,6 @@ cluster_config="cluster-config"     # 文件名，集群所有的参数都放在
 # cluster
 cluster2="[cluster]"
 cloud_name="cloud"                  # 用的哪个云
-os_name="os"                  # 用的哪个云
 k8s_version="k8s_version"           # 想要搭建的k8s集群版本【v1.24-v1.29】[只试过1.27.2]
 master_ip="master_ip"               # master节点的eip
 node_info="node_info"               # node节点的eip和密码{"ip1":"pwd1", "ip2":"pwd2"}
@@ -134,11 +133,11 @@ repo_hh_system="hh-system"
 repo_csi_all="huaweicloud-csi-driver"
 repo_ccm_all="cloud-provider-huaweicloud"
 
-repo_csi_url=""
-repo_ccm=""
-repo_packer=""
-repo_k8s_autotest=""
-repo_hh_system=""
+repo_csi_url="git@github.com:huaweicloud/huaweicloud-csi-driver.git"
+repo_ccm="git@github.com:kubernetes-sigs/cloud-provider-huaweicloud.git"
+repo_packer="git@github.com:huaweicloud/packer-plugin-huaweicloud.git"
+repo_k8s_autotest="git@github.com:Zippo-Wang/k8s-autotest.git"
+repo_hh_system="git@github.com:Zippo-Wang/hh-system.git"
 
 
 

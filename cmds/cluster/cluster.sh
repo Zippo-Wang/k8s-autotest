@@ -27,7 +27,6 @@ function f_required_cmd() {
   echo "xxx"
 }
 
-
 # 从cluster-config中读取入参
 function f_get_config(){
   echo "xxx"

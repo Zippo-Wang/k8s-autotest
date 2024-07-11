@@ -31,8 +31,6 @@ if [[ -z ${operate1} ]]; then
   return
 fi
 
-
-
 # 支持的命令 -------------------------------------------------------------------------------------------------------------
 current_cmd="${kt_main} $*" # 获取用户所有输入
 if [[ ${cmd_list1[*]} =~ ${operate1} && ${cmd_list2[*]} =~ ${operate2} ]]; then
@@ -86,9 +84,26 @@ case ${operate1} in
     if [[ ${valid} = 0 ]]; then return; fi
     case ${operate2} in
       # CSI
-      ${service_evs} )        f_delete ${dir_evs} ;;
-      ${service_obs} )        f_delete ${dir_obs} ;;
-      ${service_sfs_turbo} )  f_delete ${dir_sfs_turbo} ;;
+      ${service_evs} )      f_delete ${dir_evs};;
+      ${evs_default} )      f_delete ${dir_evs_default};;
+      ${evs_parameter} )    f_delete ${dir_evs_parameter};;
+      ${evs_deny_resize} )  f_delete ${dir_evs_deny_resize};;
+      ${evs_allow_resize} ) f_delete ${dir_evs_allow_resize};;
+      ${evs_snapshot} )     f_delete ${dir_evs_snapshot};;
+      ${evs_rwo} )          f_delete ${dir_evs_rwo};;
+      ${evs_rwx} )          f_delete ${dir_evs_rwx};;
+
+      ${service_obs} )   f_delete ${dir_obs};;
+      ${obs_default} )   f_delete ${dir_obs_default};;
+      ${obs_parameter} ) f_delete ${dir_obs_parameter};;
+      ${obs_exist} )     f_delete ${dir_obs_exist};;
+
+      ${service_sfs_turbo} )      f_delete ${dir_sfs_turbo};;
+      ${sfs_turbo_default} )      f_delete ${dir_sfs_turbo_default};;
+      ${sfs_turbo_performance} )  f_delete ${dir_sfs_turbo_performance};;
+      ${sfs_turbo_deny_resize} )  f_delete ${dir_sfs_turbo_deny_resize};;
+      ${sfs_turbo_allow_resize} ) f_delete ${dir_sfs_turbo_allow_resize};;
+      ${sfs_turbo_static} )       f_delete ${dir_sfs_turbo_static};;
 
       # CCM
       ${plugin_ccm})   f_delete_ccm ${dir_ccm};;
@@ -159,6 +174,7 @@ case ${operate1} in
   ${kt_help3}) f_help ;;
 
   # version
+  # 没啥用，图一乐
   ${kt_version1}) f_version ;;
   ${kt_version2}) f_version ;;
   ${kt_version3}) f_version ;;

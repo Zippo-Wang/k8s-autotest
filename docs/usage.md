@@ -5,9 +5,9 @@
 1）支持的服务
 ```bash
 # csi
-EVS
-OBS
-SFS-Turbo
+evs
+obs
+sfs-turbo
 
 # ccm
 ccm
@@ -39,7 +39,7 @@ kt create evs
 kt delete sfs-turbo
 
 # 自定义目录
-kt create /root/code/k8s-autotest/test-case/csi/OBS/01_obs-dynamic
+kt create /root/code/k8s-autotest/test-case/csi/obs/01_obs-dynamic
 
 # 执行ccm用例
 kt create ccm

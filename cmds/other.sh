@@ -2,6 +2,76 @@
 
 source ${kt_project_path}/main/constants.sh
 
+# 需要先看对应的系统，然后再去check env中的变量
+function f_check_os_type() {
+  if grep -i -q "EulerOS" /etc/os-release; then
+    # EulerOS
+    return 5
+  elif [ -f "/etc/redhat-release" ]; then
+    # CentOS or RHEL or EulerOS
+    if grep -i -q "CentOS" /etc/redhat-release; then
+      return 1
+    elif grep -i -q "Fedora" /etc/redhat-release; then
+      return 4
+    elif grep -i -q "EulerOS" /etc/redhat-release; then
+      return 5
+    fi
+  elif [ -f "/etc/issue" ]; then
+    # Ubuntu or Debian or Euler
+    if grep -i -q "ubuntu" /etc/issue; then
+      return 2
+    elif grep -i -q "debian" /etc/issue; then
+      return 3
+    elif grep -i -q "Euler" /etc/os-release; then
+      return 5
+    fi
+  elif [ -f "/etc/fedora-release" ]; then
+    # Fedora
+    if grep -i -q "Fedora" /etc/fedora-release; then
+      return 4
+    fi
+  else
+    # unknown OS
+    return 0
+  fi
+}
+
+function f_check_os_supported() {
+  if [ ${1} = 0 ]; then
+    printf "${err_msg}你的系统不支持k8s-autotest \n"
+    sleep 5
+    exit
+  fi
+}
+
+function f_check_env_vars() {
+  if [ -z ${kt_project_path} ]; then
+    printf "${err_msg}环境变量'kt_project_path'为空，请参考readme.md配置 \n"
+    sleep 5
+    exit
+  elif [ -z ${kt_main} ]; then
+    printf "${err_msg}环境变量'kt_main'为空，请参考readme.md配置 \n"
+    sleep 5
+    exit
+  elif [ -z "$(alias kt 2>/dev/null)" ]; then
+    printf "${err_msg}环境变量'alias kt'为空，请参考readme.md配置 \n"
+    sleep 5
+    exit
+  fi
+}
+
+function f_pre_check() {
+  # 1、检查os类型
+  f_check_os_type
+
+  # 2、检查os是否支持该脚本
+  osCode=$?
+  f_check_os_supported osCode
+
+  # 3、检查环境变量配置好了没
+  f_check_env_vars
+}
+
 function f_init() {
   # 修改换行符
   for file in `find ${kt_project_path} -name *.sh -type f`;
@@ -17,7 +87,7 @@ function f_init() {
 
   if [ ! -d ${script_directory} ]
   then
-    echo "该目录不存在，您的Linux系统不支持使用该脚本的自动补全功能，但不影响脚本使用。${script_directory}"
+    printf "${warn_msg}该目录不存在，您的Linux系统不支持使用该脚本的自动补全功能，但不影响脚本使用。${script_directory} \n"
   fi
 
   # 如果支持，就写入自动补全脚本
@@ -25,9 +95,9 @@ function f_init() {
   then
     sudo cp ${kt_project_path}/utils/auto_tab.sh /etc/bash_completion.d/kt_auto_tab
     . ${env_directory}  # 刷新自动补全的环境配置，使立即生效
-    printf "${font_green1}k8s-autotest初始化成功，请重新打开终端窗口使配置生效！${cend}\n"
+    printf "${info_msg}${font_green1}k8s-autotest初始化成功，请重新打开终端窗口使配置生效！${cend}\n"
   else
-    printf "${font_red1}sudo密码不正确，初始化失败！${cend}\n"
+    printf "${err_msg}${font_red1}sudo密码不正确，初始化失败！${cend}\n"
   fi
 }
 
@@ -37,46 +107,3 @@ function f_version() {
   printf "see the link for latest version: https://github.com/Zippo-Wang/k8s-autotest \n"
 }
 
-function f_help() {
-  printf "${font_yellow1}【一】Usage: kt <cmd1> <cmd2> ${cend}\n"
-  printf " 初次运行系统，请阅读${font_green1}Readme.md${cend}配置环境变量，然后进行初始化 \n"
-  printf " ${font_green1}${common_init}${cend}         ${font_blue1}系统初始化${cend}。\n"
-  printf " ${font_green1}${kt_help1}${cend}         查看k8s-autotest使用帮助 \n"
-  printf " ${font_green1}tab${cend}          ${font_blue1}自动补全${cend}。按tab键即可自动补全本系统支持的所有命令 \n"
-  echo
-
-  printf "${font_yellow1}【二】[install][uninstall] ${cend}\n"
-  printf " ${font_green1}${service_evs}${cend} \t      安装evs鉴权和插件 或 卸载evs鉴权和插件【不含cloud-config】\n"
-  printf " ${font_green1}${service_obs}${cend} \t      安装obs鉴权和插件 或 卸载obs鉴权和插件【不含cloud-config】 \n"
-  printf " ${font_green1}${service_sfs_turbo}${cend}    安装sfs-turbo鉴权和插件 或 卸载sfs-turbo鉴权和插件【不含cloud-config】\n"
-  printf " ${font_green1}${plugin_ccm}${cend}  \t      安装ccm鉴权和插件 或 卸载ccm鉴权和插件【不含cloud-config和lb-config】\n"
-  echo
-
-  printf "${font_yellow1}【三】[create][delete] ${cend}\n"
-  printf " ${font_green1}${service_evs}${cend} \t      执行evs用例 或 删除evs用例创建的对象\n"
-  printf " ${font_green1}${service_obs}${cend} \t      执行obs用例 或 删除obs用例创建的对象\n"
-  printf " ${font_green1}${service_sfs_turbo}${cend}    执行sfs-turbo用例 或 删除sfs-turbo用例创建的对象\n"
-  printf " ${font_green1}${plugin_ccm}${cend}  \t      执行ccm所有用例 或 删除ccm所有用例创建的对象\n"
-  printf " ${font_green1}${ccm_normal}${cend}   执行ccm基本用例 或 删除ccm基本用例创建的对象\n"
-  printf " ${font_green1}${ccm_eip}${cend}      执行ccm eip用例 或 删除ccm eip用例创建的对象\n"
-  printf " ${font_green1}${ccm_affinity}${cend} 执行ccm affinity用例 或 删除ccm affinity用例创建的对象\n"
-  printf " ${font_green1}${ccm_existing}${cend} 执行ccm existing用例 或 删除ccm existing用例创建的对象\n"
-  echo
-
-  printf "${font_yellow1}【四】[build] ${cend}示例：kt build obs v0.0.2 \n"
-  printf " ${font_green1}${service_evs}${cend} \t      打包evs插件成docker镜像，并推送到docker hub \n"
-  printf " ${font_green1}${service_obs}${cend} \t      打包obs插件成docker镜像，并推送到docker hub \n"
-  printf " ${font_green1}${service_sfs_turbo}${cend}    打包sfs-turbo插件成docker镜像，并推送到docker hub \n"
-  printf " ${font_green1}${plugin_ccm}${cend}  \t      打包ccm插件成docker镜像，并推送到docker hub \n"
-  printf " ${font_green1}${cluster}${cend}      构建k8s集群，示例：${font_green1}kt build cluster /root/cluster-config${cend}(绝对路径) \n"
-  echo
-
-  printf "${font_yellow1}【五】[watch] ${cend}\n"
-  printf " ${font_green1}${k8s_node}${cend}         执行watch -n 1 -d kubectl get node\n"
-  printf " ${font_green1}${k8s_deployment}${cend}   执行watch -n 1 -d kubectl get deployment ${font_green} 【支持简写：${k8s_deployment2}】${cend}\n"
-  printf " ${font_green1}${k8s_daemonset1}${cend}    执行watch -n 1 -d kubectl get daemonset ${font_green}  【支持简写：ds】${cend} \n"
-  printf " ${font_green1}${k8s_pod}${cend} \t      执行watch -n 1 -d kubectl get pod -o wide\n"
-  printf " ${font_green1}${k8s_service1}${cend}      执行watch -n 1 -d kubectl get service ${font_green}    【支持简写：svc】${cend} \n"
-  printf " ${font_green1}${k8s_pvc}${cend} \t      执行watch -n 1 -d kubectl get pvc ${font_green}\t【不支持：${k8s_pvc_all}】${cend}\n"
-  printf " ${font_green1}${k8s_pv}${cend}  \t      执行watch -n 1 -d kubectl get pv ${font_green} \t【不支持：${k8s_pv_all}】${cend}\n"
-}

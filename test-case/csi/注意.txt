@@ -1,5 +1,5 @@
 
 1、需要修改的地方
-SFS-Turbo\03_sfs-turbo-static\pv.yaml中的SFS-id
-
+k8s-autotest\test-case\csi\sfs-turbo\03_sfs-turbo-static\pv.yaml中的SFS-id
+k8s-autotest\test-case\csi\obs\02_obs-exist\pv.yaml
 

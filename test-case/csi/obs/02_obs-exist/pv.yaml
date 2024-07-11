@@ -10,4 +10,4 @@ spec:
   persistentVolumeReclaimPolicy: Delete
   csi:
     driver: obs.csi.huaweicloud.com
-    volumeHandle: fs-test10086
+    volumeHandle: tf-xxx

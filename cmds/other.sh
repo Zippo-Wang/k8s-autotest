@@ -119,7 +119,6 @@ function f_validate_cmd() {
 # 适用build
 function f_validate_build_cmd() {
   if [[ ${2} == ${kt_help3} && -z ${3} ]]; then return 1; fi
-  echo "${1} ${2} ${3} ${4}"
   if [ -z ${3} ]; then
     printf "${err_msg}${1}后面必须跟有2个参数, 使用${font_green1}kt ${1} --help${cend}查看使用帮助 \n"
     return 0

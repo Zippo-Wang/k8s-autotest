@@ -15,7 +15,7 @@ function f_create() {
   snapshotx=($(find ${yaml_dir} -name snapshotx -type f))
 
   if [[ ! ${#sc[@]} -eq 0 ]]; then
-    printf "${info_msg}${font_green1}[${k8s_sc}]↓↓↓${cend}---------------------------------------------------${cend} \n"
+    printf "${info_msg}${font_green1}[${k8s_sc}]↓↓↓$---------------------------------------------------------${cend} \n"
     for x in ${sc[@]}; do kubectl apply -f ${x}; done;
   fi;
 

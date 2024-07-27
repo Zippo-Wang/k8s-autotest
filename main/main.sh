@@ -21,11 +21,11 @@ if [[ ${checkPassed} == 0 ]]; then return 0; fi
 
 # 判断第1个参数是否是kt ---------------------------------------------------------------------------------------------------
 if [[ ${kt_main} != ${kt} ]]; then
-  printf "${}err_msg请参考Readme.md配置环境变量：\n"
+  printf "${err_msg}请参考Readme.md配置环境变量：\n"
   return
 fi
 
-# 判断第1个参数是否是kt ---------------------------------------------------------------------------------------------------
+# 只敲了一个kt，没跟别的参数 -----------------------------------------------------------------------------------------------
 if [[ -z ${operate1} ]]; then
   printf "${info_msg}欢迎使用k8s-autotest, 请使用${font_green1}${kt} ${kt_help1}${cend}查看使用帮助\n"
   return
@@ -121,7 +121,7 @@ case ${operate1} in
 
   # install
   ${kt_install})
-    f_validate_cmd ${kt_create} ${operate2} ${operate3}
+    f_validate_cmd ${kt_install} ${operate2} ${operate3}
     valid=$?
     if [[ ${valid} = 0 ]]; then return; fi
     case ${operate2} in
@@ -136,7 +136,7 @@ case ${operate1} in
 
   # uninstall
   ${kt_uninstall})
-    f_validate_cmd ${kt_create} ${operate2} ${operate3}
+    f_validate_cmd ${kt_uninstall} ${operate2} ${operate3}
     valid=$?
     if [[ ${valid} = 0 ]]; then return; fi
     case ${operate2} in

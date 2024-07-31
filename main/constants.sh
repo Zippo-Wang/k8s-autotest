@@ -165,7 +165,7 @@ cmd_list2=(
 info_msg="\033[0;30;42m[INFO]${cend}" # 绿色加粗, INFO
 warn_msg="\033[0;30;43m[WARN]${cend}" # 黄色加粗, WARN
 err_msg="\033[0;30;41m[ERROR]${cend}" # 红色加粗, ERROR
-debug_msg="\033[0;30;44m[DEBUG]${cend}" # 红色加粗, ERROR
+debug_msg="\033[0;30;44m[DEBUG]${cend}" # 蓝色加粗, DEBUG
 
 
 # 颜色常量

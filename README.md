@@ -6,13 +6,13 @@
 其他系统**可能**存在不兼容
 
 ### 功能说明
-* **支持一键搭建k8s集群【爆火】**。详见[搭建k8s集群](https://github.com/Zippo-Wang/k8s-autotest/blob/d6cbab4de56672221e5b7d60677000a3f639ca42/docs/build-cluster.md)
+* **支持一键搭建k8s集群【爆火】**。详见[搭建k8s集群](https://github.com/Zippo-Wang/k8s-autotest/blob/2d297422404ef8b898f24c3e9aa70025bdad86f1/docs/build-cluster.md)
 * 支持一键安装Huaweicloud CSI、CCM插件。
 * 支持一键运行Huaweicloud CSI、CCM用例。
 * 支持一键打包Huaweicloud CSI、CCM项目并推送到docker hub。
 * 支持一键监控k8s集群内对象状态。
 
-入门教程: [使用k8s-autotest](https://github.com/Zippo-Wang/k8s-autotest/blob/0fa90a5507eb6961525f63a743d95437707944c4/docs/usage.md) 
+入门教程: [使用k8s-autotest](https://github.com/Zippo-Wang/k8s-autotest/blob/196ec0ba7c09d394a24daa3344ad583a221ae657/docs/usage.md) 
 
 更多详情: 使用`kt help`查看本系统支持的全部命令。
 

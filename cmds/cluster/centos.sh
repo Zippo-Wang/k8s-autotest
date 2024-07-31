@@ -209,7 +209,7 @@ function fc_validate_input_para() {
 }
 
 function fc_change_mirrors() {
-    printf "${info_msg}start to change mirrors of CentOS and Kubernetes \n"
+    printf "${info_msg} start to change mirrors of CentOS and Kubernetes \n"
 
     mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
 
@@ -384,7 +384,7 @@ yum makecache
 }
 
 function fc_install_common_cmd() {
-    printf "${info_msg}start to install common commands, it will takes some minutes \n"
+    printf "${info_msg} start to install common commands, it will takes some minutes \n"
     sudo yum -y update
 
     yum -y install wget
@@ -478,6 +478,7 @@ EOF
 function fc_config_host() {
     printf "${info_msg} start to config host \n"
     master_hostname=$(hostname)
+    echo "${input_master} ${master_hostname}" >> /etc/hosts
 
     if [[ ${#input_node[@]} -eq 0 ]]; then
         return
@@ -574,7 +575,6 @@ function fc_node_join() {
     (${kubeadm_join_cmd})
 }
 
-
 function fc_kubeadm_init() {
     printf "${info_msg} start to execute kubeadm init \n"
 
@@ -601,9 +601,9 @@ function fc_kubeadm_init() {
 
 function fc_kubeadm_join() {
     printf "${info_msg} start to execute join other nodes to cluster \n"
-
     kubeadm_join_cmd=$(awk '/kubeadm join/{flag=1} flag' "${build_dir}/kubeadm-init-output.txt")
 
+#     # difficult to accomplish...
 #     if [ -n "${kubeadm_join_cmd}" ]; then
 #         printf "${info_msg}successfully get 'kubeadm join ***' \n"
 #         node_num=${#input_node[@]}
@@ -619,19 +619,19 @@ function fc_kubeadm_join() {
 }
 
 function fc_install_network_plugin() {
-    printf "${info_msg}start to install network plugin \n"
+    printf "${info_msg} start to install network plugin \n"
     kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 }
 
 function fc_boot_up_nfs_system() {
-    printf "${info_msg}start to boot up nfs system \n"
+    printf "${info_msg} start to boot up nfs system \n"
 
     systemctl start nfs && systemctl enable nfs
     systemctl status nfs
 }
 
 function fc_install_golang() {
-    printf "${info_msg}start to install Golang_1.21.8 \n"
+    printf "${info_msg} start to install Golang_1.21.8 \n"
     wget https://golang.google.cn/dl/go1.21.8.linux-amd64.tar.gz -P ${build_dir}
     tar -zxvf ${build_dir}/go1.21.8.linux-amd64.tar.gz -C /usr/local
     fc_check_cmd "go version"
@@ -640,13 +640,13 @@ function fc_install_golang() {
 }
 
 function fc_get_repos() {
-    printf "${info_msg}start to get repo [csi] \n"
+    printf "${info_msg} start to get repo [csi] \n"
     git clone https://github.com/huaweicloud/huaweicloud-csi-driver.git ${code_dir}/huaweicloud-csi-driver
     sleep 5
-    printf "${info_msg}start to get repo [ccm] \n"
+    printf "${info_msg} start to get repo [ccm] \n"
     git clone https://github.com/kubernetes-sigs/cloud-provider-huaweicloud.git ${code_dir}/cloud-provider-huaweicloud
     sleep 5
-    printf "${info_msg}start to get repo [kt] \n"
+    printf "${info_msg} start to get repo [kt] \n"
     git clone https://github.com/Zippo-Wang/k8s-autotest.git ${code_dir}/k8s-autotest
     sleep 5
     $(kt init > /dev/null 2>&1)
@@ -654,7 +654,7 @@ function fc_get_repos() {
 }
 
 function fc_install_dashboard() {
-    printf "${info_msg}start to install dashboard \n"
+    printf "${info_msg} start to install dashboard \n"
     wget https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml -P ${build_dir}
     sleep 5
 
@@ -719,15 +719,14 @@ subjects:
   namespace: kubernetes-dashboard
 EOF
 
-kubectl apply -f ${build_dir}/usr.yaml
-
+    kubectl apply -f ${build_dir}/usr.yaml
     (kubectl proxy --port=${input_dashboard_port}) &
     printf "${info_msg}Now, you can use kubectl create token ${input_dashboard_name} -n kubernetes-dashboard to create token \n"
     printf "${info_msg}Use https://EIP:${input_dashboard_port} to login dashboard! \n"
 }
 
 function fc_end_output() {
-    echo "-------------------------------------------------------------- "
+    echo "---------------------------------------------------------------------------------- "
     printf "${info_msg}${yellow}System environment variables:${cend} ${green}/etc/profile${cend} \n"
     printf "${info_msg}${yellow}Code directory:${cend} ${green}${code_dir}${cend} \n"
     printf "${info_msg}${yellow}Pkg directory:${cend} ${green}${build_dir}${cend} \n"
@@ -735,7 +734,7 @@ function fc_end_output() {
     if [[ -n ${para_dashboard_name} && -n ${para_dashboard_port} ]]; then
         printf "${info_msg}${yellow}Dashboard username: ${input_dashboard_name}, port: ${input_dashboard_port}${cend} \n"
     fi
-    echo "-------------------------------------------------------------- "
+    echo "---------------------------------------------------------------------------------- "
     printf "${info_msg}${green}kubectl get nodes${cend} \n"
     kubectl get nodes
 }

@@ -30,7 +30,7 @@
 
 * `--dashname` (String, Required). 安装dashboard，创建的用户叫什么。
 
-* `--dashport` (String, Required). 安装dashboard，用哪个端口。
+* `--dashport` (Int, Required). 安装dashboard，用哪个端口。
 
 * `--mirror` (Bool, Required). 是否使用脚本给写入镜像源。默认`false`
   - `true`。使用，且安装一系列命令，会有点耗时

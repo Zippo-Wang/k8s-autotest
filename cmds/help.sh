@@ -76,8 +76,8 @@ function f_build_help() {
   printf " ${font_green1}${plugin_ccm}${cend}  \t    打包ccm插件成docker镜像，并推送到docker hub \n"
   echo
 
-  printf " ${font_green1}${cluster}${cend}    构建k8s集群。(需要填写cluster-config的绝对路径) \n"
-  echo
+  #printf " ${font_green1}${cluster}${cend}    构建k8s集群。(需要填写cluster-config的绝对路径) \n"
+  #echo
 }
 
 function f_watch_help() {

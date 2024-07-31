@@ -12,7 +12,7 @@
 * 支持一键打包Huaweicloud CSI、CCM项目并推送到docker hub。
 * 支持一键监控k8s集群内对象状态。
 
-入门教程: [使用k8s-autotest](https://github.com/Zippo-Wang/k8s-autotest/blob/0fa90a5507eb6961525f63a743d95437707944c4/docs/usage.md)。TODO: 提交PR之后，才会生成一个链接 
+入门教程: [使用k8s-autotest](https://github.com/Zippo-Wang/k8s-autotest/blob/0fa90a5507eb6961525f63a743d95437707944c4/docs/usage.md) 
 
 更多详情: 使用`kt help`查看本系统支持的全部命令。
 

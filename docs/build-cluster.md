@@ -1,48 +1,4 @@
-# Description of cluster config
 
-## File Structure
-
-不用对齐等号，copy一下直接用
-
-```
-[cluster]
-cloud=
-k8s_version=
-master_ip=
-node_info={"":""}
-docker_mirror=
-
-[git]
-git_username=
-git_email=
-code_dir=
-github_repos=["cis", "ccm"]
-
-[dashboard]
-dash_port=
-dash_user=
-```
-
-### Examples for kubernetes_v1.27.2
-
-```
-[cluster]
-cloud=flexibleengine
-k8s_version=1.27.2
-master_ip=master_eip
-node_info={"node1_ip":"node1_pwd", "node2_ip":"node2_pwd"}
-docker_mirror="xxx"
-
-[git]
-git_username="Tom123"
-git_email="tom123@outlook.com"
-code_dir="/root/code"
-github_repos=["csi", "ccm", "k8s-autotest"]
-
-[dashboard]
-dash_port=30012
-dash_user=Tom
-```
 
 ## Introduction
 
@@ -51,40 +7,69 @@ dash_user=Tom
 ### cluster
 
 特别说明，只支持同一类型的OS搭建成k8s集群，比如该集群中的机器都是CentOS；别整那既有CentOS，又有Ubuntu的。
-支持搭建集群的系统：**CentOS**、**Ubuntu**、**EulerOS**
+支持搭建集群的系统：**CentOS**
 
-* `cloud` (List, Required). 用的哪个云。取值：**huaweicloud**, **flexibleengine**.
+* `--type` (String, Required). 这个节点的类型。取值如下
+  - `master`。该节点是master
+  - `node`。该节点是node
 
-* `k8s_version` (String, Required). 想要搭建的k8s集群版本。支持的版本取决于[镜像源](http://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/)提供的版本，目前最高1.28.2，新版镜像源暂未更新。
-  - 小版本。写成1.27.2，就会去搭建v1.27.2版本的集群。
-  - 大版本。暂不支持。
+* `--version` (String, Required). 要搭建集群的版本。也可以自己看**yum list --showduplicates | grep kubelet**
+```
+1.27.0 ~ 1.27.16
+1.28.0 ~ 1.28.12
+1.29.0 ~ 1.29.7
+```
 
-* `master_ip` (String, Required). master节点的私有IP。
+* `--master` (String, Required). master节点的私有IP。
 
-* `node_info` (Map, Optional). node节点的IP和节点密码，格式是: {"node1_ip":"node1_pwd", "node2_ip":"node2_pwd"}。如果想搭建
-  一个单master节点的集群，那就不写该参数。
+* `--node` (String, Required). node节点的私有IP，以逗号分割，跟密码一一对应。
+  例如**--node=192.168.0.5,192.168.0.6**
 
-* `docker_mirror` (String, Optional). docker加速器地址，建议写，不写可能会导致一些问题。
-  示例：https://xxx.mirror.aliyuncs.com
+* `--password` (String, Required). node节点的密码，跟私有IP一一对应 以逗号分割。
+  例如**--node=xxx,yyy**
 
-### git
+* `--dashname` (String, Required). 安装dashboard，创建的用户叫什么。
 
-如果不指定git下的任何参数，请勿在cluster-config中填写`[git]`
+* `--dashport` (String, Required). 安装dashboard，用哪个端口。
 
-* `git_username` (String, Optional). 你想在本地设置的git账号的用户名。
+* `--mirror` (Bool, Required). 是否使用脚本给写入镜像源。默认`false`
+  - `true`。使用，且安装一系列命令，会有点耗时
+  - `false`。不使用，也不安装命令。(确保自己基础命令安装好了，而且你自己的镜像源中有docker/containerd/kubelet/kubeadm/kubectl)
 
-* `git_email` (String, Optional). 你想在本地设置的git账号的邮箱。
+[Note] 手动安装怎么装？
+```bash
+# centos
+yum -y install wget
+yum -y install gcc
+yum -y install gcc-c++
+yum -y install bind-utils
+yum -y install vim*
+yum -y install git
+yum -y install ipset ipvsadm
+yum -y install expect
+yum -y install sshpass
+```
 
-* `code_dir` (String, Optional). git clone下来的代码放到哪个目录。如果指定了该参数，`git_username`和`git_email`为必选。
+### 一个例子
+```bash
+# master
+sh /root/centos.sh \
+	--type=master \
+	--version=1.27.2 \
+	--master=192.168.0.100 \
+	--node=192.168.0.101,192.168.0.102 \
+	--password='xxxxx','yyyyy' \
+	--dashname=namexxx \
+	--dashport=30017 \
+	--mirror=true
 
-* `github_repos` (List, Optional). clone哪些代码仓。取值：**csi**, **ccm**, **packer**, **hh-system**, **k8s-autotest**.
-  如果指定了该参数，`git_username`, `git_email`和`code_dir`为必选。
+# node
+sh /root/centos.sh \
+	--type=node \
+	--version=1.27.2 \
+	--master=192.168.0.100 \
+	--node=192.168.0.101,192.168.0.102 \
+	--password='xxxxx','yyyyy' \
+	--mirror=true
+```
 
-### dashboard
-
-如果不指定dashboard下的任何参数，请勿在cluster-config中填写`[dashboard]`
-仅支持dashboard2.7，不支持自定义版本。如果需要安装其他版本的dashboard请手动安装
-
-* `dash_port` (String, Optional). dashboard要开放的端口，可以通过`https://EIP:port`登录。
-
-* `dash_user` (String, Optional). 创建一个用户名为`dash_user`的用户，用于登录dashboard。如果指定了该参数，`dash_port`为必选。

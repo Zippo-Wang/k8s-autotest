@@ -162,7 +162,7 @@ case ${operate1} in
       ${cluster})           f_build_cluster ${operate3} ;;
 
       # build cmd help
-      ${kt_help3}) f_build_help ;;
+      # ${kt_help3}) f_build_help ;;    # 不用这种方式了
     esac ;;
 
   # watch

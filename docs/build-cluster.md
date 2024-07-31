@@ -2,7 +2,7 @@
 
 ## Introduction
 
-* Ensure your virtual machines are clean, including have not installed docker, kubernetes, etc.
+* Ensure your virtual machines are clean, including have not installed docker,containerd, kubernetes, etc.
 
 ### cluster
 
@@ -33,8 +33,8 @@
 * `--dashport` (Int, Required). 安装dashboard，用哪个端口。
 
 * `--mirror` (Bool, Required). 是否使用脚本给写入镜像源。默认`false`
-  - `true`。使用，且安装一系列命令，会有点耗时
-  - `false`。不使用，也不安装命令。(确保自己基础命令安装好了，而且你自己的镜像源中有docker/containerd/kubelet/kubeadm/kubectl)
+  - `true`。使用，且安装一系列命令，会有点耗时，大概10-15min
+  - `false`。不使用，也不安装命令，超快，5min左右。(确保自己基础命令安装好了，而且你自己的镜像源中有docker/containerd/kubelet/kubeadm/kubectl)
 
 [Note] 手动安装怎么装？
 ```bash

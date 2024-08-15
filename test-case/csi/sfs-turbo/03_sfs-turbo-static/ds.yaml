@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: sfs-turbo-static-ds
+spec:
+  selector:
+    matchLabels:
+      app: sfs-turbo-static
+  template:
+    metadata:
+      labels:
+        app: sfs-turbo-static
+    spec:
+      containers:
+        - image: nginx
+          name: nginx-sfsturbo-custom
+          command: ["/bin/sh"]
+          args: ["-c", "while true; do echo $(date -u) >> /mnt/sfsturbo/outfile; sleep 5; done"]
+          volumeMounts:
+            - mountPath: /mnt/sfsturbo
+              name: sfsturbo-data
+      volumes:
+        - name: sfsturbo-data
+          persistentVolumeClaim:
+            claimName: sfs-turbo-static-pvc

@@ -105,11 +105,15 @@ function f_init() {
 
 # 适用create、delete、install、uninstall、watch
 function f_validate_cmd() {
-  if [ -z ${2} ]; then
+  if [[ -z ${2} ]]; then
     printf "${err_msg}${1}后面必须跟有一个参数, 使用${font_green1}kt ${1} --help${cend}查看使用帮助 \n"
     return 0
   fi
-  if [ ! -z ${3} ]; then
+  if [[ ${3} == ${kt_ds} ]]; then
+    return 1
+  fi
+
+  if [[ ! -z ${3} ]]; then
     printf "${err_msg}没有这个命令: ${kt} $* \n"
     return 0
   fi

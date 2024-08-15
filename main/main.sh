@@ -3,8 +3,6 @@
 source ${kt_project_path}/main/constants.sh
 source ${kt_project_path}/cmds/k8s/csi.sh
 source ${kt_project_path}/cmds/k8s/ccm.sh
-source ${kt_project_path}/cmds/cluster/cluster.sh
-source ${kt_project_path}/cmds/cluster/centos.sh
 source ${kt_project_path}/cmds/other.sh
 source ${kt_project_path}/cmds/help.sh
 
@@ -42,26 +40,26 @@ case ${operate1} in
     if [[ ${valid} = 0 ]]; then return; fi
     case ${operate2} in
       # CSI
-      ${service_evs} )      f_create ${dir_evs};;
-      ${evs_default} )      f_create ${dir_evs_default};;
-      ${evs_parameter} )    f_create ${dir_evs_parameter};;
-      ${evs_deny_resize} )  f_create ${dir_evs_deny_resize};;
-      ${evs_allow_resize} ) f_create ${dir_evs_allow_resize};;
-      ${evs_snapshot} )     f_create ${dir_evs_snapshot};;
-      ${evs_rwo} )          f_create ${dir_evs_rwo};;
-      ${evs_rwx} )          f_create ${dir_evs_rwx};;
+      ${service_evs} )      f_create ${dir_evs} ;;
+      ${evs_default} )      f_create ${dir_evs_default} ;;
+      ${evs_parameter} )    f_create ${dir_evs_parameter} ;;
+      ${evs_deny_resize} )  f_create ${dir_evs_deny_resize} ;;
+      ${evs_allow_resize} ) f_create ${dir_evs_allow_resize} ;;
+      ${evs_snapshot} )     f_create ${dir_evs_snapshot} ;;
+      ${evs_rwo} )          f_create ${dir_evs_rwo} ;;
+      ${evs_rwx} )          f_create ${dir_evs_rwx} ;;
 
-      ${service_obs} )   f_create ${dir_obs};;
-      ${obs_default} )   f_create ${dir_obs_default};;
-      ${obs_parameter} ) f_create ${dir_obs_parameter};;
-      ${obs_exist} )     f_create ${dir_obs_exist};;
+      ${service_obs} )   f_create ${dir_obs} ${operate3};;
+      ${obs_default} )   f_create ${dir_obs_default} ${operate3};;
+      ${obs_parameter} ) f_create ${dir_obs_parameter} ${operate3};;
+      ${obs_exist} )     f_create ${dir_obs_exist} ${operate3};;
 
-      ${service_sfs_turbo} )      f_create ${dir_sfs_turbo};;
-      ${sfs_turbo_default} )      f_create ${dir_sfs_turbo_default};;
-      ${sfs_turbo_performance} )  f_create ${dir_sfs_turbo_performance};;
-      ${sfs_turbo_deny_resize} )  f_create ${dir_sfs_turbo_deny_resize};;
-      ${sfs_turbo_allow_resize} ) f_create ${dir_sfs_turbo_allow_resize};;
-      ${sfs_turbo_static} )       f_create ${dir_sfs_turbo_static};;
+      ${service_sfs_turbo} )      f_create ${dir_sfs_turbo} ;;
+      ${sfs_turbo_default} )      f_create ${dir_sfs_turbo_default} ;;
+      ${sfs_turbo_performance} )  f_create ${dir_sfs_turbo_performance} ;;
+      ${sfs_turbo_deny_resize} )  f_create ${dir_sfs_turbo_deny_resize} ;;
+      ${sfs_turbo_allow_resize} ) f_create ${dir_sfs_turbo_allow_resize} ;;
+      ${sfs_turbo_static} )       f_create ${dir_sfs_turbo_static} ;;
 
       # CCM
       ${plugin_ccm})   f_create_ccm ${dir_ccm};;
@@ -84,26 +82,26 @@ case ${operate1} in
     if [[ ${valid} = 0 ]]; then return; fi
     case ${operate2} in
       # CSI
-      ${service_evs} )      f_delete ${dir_evs};;
-      ${evs_default} )      f_delete ${dir_evs_default};;
-      ${evs_parameter} )    f_delete ${dir_evs_parameter};;
-      ${evs_deny_resize} )  f_delete ${dir_evs_deny_resize};;
-      ${evs_allow_resize} ) f_delete ${dir_evs_allow_resize};;
-      ${evs_snapshot} )     f_delete ${dir_evs_snapshot};;
-      ${evs_rwo} )          f_delete ${dir_evs_rwo};;
-      ${evs_rwx} )          f_delete ${dir_evs_rwx};;
+      ${service_evs} )      f_delete ${dir_evs} ;;
+      ${evs_default} )      f_delete ${dir_evs_default} ;;
+      ${evs_parameter} )    f_delete ${dir_evs_parameter} ;;
+      ${evs_deny_resize} )  f_delete ${dir_evs_deny_resize} ;;
+      ${evs_allow_resize} ) f_delete ${dir_evs_allow_resize} ;;
+      ${evs_snapshot} )     f_delete ${dir_evs_snapshot} ;;
+      ${evs_rwo} )          f_delete ${dir_evs_rwo} ;;
+      ${evs_rwx} )          f_delete ${dir_evs_rwx} ;;
 
-      ${service_obs} )   f_delete ${dir_obs};;
-      ${obs_default} )   f_delete ${dir_obs_default};;
-      ${obs_parameter} ) f_delete ${dir_obs_parameter};;
-      ${obs_exist} )     f_delete ${dir_obs_exist};;
+      ${service_obs} )   f_delete ${dir_obs} ${operate3};;
+      ${obs_default} )   f_delete ${dir_obs_default} ${operate3};;
+      ${obs_parameter} ) f_delete ${dir_obs_parameter} ${operate3};;
+      ${obs_exist} )     f_delete ${dir_obs_exist} ${operate3};;
 
-      ${service_sfs_turbo} )      f_delete ${dir_sfs_turbo};;
-      ${sfs_turbo_default} )      f_delete ${dir_sfs_turbo_default};;
-      ${sfs_turbo_performance} )  f_delete ${dir_sfs_turbo_performance};;
-      ${sfs_turbo_deny_resize} )  f_delete ${dir_sfs_turbo_deny_resize};;
-      ${sfs_turbo_allow_resize} ) f_delete ${dir_sfs_turbo_allow_resize};;
-      ${sfs_turbo_static} )       f_delete ${dir_sfs_turbo_static};;
+      ${service_sfs_turbo} )      f_delete ${dir_sfs_turbo} ;;
+      ${sfs_turbo_default} )      f_delete ${dir_sfs_turbo_default} ;;
+      ${sfs_turbo_performance} )  f_delete ${dir_sfs_turbo_performance} ;;
+      ${sfs_turbo_deny_resize} )  f_delete ${dir_sfs_turbo_deny_resize} ;;
+      ${sfs_turbo_allow_resize} ) f_delete ${dir_sfs_turbo_allow_resize} ;;
+      ${sfs_turbo_static} )       f_delete ${dir_sfs_turbo_static} ;;
 
       # CCM
       ${plugin_ccm})   f_delete_ccm ${dir_ccm};;

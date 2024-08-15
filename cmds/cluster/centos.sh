@@ -30,7 +30,7 @@ green='\033[0;32m'
 yellow='\033[0;33m'
 cend='\033[0m'
 
-# 'fc' specify it is a Function of CentOS
+# 'fc' specify it is a Centos Function
 function fc_main() {
     fc_parse_cmd $@
     fc_validate_input_para
@@ -110,7 +110,6 @@ function fc_node() {
     fc_get_repos
 }
 
-
 # common function: check if specified cmd could execute successfully
 function fc_check_cmd() {
     if ! command -v ${1} >/dev/null 2>&1 ; then
@@ -135,7 +134,7 @@ function fc_parse_cmd() {
             ${para_password}=*)
                 IFS=',' read -r -a input_password <<< "${1#*=}"
                 shift
-            ;;
+                ;;
             #${para_docker}=*) input_docker="${1#*=}"; shift ;;
             ${para_dashboard_name}=*) input_dashboard_name="${1#*=}"; shift ;;
             ${para_dashboard_port}=*) input_dashboard_port="${1#*=}"; shift ;;
@@ -459,10 +458,6 @@ function fc_install_docker() {
     yum install -y docker
     fc_check_cmd "docker -v"
 
-# cat <<EOF>> /etc/default/docker
-# DOCKER_OPTS="${input_docker}"
-# EOF
-
 cat <<EOF>> /etc/docker/daemon.json
 {
   "exec-opts": ["native.cgroupdriver=systemd"]
@@ -601,6 +596,7 @@ function fc_kubeadm_init() {
 
 function fc_kubeadm_join() {
     printf "${info_msg} start to execute join other nodes to cluster \n"
+
     kubeadm_join_cmd=$(awk '/kubeadm join/{flag=1} flag' "${build_dir}/kubeadm-init-output.txt")
 
 #     # difficult to accomplish...
@@ -739,11 +735,11 @@ function fc_end_output() {
     kubectl get nodes
 }
 
-start_time=$(date +%s)
-fc_main "$@"
-end_time=$(date +%s)
-duration=$((end_time - start_time))
-minute=$(( (duration % 3600) / 60 ))
-second=$((duration % 60))
-printf "${info_msg}Build completed! Spend ${minute}:${second} (min:sec) \n"
+# start_time=$(date +%s)
+# fc_main "$@"
+# end_time=$(date +%s)
+# duration=$((end_time - start_time))
+# minute=$(( (duration % 3600) / 60 ))
+# second=$((duration % 60))
+# printf "${info_msg}Build completed! Spend ${minute}:${second} (min:sec) \n"
 

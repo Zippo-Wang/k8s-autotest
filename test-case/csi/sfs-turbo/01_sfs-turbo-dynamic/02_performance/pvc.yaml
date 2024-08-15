@@ -1,11 +1,11 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: sfsturbo-pvc-performance
+  name: sfsturbo-performance-pvc
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 500Gi
-  storageClassName: sfsturbo-sc-performance
+  storageClassName: sfsturbo-performance-sc

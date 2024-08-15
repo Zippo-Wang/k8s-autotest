@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: sfsturbo-performance-ds
+spec:
+  selector:
+    matchLabels:
+      app: sfsturbo-performance
+  template:
+    metadata:
+      labels:
+        app: sfsturbo-performance
+    spec:
+      containers:
+        - image: nginx
+          name: sfsturbo-nginx-performance
+          command: [ "/bin/sh" ]
+          args: [ "-c", "while true; do echo $(date -u) >> /mnt/sfsturbo/outfile; sleep 5; done" ]
+          volumeMounts:
+            - mountPath: /mnt/sfsturbo
+              name: sfsturbo-data
+      volumes:
+        - name: sfsturbo-data
+          persistentVolumeClaim:
+            claimName: sfsturbo-performance-pvc

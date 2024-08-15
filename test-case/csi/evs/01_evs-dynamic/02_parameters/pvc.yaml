@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: evs-normal-pvc-paras
+  name: evs-parameter-pvc
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 20Gi
-  storageClassName: evs-sc-paras
+  storageClassName: evs-parameter-sc

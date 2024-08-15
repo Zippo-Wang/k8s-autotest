@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: sfsturbo-nginx-performance
+  name: sfsturbo-performance-pod
 spec:
   containers:
     - image: nginx
@@ -14,4 +14,4 @@ spec:
   volumes:
     - name: sfsturbo-data
       persistentVolumeClaim:
-        claimName: sfsturbo-pvc-performance
+        claimName: sfsturbo-performance-pvc

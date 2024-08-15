@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: sfsturbo-default-ds
+spec:
+  selector:
+    matchLabels:
+      app: sfsturbo-default
+  template:
+    metadata:
+      labels:
+        app: sfsturbo-default
+    spec:
+      containers:
+        - image: nginx
+          name: sfsturbo-nginx-standard
+          command: [ "/bin/sh" ]
+          args: [ "-c", "while true; do echo $(date -u) >> /mnt/sfsturbo/outfile; sleep 5; done" ]
+          volumeMounts:
+            - mountPath: /mnt/sfsturbo
+              name: sfsturbo-data
+      volumes:
+        - name: sfsturbo-data
+          persistentVolumeClaim:
+            claimName: sfsturbo-default-pvc

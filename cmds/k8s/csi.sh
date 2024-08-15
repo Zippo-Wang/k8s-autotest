@@ -4,6 +4,8 @@ source ${kt_project_path}/main/constants.sh
 
 function f_create() {
   yaml_dir=${1}
+  daemonset=${2}
+
   # 一般
   sc=($(find ${yaml_dir} -name sc.yaml -type f))  # -type f。find的一个选项，表示只查找普通文件，不包括目录、设备文件等
   pv=($(find ${yaml_dir} -name pv.yaml -type f))
@@ -14,8 +16,13 @@ function f_create() {
   pvc2=($(find ${yaml_dir} -name pvc2.yaml -type f))
   snapshotx=($(find ${yaml_dir} -name snapshotx -type f))
 
+  if [[ ${daemonset} == ${kt_ds} ]]; then
+    ds=($(find ${yaml_dir} -name ds.yaml -type f))
+   # ds2=($(find ${yaml_dir} -name ds2.yaml -type f)) # 目前先不管ds2的情况
+  fi
+
   if [[ ! ${#sc[@]} -eq 0 ]]; then
-    printf "${info_msg}${font_green1}[${k8s_sc}]↓↓↓$---------------------------------------------------------${cend} \n"
+    printf "${info_msg}${font_green1}[${k8s_sc}]↓↓↓----------------------------------------------------------${cend} \n"
     for x in ${sc[@]}; do kubectl apply -f ${x}; done;
   fi;
 
@@ -29,10 +36,13 @@ function f_create() {
     for x in ${pvc[@]}; do kubectl apply -f ${x}; done;
   fi;
 
-  if [[ ! ${#pod[@]} -eq 0 ]]; then
+  if [[ ! ${#pod[@]} -eq 0 && ${daemonset} != ${kt_ds} ]]; then
     printf "${info_msg}${font_green1}[${k8s_pod}]↓↓↓---------------------------------------------------------${cend} \n"
     for x in ${pod[@]}; do kubectl apply -f ${x}; done;
-  fi;
+  elif [[ ${daemonset} == ${kt_ds} ]]; then
+    printf "${info_msg}${font_green1}[${k8s_daemonset2}]↓↓↓---------------------------------------------------------${cend} \n"
+    for x in ${ds[@]}; do kubectl apply -f ${x}; done;
+  fi
 
   if [[ ! ${#evs_snapshot_array[@]} -eq 0 ]]; then
     printf "${info_msg}${font_green1}[${k8s_snapshotx}]↓↓↓---------------------------------------------------${cend} \n"
@@ -43,11 +53,17 @@ function f_create() {
   printf "${info_msg}The cmd have been executed successfully, please wait for resources be created completely. \n"
 
   # resize
-  if [[ ! ${#pvc2[@]} -eq 0 ]]
-  then
+  if [[ ! ${#pvc2[@]} -eq 0 ]]; then
     printf "${warn_msg}these tests have resize, please execute manually: \n"
     for x in ${pvc2[@]}; do echo "kubectl apply -f ${x}"; done ;
   fi
+
+  # ds2先不管
+#   if [[ ! ${#pvc2[@]} -eq 0 ]]; then
+#     printf "${warn_msg}these tests have resize, please execute manually: \n"
+#     for x in ${pvc2[@]}; do echo "kubectl apply -f ${x}"; done ;
+#   fi
+
 }
 
 function f_delete() {
@@ -62,7 +78,12 @@ function f_delete() {
   pvc2=($(find ${yaml_dir} -name pvc2.yaml -type f))
   snapshotx=($(find ${yaml_dir} -name snapshotx -type f))
 
-  if [[ ! ${#pod[@]} -eq 0 ]]; then
+  if [[ ${daemonset} == ${kt_ds} ]]; then
+    ds=($(find ${yaml_dir} -name ds.yaml -type f))
+   # ds2=($(find ${yaml_dir} -name ds2.yaml -type f)) # 目前先不管ds2的情况
+  fi
+
+  if [[ ! ${#pod[@]} -eq 0 && ${daemonset} != ${kt_ds} ]]; then
     printf "${info_msg}${font_green1}[${k8s_pod}]↓↓↓---------------------------------------------------------${cend} \n"
     for x in ${pod[@]};
     do {
@@ -70,7 +91,15 @@ function f_delete() {
     }&
     done
     wait > /dev/null 2>&1
-  fi;
+  elif [[ ${daemonset} == ${kt_ds} ]]; then
+    printf "${info_msg}${font_green1}[${k8s_daemonset2}]↓↓↓---------------------------------------------------------${cend} \n"
+    for x in ${ds[@]};
+    do {
+        kubectl delete -f ${x}
+    }&
+    done
+    wait > /dev/null 2>&1
+  fi
 
   if [[ ! ${#pvc[@]} -eq 0 ]]; then
     printf "${info_msg}${font_green1}[${k8s_pvc}]↓↓↓---------------------------------------------------------${cend} \n"
@@ -115,6 +144,7 @@ function f_watch() {
     ${k8s_daemonset2} )  watch -n 1 -d kubectl get daemonset ;;
     ${k8s_service1} )  watch -n 1 -d kubectl get service ;;
     ${k8s_service2} )  watch -n 1 -d kubectl get service ;;
+    ${k8s_sc} )  watch -n 1 -d kubectl get sc ;;
 
     ${k8s_node} )  watch -n 1 -d kubectl get node ;;
 

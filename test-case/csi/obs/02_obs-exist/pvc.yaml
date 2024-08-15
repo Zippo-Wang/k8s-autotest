@@ -1,11 +1,11 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: pvc-obs-static2
+  name: obs-static-pvc
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 5Gi
-  volumeName: pv-obs-static2
+  volumeName: obs-static-pv

@@ -1,7 +1,7 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: obs-sc6
+  name: obs-parameter-sc6
 provisioner: obs.csi.huaweicloud.com
 reclaimPolicy: Delete
 parameters:

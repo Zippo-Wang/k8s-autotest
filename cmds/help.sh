@@ -31,8 +31,8 @@ function f_install_uninstall_help() {
 }
 
 function f_create_delete_help() {
-  printf "${font_yellow1}[create][delete] 执行所有用例，或删除所有用例创建的对象${cend}\n"
-  printf "${font_yellow1}可选参数: ${cend}\n"
+  printf " ${font_yellow1}[create][delete] 执行所有用例，或删除所有用例创建的对象${cend}\n"
+  printf " ${font_yellow1}可选参数: ${cend}\n"
   printf " ${font_green1}${service_evs}${cend} \t\t       执行evs${font_blue1}所有${cend}用例 或 删除evs所有用例创建的对象\n"
   printf " ${font_green1}${evs_default}${cend} \t       执行evs default用例 或 删除evs default用例用例创建的对象\n"
   printf " ${font_green1}${evs_parameter}${cend}         执行evs parameter用例 或 删除evs parameter用例创建的对象\n"
@@ -43,6 +43,7 @@ function f_create_delete_help() {
   printf " ${font_green1}${evs_rwx}${cend} \t       执行evs rwx用例 或 删除evs rwx用例创建的对象。${font_blue1}rwx: ReadWriteMany${cend}\n"
   echo
 
+  printf " ${font_yellow1}[obs]支持部署DaemonSet，如: kt create obs-default --ds ${cend}\n"
   printf " ${font_green1}${service_obs}${cend} \t\t       执行obs${font_blue1}所有${cend}用例 或 删除obs所有用例创建的对象\n"
   printf " ${font_green1}${obs_default}${cend} \t       执行obs default用例 或 删除obs default用例创建的对象\n"
   printf " ${font_green1}${obs_parameter}${cend} \t       执行obs parameter用例 或 删除obs parameter用例创建的对象\n"

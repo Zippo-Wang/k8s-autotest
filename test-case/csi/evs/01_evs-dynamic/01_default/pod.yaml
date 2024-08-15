@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: evs-normal-default
+  name: evs-default-pod
 spec:
   containers:
     - image: nginx
@@ -16,5 +16,5 @@ spec:
   volumes:
     - name: csi-data-evs
       persistentVolumeClaim:
-        claimName: evs-normal-pvc-default
+        claimName: evs-default-pvc
         readOnly: false

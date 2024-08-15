@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: evs-pod-resize2
+  name: evs-allow-resize-pod
 spec:
   containers:
     - image: nginx
@@ -16,5 +16,5 @@ spec:
   volumes:
     - name: csi-data-evs
       persistentVolumeClaim:
-        claimName: evs-pvc-resize
+        claimName: evs-allow-resize-pvc
         readOnly: false

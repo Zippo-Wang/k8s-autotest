@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: evs-default
+spec:
+  selector:
+    matchLabels:
+      app: evs-default
+  template:
+    metadata:
+      labels:
+        app: evs-default
+    spec:
+      containers:
+        - image: nginx
+          name: nginx
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/www/html
+              name: csi-data-evs
+      volumes:
+        - name: csi-data-evs
+          persistentVolumeClaim:
+            claimName: evs-default-pvc
+            readOnly: false

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: evs-allow-resize-ds
+spec:
+  selector:
+    matchLabels:
+      app: evs-allow-resize
+  template:
+    metadata:
+      labels:
+        app: evs-allow-resize
+    spec:
+      containers:
+        - image: nginx
+          name: nginx
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/www/html
+              name: csi-data-evs
+      volumes:
+        - name: csi-data-evs
+          persistentVolumeClaim:
+            claimName: evs-allow-resize-pvc
+            readOnly: false

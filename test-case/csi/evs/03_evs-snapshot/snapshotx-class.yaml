@@ -1,7 +1,7 @@
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshotClass
 metadata:
-  name: evs-snapshot-class2
+  name: evs-snapshot-vsc
 driver: evs.csi.huaweicloud.com
 deletionPolicy: Delete
 parameters:

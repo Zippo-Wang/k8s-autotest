@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: evs-normal-pvc-default
+  name: evs-default-pvc
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 10Gi
-  storageClassName: evs-sc-default
+  storageClassName: evs-default-sc

@@ -2,11 +2,11 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: pvc-obs6
+  name: obs-parameter-pvc6
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 500Gi
-  storageClassName: obs-sc6
+  storageClassName: obs-parameter-sc6

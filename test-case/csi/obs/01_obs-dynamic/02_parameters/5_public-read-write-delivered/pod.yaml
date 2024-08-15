@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx-obs5
+  name: obs-parameter-pod5
 spec:
   containers:
     - image: nginx
@@ -14,4 +14,4 @@ spec:
   volumes:
     - name: obs-data
       persistentVolumeClaim:
-        claimName: pvc-obs5
+        claimName: obs-parameter-pvc5

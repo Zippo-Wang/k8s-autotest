@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: evs-pod-rwo1
+  name: evs-rwo-pod
 spec:
   containers:
     - image: nginx
@@ -16,31 +16,5 @@ spec:
   volumes:
     - name: shared-volume
       persistentVolumeClaim:
-        claimName: evs-pvc-rwo
+        claimName: evs-rwo-pvc
         readOnly: false
-  nodeSelector:
-    node-role.kubernetes.io/node2: node2
-  
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: evs-pod-rwo2
-spec:
-  containers:
-    - image: nginx
-      imagePullPolicy: IfNotPresent
-      name: nginx2
-      ports:
-        - containerPort: 80
-          protocol: TCP
-      volumeMounts:
-        - mountPath: /var/lib/www/html
-          name: shared-volume
-  volumes:
-    - name: shared-volume
-      persistentVolumeClaim:
-        claimName: evs-pvc-rwo
-        readOnly: false
-  nodeSelector:
-    node-role.kubernetes.io/node3: node3

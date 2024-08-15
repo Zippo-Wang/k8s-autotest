@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: evs-snapshot-restore
+  name: evs-snapshot-restore-pvc
 spec:
-  storageClassName: evs-sc
+  storageClassName: evs-snapshot-sc
   dataSource:
     name: evs-snapshot
     kind: VolumeSnapshot

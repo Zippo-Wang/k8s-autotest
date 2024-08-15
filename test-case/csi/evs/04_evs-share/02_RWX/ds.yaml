@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: evs-rwx-ds
+spec:
+  selector:
+    matchLabels:
+      app: evs-rwx
+  template:
+    metadata:
+      labels:
+        app: evs-rwx
+    spec:
+      containers:
+        - image: nginx
+          name: nginx1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/www/html
+              name: shared-volume
+      volumes:
+        - name: shared-volume
+          persistentVolumeClaim:
+            claimName: evs-rwx-pvc
+            readOnly: false

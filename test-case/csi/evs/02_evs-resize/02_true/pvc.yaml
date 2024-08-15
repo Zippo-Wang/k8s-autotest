@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: evs-pvc-resize
+  name: evs-allow-resize-pvc
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 10Gi
-  storageClassName: evs-sc-resize
+  storageClassName: evs-allow-resize-sc

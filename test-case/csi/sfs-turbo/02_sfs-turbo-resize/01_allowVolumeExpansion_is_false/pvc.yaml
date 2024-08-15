@@ -1,11 +1,11 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: sfsturbo-pvc-reject-expand
+  name: sfsturbo-deny-resize-pvc
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 500Gi
-  storageClassName: sfsturbo-sc-reject-expand
+  storageClassName: sfsturbo-deny-resize-sc

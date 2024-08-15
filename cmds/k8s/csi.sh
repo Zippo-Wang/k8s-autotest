@@ -68,6 +68,8 @@ function f_create() {
 
 function f_delete() {
   yaml_dir=${1}
+  daemonset=${2}
+
   # 一般
   sc=($(find ${yaml_dir} -name sc.yaml -type f))
   pv=($(find ${yaml_dir} -name pv.yaml -type f))

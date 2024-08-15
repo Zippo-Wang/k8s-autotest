@@ -36,10 +36,10 @@ function f_create() {
     for x in ${pvc[@]}; do kubectl apply -f ${x}; done;
   fi;
 
-  if [[ ! ${#pod[@]} -eq 0 && ${daemonset} != ${kt_ds} ]]; then
+  if [[ ! ${#pod[@]} -eq 0 && ${daemonset} == "" ]]; then
     printf "${info_msg}${font_green1}[${k8s_pod}]↓↓↓---------------------------------------------------------${cend} \n"
     for x in ${pod[@]}; do kubectl apply -f ${x}; done;
-  elif [[ ${daemonset} == ${kt_ds} ]]; then
+  elif [[ ! ${#ds[@]} -eq 0 && ${daemonset} == ${kt_ds} ]]; then
     printf "${info_msg}${font_green1}[${k8s_daemonset2}]↓↓↓---------------------------------------------------------${cend} \n"
     for x in ${ds[@]}; do kubectl apply -f ${x}; done;
   fi
@@ -83,7 +83,7 @@ function f_delete() {
    # ds2=($(find ${yaml_dir} -name ds2.yaml -type f)) # 目前先不管ds2的情况
   fi
 
-  if [[ ! ${#pod[@]} -eq 0 && ${daemonset} != ${kt_ds} ]]; then
+  if [[ ${#pod[@]} != 0 && ${daemonset} == "" ]]; then
     printf "${info_msg}${font_green1}[${k8s_pod}]↓↓↓---------------------------------------------------------${cend} \n"
     for x in ${pod[@]};
     do {
@@ -91,8 +91,8 @@ function f_delete() {
     }&
     done
     wait > /dev/null 2>&1
-  elif [[ ${daemonset} == ${kt_ds} ]]; then
-    printf "${info_msg}${font_green1}[${k8s_daemonset2}]↓↓↓---------------------------------------------------------${cend} \n"
+  elif [[ ${#ds[@]} != 0 && ${daemonset} == ${kt_ds} ]]; then
+    printf "${info_msg}${font_green1}[${k8s_daemonset2}]↓↓↓--------------------------------------------------${cend} \n"
     for x in ${ds[@]};
     do {
         kubectl delete -f ${x}

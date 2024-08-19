@@ -85,6 +85,10 @@ k8s_node="node"
 k8s_pvc2="pvc2"
 k8s_snapshotx="snapshotx"
 
+# repo -----------------------------------------------------------------------------------------------------------------
+repo_csi_all="huaweicloud-csi-driver"
+repo_ccm_all="cloud-provider-huaweicloud"
+
 # ccm ------------------------------------------------------------------------------------------------------------------
 plugin_ccm="ccm"
 ccm_default="ccm-normal"

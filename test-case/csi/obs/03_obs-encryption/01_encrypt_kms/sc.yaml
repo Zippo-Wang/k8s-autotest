@@ -1,0 +1,9 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: obs-encryption-kms
+provisioner: obs.csi.huaweicloud.com
+reclaimPolicy: Delete
+parameters:
+  sseAlgorithm: kms
+  kmsKeyId: "7e2125cb-1f24-4f4a-bd7c-e4acd4e9b811"

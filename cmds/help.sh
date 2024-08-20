@@ -48,6 +48,7 @@ function f_create_delete_help() {
   printf " ${font_green1}${obs_default}${cend} \t       执行obs default用例 或 删除obs default用例创建的对象\n"
   printf " ${font_green1}${obs_parameter}${cend} \t       执行obs parameter用例 或 删除obs parameter用例创建的对象\n"
   printf " ${font_green1}${obs_exist}${cend} \t       执行obs exist用例 或 删除obs exist用例创建的对象\n"
+  printf " ${font_green1}${obs_encryption}${cend}        执行obs encryption用例 或 删除obs encryption用例创建的对象\n"
   echo
 
   printf " ${font_green1}${service_sfs_turbo}${cend} \t       执行sfsturbo${font_blue1}所有${cend}用例 或 删除sfsturbo所有用例创建的对象\n"

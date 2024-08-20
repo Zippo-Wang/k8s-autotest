@@ -37,6 +37,7 @@ service_obs="obs"
 obs_default="obs-default"
 obs_parameter="obs-parameter"
 obs_exist="obs-exist"
+obs_encryption="obs-encryption"
 
 service_sfs_turbo="sfsturbo"
 sfs_turbo_default="sfsturbo-default"
@@ -59,6 +60,7 @@ dir_obs="${kt_project_path}/test-case/csi/obs"
 dir_obs_default="${kt_project_path}/test-case/csi/obs/01_obs-dynamic/01_default"
 dir_obs_parameter="${kt_project_path}/test-case/csi/obs/01_obs-dynamic/02_parameters"
 dir_obs_exist="${kt_project_path}/test-case/csi/obs/02_obs-exist-dynamic"
+dir_obs_encryption="${kt_project_path}/test-case/csi/obs/03_obs-encryption"
 
 dir_sfs_turbo="${kt_project_path}/test-case/csi/sfs-turbo"
 dir_sfs_turbo_default="${kt_project_path}/test-case/csi/sfs-turbo/01_sfs-turbo-dynamic/01_default"
@@ -114,7 +116,7 @@ cmd_list1=(
 cmd_list2=(
     ${service_evs} ${service_obs} ${service_sfs_turbo} ${k8s_pod} ${k8s_pvc} ${k8s_pv} ${kt_help3}
     ${evs_default} ${evs_parameter} ${evs_deny_resize} ${evs_allow_resize} ${evs_snapshot} ${evs_rwo} ${evs_rwx}
-    ${obs_default} ${obs_parameter} ${obs_exist}
+    ${obs_default} ${obs_parameter} ${obs_exist} ${obs_encryption}
     ${sfs_turbo_default} ${sfs_turbo_performance} ${sfs_turbo_deny_resize} ${sfs_turbo_allow_resize} ${sfs_turbo_static}
     ${k8s_deployment} ${k8s_deployment2} ${k8s_sc} ${k8s_service1} ${k8s_service2} ${k8s_node}
     ${k8s_daemonset1} ${k8s_daemonset2}

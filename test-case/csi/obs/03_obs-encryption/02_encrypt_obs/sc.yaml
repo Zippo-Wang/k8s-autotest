@@ -5,4 +5,4 @@ metadata:
 provisioner: obs.csi.huaweicloud.com
 reclaimPolicy: Delete
 parameters:
-  sseAlgorithm: obs
+  sseAlgorithm: AES256

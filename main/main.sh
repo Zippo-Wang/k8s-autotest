@@ -49,10 +49,11 @@ case ${operate1} in
       ${evs_rwo} )          f_create ${dir_evs_rwo} ;;
       ${evs_rwx} )          f_create ${dir_evs_rwx} ;;
 
-      ${service_obs} )   f_create ${dir_obs} ${operate3};;
-      ${obs_default} )   f_create ${dir_obs_default} ${operate3};;
-      ${obs_parameter} ) f_create ${dir_obs_parameter} ${operate3};;
-      ${obs_exist} )     f_create ${dir_obs_exist} ${operate3};;
+      ${service_obs} )    f_create ${dir_obs} ${operate3};;
+      ${obs_default} )    f_create ${dir_obs_default} ${operate3};;
+      ${obs_parameter} )  f_create ${dir_obs_parameter} ${operate3};;
+      ${obs_exist} )      f_create ${dir_obs_exist} ${operate3};;
+      ${obs_encryption} ) f_create ${dir_obs_encryption} ${operate3};;
 
       ${service_sfs_turbo} )      f_create ${dir_sfs_turbo} ;;
       ${sfs_turbo_default} )      f_create ${dir_sfs_turbo_default} ;;
@@ -91,10 +92,11 @@ case ${operate1} in
       ${evs_rwo} )          f_delete ${dir_evs_rwo} ;;
       ${evs_rwx} )          f_delete ${dir_evs_rwx} ;;
 
-      ${service_obs} )   f_delete ${dir_obs} ${operate3};;
-      ${obs_default} )   f_delete ${dir_obs_default} ${operate3};;
-      ${obs_parameter} ) f_delete ${dir_obs_parameter} ${operate3};;
-      ${obs_exist} )     f_delete ${dir_obs_exist} ${operate3};;
+      ${service_obs} )    f_delete ${dir_obs} ${operate3};;
+      ${obs_default} )    f_delete ${dir_obs_default} ${operate3};;
+      ${obs_parameter} )  f_delete ${dir_obs_parameter} ${operate3};;
+      ${obs_exist} )      f_delete ${dir_obs_exist} ${operate3};;
+      ${obs_encryption} ) f_delete ${dir_obs_encryption} ${operate3};;
 
       ${service_sfs_turbo} )      f_delete ${dir_sfs_turbo} ;;
       ${sfs_turbo_default} )      f_delete ${dir_sfs_turbo_default} ;;

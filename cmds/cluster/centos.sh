@@ -71,6 +71,8 @@ function fc_master() {
     fc_kubeadm_join
     fc_install_network_plugin
     fc_boot_up_nfs_system
+    fc_kustomize
+    fc_snapshot_crds
     fc_install_golang
     fc_get_repos
 
@@ -106,6 +108,8 @@ function fc_node() {
     fc_mkfile
     fc_node_join
     fc_boot_up_nfs_system
+    fc_kustomize
+    fc_snapshot_crds
     fc_install_golang
     fc_get_repos
 }
@@ -624,6 +628,16 @@ function fc_boot_up_nfs_system() {
 
     systemctl start nfs && systemctl enable nfs
     systemctl status nfs
+}
+
+function fc_kustomize {
+    (cd ${build_dir} && curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash)
+}
+
+function fc_snapshot_crds() {
+    git clone https://github.com/kubernetes-csi/external-snapshotter.git ${code_dir}/external-snapshotter
+    (cd ${code_dir}/external-snapshotter && kubectl kustomize client/config/crd | kubectl create -f -)
+    (cd ${code_dir}/external-snapshotter && kubectl -n kube-system kustomize deploy/kubernetes/snapshot-controller | kubectl create -f -)
 }
 
 function fc_install_golang() {

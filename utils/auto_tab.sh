@@ -13,6 +13,7 @@ _kt_auto_tab(){
   ccm_cmd="ccm-normal ccm-eip ccm-affinity ccm-existing"
   opts3="pod pvc pv deployment daemonset service node dep ds svc"
   help_cmd="--help"
+  ds_cmd="--ds"
 	case ${COMP_CWORD} in
 	1)
 		COMPREPLY=($(compgen -W "${opts1}" -- ${COMP_WORDS[COMP_CWORD]}));;

@@ -40,14 +40,14 @@ case ${operate1} in
     if [[ ${valid} = 0 ]]; then return; fi
     case ${operate2} in
       # CSI
-      ${service_evs} )      f_create ${dir_evs} ;;
-      ${evs_default} )      f_create ${dir_evs_default} ;;
-      ${evs_parameter} )    f_create ${dir_evs_parameter} ;;
-      ${evs_deny_resize} )  f_create ${dir_evs_deny_resize} ;;
-      ${evs_allow_resize} ) f_create ${dir_evs_allow_resize} ;;
-      ${evs_snapshot} )     f_create ${dir_evs_snapshot} ;;
-      ${evs_rwo} )          f_create ${dir_evs_rwo} ;;
-      ${evs_rwx} )          f_create ${dir_evs_rwx} ;;
+      ${service_evs} )      f_create ${dir_evs} ${operate3} ;;
+      ${evs_default} )      f_create ${dir_evs_default} ${operate3} ;;
+      ${evs_parameter} )    f_create ${dir_evs_parameter} ${operate3} ;;
+      ${evs_deny_resize} )  f_create ${dir_evs_deny_resize} ${operate3} ;;
+      ${evs_allow_resize} ) f_create ${dir_evs_allow_resize} ${operate3} ;;
+      ${evs_snapshot} )     f_create ${dir_evs_snapshot} ${operate3} ;;
+      ${evs_rwo} )          f_create ${dir_evs_rwo} ${operate3} ;;
+      ${evs_rwx} )          f_create ${dir_evs_rwx} ${operate3} ;;
 
       ${service_obs} )    f_create ${dir_obs} ${operate3};;
       ${obs_default} )    f_create ${dir_obs_default} ${operate3};;
@@ -83,14 +83,14 @@ case ${operate1} in
     if [[ ${valid} = 0 ]]; then return; fi
     case ${operate2} in
       # CSI
-      ${service_evs} )      f_delete ${dir_evs} ;;
-      ${evs_default} )      f_delete ${dir_evs_default} ;;
-      ${evs_parameter} )    f_delete ${dir_evs_parameter} ;;
-      ${evs_deny_resize} )  f_delete ${dir_evs_deny_resize} ;;
-      ${evs_allow_resize} ) f_delete ${dir_evs_allow_resize} ;;
-      ${evs_snapshot} )     f_delete ${dir_evs_snapshot} ;;
-      ${evs_rwo} )          f_delete ${dir_evs_rwo} ;;
-      ${evs_rwx} )          f_delete ${dir_evs_rwx} ;;
+      ${service_evs} )      f_delete ${dir_evs} ${operate3} ;;
+      ${evs_default} )      f_delete ${dir_evs_default} ${operate3} ;;
+      ${evs_parameter} )    f_delete ${dir_evs_parameter} ${operate3} ;;
+      ${evs_deny_resize} )  f_delete ${dir_evs_deny_resize} ${operate3} ;;
+      ${evs_allow_resize} ) f_delete ${dir_evs_allow_resize} ${operate3} ;;
+      ${evs_snapshot} )     f_delete ${dir_evs_snapshot} ${operate3} ;;
+      ${evs_rwo} )          f_delete ${dir_evs_rwo} ${operate3} ;;
+      ${evs_rwx} )          f_delete ${dir_evs_rwx} ${operate3} ;;
 
       ${service_obs} )    f_delete ${dir_obs} ${operate3};;
       ${obs_default} )    f_delete ${dir_obs_default} ${operate3};;

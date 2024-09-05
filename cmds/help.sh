@@ -15,7 +15,7 @@ function f_help() {
   printf " ${font_green1}uninstall${cend}    ${font_blue1}卸载插件${cend} \n"
   printf " ${font_green1}create${cend}       ${font_blue1}执行用例，创建资源${cend} \n"
   printf " ${font_green1}delete${cend}       ${font_blue1}删除用例创建的资源${cend} \n"
-  printf " ${font_green1}build${cend}        ${font_blue1}打包推送，或创建集群${cend} \n"
+  printf " ${font_green1}build${cend}        ${font_blue1}打包推送${cend} \n"
   printf " ${font_green1}watch${cend}        ${font_blue1}监控资源${cend} \n"
   echo
 }
@@ -31,8 +31,8 @@ function f_install_uninstall_help() {
 }
 
 function f_create_delete_help() {
-  printf " ${font_yellow1}[create][delete] 执行所有用例，或删除所有用例创建的对象${cend}\n"
-  printf " ${font_yellow1}可选参数1: ${cend}\n"
+  printf "${font_yellow1}[create][delete] 执行所有用例，或删除所有用例创建的对象${cend}\n"
+  printf "${font_yellow1}可选参数1: ${cend}\n"
   printf " ${font_green1}${service_evs}${cend} \t\t       执行evs${font_blue1}所有${cend}用例 或 删除evs所有用例创建的对象\n"
   printf " ${font_green1}${evs_default}${cend} \t       执行evs default用例 或 删除evs default用例用例创建的对象\n"
   printf " ${font_green1}${evs_parameter}${cend}         执行evs parameter用例 或 删除evs parameter用例创建的对象\n"
@@ -65,7 +65,7 @@ function f_create_delete_help() {
   printf " ${font_green1}${ccm_existing}${cend} \t       执行ccm existing用例 或 删除ccm existing用例创建的对象\n"
   echo
 
-  printf " ${font_yellow1}可选参数2: ${kt_ds}${cend}\n"
+  printf "${font_yellow1}可选参数2: ${kt_ds}${cend}\n"
   printf " ${font_yellow1}[${service_obs}]      ${cend}支持部署DaemonSet，如: ${kt} ${kt_create} ${obs_default} ${kt_ds}\n"
   printf " ${font_yellow1}[${service_evs}]      ${cend}支持部署DaemonSet，如: ${kt} ${kt_create} ${evs_default} ${kt_ds} \n"
   printf " ${font_yellow1}[${service_sfs_turbo}] ${cend}支持部署DaemonSet，如: ${kt} ${kt_create} ${sfs_turbo_default} ${kt_ds} \n"

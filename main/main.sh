@@ -10,7 +10,7 @@ source ${kt_project_path}/cmds/help.sh
 operate1=${1} # create/delete/watch/help
 operate2=${2} # evs/obs/sfs-turbo，pod/pvc/pv
 operate3=${3} # 倚天屠龙，有始有终(包含kt在内，一共3个参数, 比如kt create obs)
-operate4=${4} # 倚天屠龙，有始有终(包含kt在内，一共4个参数m 比如kt build obs v1.0)
+operate4=${4} # 倚天屠龙，有始有终(包含kt在内，一共4个参数, 比如kt build obs v1.0)
 
 # 检查一波
 f_pre_check
@@ -162,7 +162,7 @@ case ${operate1} in
       ${cluster})           f_build_cluster ${operate3} ;;
 
       # build cmd help
-      # ${kt_help3}) f_build_help ;;    # 不用这种方式了
+      ${kt_help3}) f_build_help ;;
     esac ;;
 
   # watch

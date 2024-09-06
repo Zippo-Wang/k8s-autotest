@@ -27,6 +27,7 @@ function f_install_uninstall_help() {
   printf " ${font_green1}${service_obs}${cend} \t      安装obs鉴权和插件 或 卸载obs鉴权和插件【不含cloud-config】 \n"
   printf " ${font_green1}${service_sfs_turbo}${cend}     安装sfsturbo鉴权和插件 或 卸载sfsturbo鉴权和插件【不含cloud-config】\n"
   printf " ${font_green1}${plugin_ccm}${cend}  \t      安装ccm鉴权和插件 或 卸载ccm鉴权和插件【不含cloud-config和lb-config】\n"
+  printf " ${font_green1}${kt_clear}${cend}        安装一键清屏脚本，使用: ${font_green1}敲一个c${cend}即可 \n"
   echo
 }
 

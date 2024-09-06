@@ -5,6 +5,7 @@ source ${kt_project_path}/cmds/k8s/csi.sh
 source ${kt_project_path}/cmds/k8s/ccm.sh
 source ${kt_project_path}/cmds/other.sh
 source ${kt_project_path}/cmds/help.sh
+source ${kt_project_path}/cmds/tools.sh
 
 # 用户输入 ---------------------------------------------------------------------------------------------------------------
 operate1=${1} # create/delete/watch/help
@@ -132,6 +133,9 @@ case ${operate1} in
 
       # install cmd help
       ${kt_help3}) f_install_uninstall_help ;;
+
+      # install clear
+      ${kt_clear}) f_install_clear ;;
     esac ;;
 
   # uninstall

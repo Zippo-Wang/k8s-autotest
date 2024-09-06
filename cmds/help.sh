@@ -4,7 +4,7 @@ source ${kt_project_path}/main/constants.sh
 
 
 function f_help() {
-  printf "${font_yellow1}Usage: kt <cmd1> <cmd2> ${cend}\n"
+  printf "${font_yellow1}Usage: kt <cmd1> <cmd2> <cmd3> ${cend}\n"
   printf " ${font_green1}${common_init}${cend}         ${font_blue1}系统初始化${cend}\n"
   printf " ${font_green1}tab${cend}          ${font_blue1}自动补全。${cend}按tab键即可自动补全本系统支持的所有命令 \n"
   printf " ${font_green1}${kt_help1}${cend}         查看k8s-autotest使用帮助 \n"
@@ -66,16 +66,12 @@ function f_create_delete_help() {
   echo
 
   printf "${font_yellow1}可选参数2: ${kt_ds}${cend}\n"
-  printf " ${font_yellow1}[${service_obs}]      ${cend}支持部署DaemonSet，如: ${kt} ${kt_create} ${obs_default} ${kt_ds}\n"
-  printf " ${font_yellow1}[${service_evs}]      ${cend}支持部署DaemonSet，如: ${kt} ${kt_create} ${evs_default} ${kt_ds} \n"
-  printf " ${font_yellow1}[${service_sfs_turbo}] ${cend}支持部署DaemonSet，如: ${kt} ${kt_create} ${sfs_turbo_default} ${kt_ds} \n"
-
+  printf " ${font_yellow1}[${service_obs}]      ${cend}支持部署DaemonSet，如: ${kt} ${kt_create} ${obs_default} ${kt_ds} \n"
 }
 
 function f_build_help() {
   printf "${font_yellow1}[build] ${cend} \n"
-  printf "${font_yellow1}用法1: 打包插件推送成docker镜像，并推送到docker hub。${cend}${font_blue1}示例：kt build obs v0.0.2${cend} \n"
-  printf "${font_yellow1}用法2: 创建集群。${cend}${font_blue1}示例：kt build cluster /root/cluster-config${cend} \n"
+  printf "${font_yellow1}用法: 打包插件推送成docker镜像，并推送到docker hub。${cend}${font_blue1}示例：kt build obs v0.0.2${cend} \n"
   printf "${font_yellow1}可选参数: ${cend}\n"
   printf " ${font_green1}${service_evs}${cend} \t    打包evs插件成docker镜像，并推送到docker hub \n"
   printf " ${font_green1}${service_obs}${cend} \t    打包obs插件成docker镜像，并推送到docker hub \n"

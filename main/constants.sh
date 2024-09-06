@@ -20,7 +20,8 @@ kt_version2="-version"
 kt_version3="--version"
 kt_version4="-v"
 kt_version5="--v"
-sys_current_version="v2.0"  # 没啥用，图一乐
+sys_current_version="v2.0"  # 没啥用，图一乐.
+kt_clear="clear"
 kt_ds="--ds"
 
 # 云服务
@@ -114,7 +115,7 @@ cmd_list1=(
     ${kt_version1} ${kt_version2} ${kt_version3} ${kt_version4} ${kt_version5}
 )
 cmd_list2=(
-    ${service_evs} ${service_obs} ${service_sfs_turbo} ${k8s_pod} ${k8s_pvc} ${k8s_pv} ${kt_help3}
+    ${service_evs} ${service_obs} ${service_sfs_turbo} ${k8s_pod} ${k8s_pvc} ${k8s_pv} ${kt_help3} ${kt_clear}
     ${evs_default} ${evs_parameter} ${evs_deny_resize} ${evs_allow_resize} ${evs_snapshot} ${evs_rwo} ${evs_rwx}
     ${obs_default} ${obs_parameter} ${obs_exist} ${obs_encryption}
     ${sfs_turbo_default} ${sfs_turbo_performance} ${sfs_turbo_deny_resize} ${sfs_turbo_allow_resize} ${sfs_turbo_static}

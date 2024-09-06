@@ -2,6 +2,21 @@
 
 source ${kt_project_path}/main/constants.sh
 
+function progress_bar() {
+    local total=50      # 进度条长度
+    local steps=5       # 进度更新的次数
+    local task_func=$1  # 要执行的任务函数
+
+    for ((i=1; i<=steps; i++)); do
+        $task_func
+        filled=$((i * total / steps))
+        bar=$(printf "%-${total}s" "#" | sed "s/ /#/g" | cut -c1-$filled)
+        printf "\r[%-${total}s] %d%%" "$bar" $((i * 100 / steps))
+    done
+    echo
+}
+
+# centos:1  ubuntu:2    debian:3    fedora:4    euler:5
 function f_check_os_type() {
   if grep -i -q "EulerOS" /etc/os-release; then
     # EulerOS
@@ -76,6 +91,7 @@ function f_pre_check() {
 
 function f_init() {
   # 修改换行符
+  printf "${info_msg}"
   for file in `find ${kt_project_path} -name *.sh -type f`;
   do
       sed -i 's/\r$//' ${file}

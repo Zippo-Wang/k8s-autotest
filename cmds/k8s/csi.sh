@@ -7,7 +7,7 @@ function f_create() {
   daemonset=${2}
 
   # 一般
-  sc=($(find ${yaml_dir} -name sc.yaml -type f))  # -type f。find的一个选项，表示只查找普通文件，不包括目录、设备文件等
+  sc=($(find ${yaml_dir} -name sc.yaml -type f))  # -type f。find的一个选项, 表示只查找普通文件, 不包括目录、设备文件等
   pv=($(find ${yaml_dir} -name pv.yaml -type f))
   pvc=($(find ${yaml_dir} -name pvc.yaml -type f))
   pod=($(find ${yaml_dir} -name pod.yaml -type f))

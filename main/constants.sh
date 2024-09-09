@@ -10,7 +10,8 @@ kt_delete="delete"       # 删除用例
 kt_install="install"     # 创建RBAC鉴权、安装插件【不包括cloud-config】
 kt_uninstall="uninstall" # 删除RBAC鉴权、安装插件【不包括cloud-config】
 kt_watch="watch"         # 监控资源
-kt_build="build"         # 构建csi包，然后发布到docker hub
+kt_build="build"         # 构建csi包, 然后发布到docker hub
+kt_config="config"       # 新增一个命令, 但不知道该归于哪一类里面去，就放这
 
 kt_help1="help"
 kt_help2="-help"
@@ -20,9 +21,12 @@ kt_version2="-version"
 kt_version3="--version"
 kt_version4="-v"
 kt_version5="--v"
-sys_current_version="v2.0"  # 没啥用，图一乐.
-kt_clear="clear"
-kt_ds="--ds"
+sys_current_version="v2.1.2"    # 没啥用, 图一乐, 就是玩~
+
+kt_clear="clear"                # 用于安装clear命令
+kt_ds="--ds"                    # 用于以DaemonSet的方式执行用例
+kt_cloud_config="cloud-config" # 用于指定cloud-config的路径
+
 
 # 云服务
 service_evs="evs"
@@ -110,18 +114,19 @@ common_none=""
 common_init="init"
 
 cmd_list1=(
-    ${kt_create} ${kt_delete} ${kt_watch} ${kt_install} ${kt_uninstall} ${kt_build}
+    ${kt_create} ${kt_delete} ${kt_watch} ${kt_install} ${kt_uninstall} ${kt_build} ${kt_config}
     ${common_init} ${kt_help1} ${kt_help2} ${kt_help3}
     ${kt_version1} ${kt_version2} ${kt_version3} ${kt_version4} ${kt_version5}
 )
+
 cmd_list2=(
-    ${service_evs} ${service_obs} ${service_sfs_turbo} ${k8s_pod} ${k8s_pvc} ${k8s_pv} ${kt_help3} ${kt_clear}
+    ${service_evs} ${service_obs} ${service_sfs_turbo} ${k8s_pod} ${k8s_pvc} ${k8s_pv} ${kt_help3}
     ${evs_default} ${evs_parameter} ${evs_deny_resize} ${evs_allow_resize} ${evs_snapshot} ${evs_rwo} ${evs_rwx}
     ${obs_default} ${obs_parameter} ${obs_exist} ${obs_encryption}
     ${sfs_turbo_default} ${sfs_turbo_performance} ${sfs_turbo_deny_resize} ${sfs_turbo_allow_resize} ${sfs_turbo_static}
     ${k8s_deployment} ${k8s_deployment2} ${k8s_sc} ${k8s_service1} ${k8s_service2} ${k8s_node}
     ${k8s_daemonset1} ${k8s_daemonset2}
-    ${cluster}
+    ${cluster} ${kt_cloud_config} ${kt_clear}
 )
 
 # debug常量

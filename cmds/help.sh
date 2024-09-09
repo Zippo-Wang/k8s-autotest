@@ -13,7 +13,7 @@ function f_help() {
 
   printf " ${font_green1}install${cend}      ${font_blue1}安装插件${cend} \n"
   printf " ${font_green1}uninstall${cend}    ${font_blue1}卸载插件${cend} \n"
-  printf " ${font_green1}create${cend}       ${font_blue1}执行用例，创建资源${cend} \n"
+  printf " ${font_green1}create${cend}       ${font_blue1}执行用例, 创建资源${cend} \n"
   printf " ${font_green1}delete${cend}       ${font_blue1}删除用例创建的资源${cend} \n"
   printf " ${font_green1}build${cend}        ${font_blue1}打包推送${cend} \n"
   printf " ${font_green1}watch${cend}        ${font_blue1}监控资源${cend} \n"
@@ -21,18 +21,17 @@ function f_help() {
 }
 
 function f_install_uninstall_help() {
-  printf "${font_yellow1}[install][uninstall]。安装鉴权和插件，或卸载鉴权和插件【不含cloud-config】 ${cend}\n"
+  printf "${font_yellow1}[${kt_install}][${kt_uninstall}]。安装鉴权和插件, 或卸载鉴权和插件【不含cloud-config】 ${cend}\n"
   printf "${font_yellow1}可选参数: ${cend}\n"
   printf " ${font_green1}${service_evs}${cend} \t      安装evs鉴权和插件 或 卸载evs鉴权和插件【不含cloud-config】\n"
   printf " ${font_green1}${service_obs}${cend} \t      安装obs鉴权和插件 或 卸载obs鉴权和插件【不含cloud-config】 \n"
   printf " ${font_green1}${service_sfs_turbo}${cend}     安装sfsturbo鉴权和插件 或 卸载sfsturbo鉴权和插件【不含cloud-config】\n"
   printf " ${font_green1}${plugin_ccm}${cend}  \t      安装ccm鉴权和插件 或 卸载ccm鉴权和插件【不含cloud-config和lb-config】\n"
-  printf " ${font_green1}${kt_clear}${cend}        安装一键清屏脚本，使用: ${font_green1}敲一个c${cend}即可 \n"
   echo
 }
 
 function f_create_delete_help() {
-  printf "${font_yellow1}[create][delete] 执行所有用例，或删除所有用例创建的对象${cend}\n"
+  printf "${font_yellow1}[${kt_create}][${kt_delete}] 执行所有用例, 或删除所有用例创建的对象${cend}\n"
   printf "${font_yellow1}可选参数1: ${cend}\n"
   printf " ${font_green1}${service_evs}${cend} \t\t       执行evs${font_blue1}所有${cend}用例 或 删除evs所有用例创建的对象\n"
   printf " ${font_green1}${evs_default}${cend} \t       执行evs default用例 或 删除evs default用例用例创建的对象\n"
@@ -67,17 +66,17 @@ function f_create_delete_help() {
   echo
 
   printf "${font_yellow1}可选参数2: ${kt_ds}${cend}\n"
-  printf " ${font_yellow1}[${service_obs}]      ${cend}支持部署DaemonSet，如: ${kt} ${kt_create} ${obs_default} ${kt_ds} \n"
+  printf " ${font_yellow1}[${service_obs}]      ${cend}支持部署DaemonSet, 如: ${kt} ${kt_create} ${obs_default} ${kt_ds} \n"
 }
 
 function f_build_help() {
-  printf "${font_yellow1}[build] ${cend} \n"
-  printf "${font_yellow1}用法: 打包插件推送成docker镜像，并推送到docker hub。${cend}${font_blue1}示例：kt build obs v0.0.2${cend} \n"
+  printf "${font_yellow1}[${kt_build}] ${cend} \n"
+  printf "${font_yellow1}用法: 打包插件推送成docker镜像, 并推送到docker hub。${cend}${font_blue1}示例：kt build obs v0.0.2${cend} \n"
   printf "${font_yellow1}可选参数: ${cend}\n"
-  printf " ${font_green1}${service_evs}${cend} \t    打包evs插件成docker镜像，并推送到docker hub \n"
-  printf " ${font_green1}${service_obs}${cend} \t    打包obs插件成docker镜像，并推送到docker hub \n"
-  printf " ${font_green1}${service_sfs_turbo}${cend}   打包sfsturbo插件成docker镜像，并推送到docker hub \n"
-  printf " ${font_green1}${plugin_ccm}${cend}  \t    打包ccm插件成docker镜像，并推送到docker hub \n"
+  printf " ${font_green1}${service_evs}${cend} \t    打包evs插件成docker镜像, 并推送到docker hub \n"
+  printf " ${font_green1}${service_obs}${cend} \t    打包obs插件成docker镜像, 并推送到docker hub \n"
+  printf " ${font_green1}${service_sfs_turbo}${cend}   打包sfsturbo插件成docker镜像, 并推送到docker hub \n"
+  printf " ${font_green1}${plugin_ccm}${cend}  \t    打包ccm插件成docker镜像, 并推送到docker hub \n"
   echo
 
   #printf " ${font_green1}${cluster}${cend}    构建k8s集群。(需要填写cluster-config的绝对路径) \n"
@@ -85,7 +84,7 @@ function f_build_help() {
 }
 
 function f_watch_help() {
-  printf "${font_yellow1}[watch] 监控k8s集群中的资源${cend}\n"
+  printf "${font_yellow1}[${kt_watch}] 监控k8s集群中的资源${cend}\n"
   printf "${font_yellow1}可选参数: ${cend}\n"
   printf " ${font_green1}${k8s_node}${cend}         执行watch -n 1 -d kubectl get node\n"
   printf " ${font_green1}${k8s_deployment}${cend}   执行watch -n 1 -d kubectl get deployment ${font_green} 【支持简写：${k8s_deployment2}】${cend}\n"
@@ -96,8 +95,15 @@ function f_watch_help() {
   printf " ${font_green1}${k8s_pv}${cend}  \t      执行watch -n 1 -d kubectl get pv ${font_green} \t【不支持：${k8s_pv_all}】${cend}\n"
 }
 
+function f_config_help() {
+  printf "${font_yellow1}[${kt_config}] 一些不太好分类的命令${cend}\n"
+  printf "${font_yellow1}可选参数: ${cend}\n"
+  printf " ${font_green1}${kt_clear}${cend}         安装一键清屏脚本, 使用: ${font_green1}敲一个c${cend}即可 \n"
+  printf " ${font_green1}${kt_cloud_config}${cend}  配置cloud-config, 使用: ${font_green1}${kt_main} ${kt_config} ${kt_cloud_config} /path/cloud-config${cend}, path可省略, 默认路径: /root/build-k8s/cloud-config \n"
+}
+
 function f_version() {
   printf "k8s-autotest_${sys_current_version} \n"
   echo
-  printf "see the link for latest version: https://github.com/Zippo-Wang/k8s-autotest \n"
+  printf "latest version: https://github.com/Zippo-Wang/k8s-autotest \n"
 }

@@ -5,13 +5,13 @@ source ${kt_project_path}/cmds/k8s/csi.sh
 source ${kt_project_path}/cmds/k8s/ccm.sh
 source ${kt_project_path}/cmds/other.sh
 source ${kt_project_path}/cmds/help.sh
-source ${kt_project_path}/cmds/tools.sh
+source ${kt_project_path}/cmds/config_cmd.sh
 
 # 用户输入 ---------------------------------------------------------------------------------------------------------------
-operate1=${1} # create/delete/watch/help
-operate2=${2} # evs/obs/sfs-turbo，pod/pvc/pv
-operate3=${3} # 倚天屠龙，有始有终(包含kt在内，一共3个参数, 比如kt create obs)
-operate4=${4} # 倚天屠龙，有始有终(包含kt在内，一共4个参数, 比如kt build obs v1.0)
+operate1=${1} # install/uninstall/create/delete/build/watch/config/help/version
+operate2=${2} # evs/obs/sfs-turbo, pod/pvc/pv
+operate3=${3} # 倚天屠龙, 有始有终(包含kt在内, 一共3个参数, 比如kt create obs)
+operate4=${4} # 倚天屠龙, 有始有终(包含kt在内, 一共4个参数, 比如kt build obs v1.0)
 
 # 检查一波
 f_pre_check
@@ -24,7 +24,7 @@ if [[ ${kt_main} != ${kt} ]]; then
   return
 fi
 
-# 只敲了一个kt，没跟别的参数 -----------------------------------------------------------------------------------------------
+# 只敲了一个kt, 没跟别的参数 -----------------------------------------------------------------------------------------------
 if [[ -z ${operate1} ]]; then
   printf "${info_msg}欢迎使用k8s-autotest, 请使用${font_green1}${kt} ${kt_help1}${cend}查看使用帮助\n"
   return
@@ -172,13 +172,26 @@ case ${operate1} in
   # watch
   ${kt_watch}) f_watch ${operate2} ;;
 
+  # config
+  ${kt_config})
+    f_validate_config_cmd ${kt_config} ${operate2} ${operate3}
+    valid=$?
+    if [[ ${valid} = 0 ]]; then return; fi
+    case ${operate2} in
+      ${kt_clear})         f_config_clear ;;
+      ${kt_cloud_config})  f_config_cloud_config ${operate3} ;;
+
+      # config cmd help
+      ${kt_help3}) f_config_help ;;
+    esac ;;
+
   # help
   ${kt_help1}) f_help ;;
   ${kt_help2}) f_help ;;
   ${kt_help3}) f_help ;;
 
   # version
-  # 没啥用，图一乐
+  # 没啥用, 图一乐
   ${kt_version1}) f_version ;;
   ${kt_version2}) f_version ;;
   ${kt_version3}) f_version ;;

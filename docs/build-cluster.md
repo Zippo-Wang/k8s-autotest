@@ -6,7 +6,7 @@
 
 ### cluster
 
-特别说明，只支持同一类型的OS搭建成k8s集群，比如该集群中的机器都是CentOS；别整那既有CentOS，又有Ubuntu的。
+特别说明, 只支持同一类型的OS搭建成k8s集群, 比如该集群中的机器都是CentOS；别整那既有CentOS, 又有Ubuntu的。
 支持搭建集群的系统：**CentOS**
 
 * `--type` (String, Required). 这个节点的类型。取值如下
@@ -22,19 +22,19 @@
 
 * `--master` (String, Required). master节点的私有IP。
 
-* `--node` (String, Optional). node节点的私有IP，以逗号分割，跟密码一一对应。
+* `--node` (String, Optional). node节点的私有IP, 以逗号分割, 跟密码一一对应。
   例如**--node=192.168.0.5,192.168.0.6**
 
-* `--password` (String, Required). node节点的密码，跟私有IP一一对应 以逗号分割。
+* `--password` (String, Required). node节点的密码, 跟私有IP一一对应 以逗号分割。
   例如**--node=xxx,yyy**
 
-* `--dashname` (String, Optional). 安装dashboard，创建的用户叫什么。
+* `--dashname` (String, Optional). 安装dashboard, 创建的用户叫什么。
 
-* `--dashport` (Int, Optional). 安装dashboard，用哪个端口。
+* `--dashport` (Int, Optional). 安装dashboard, 用哪个端口。
 
 * `--mirror` (Bool, Optional). 是否使用脚本给写入镜像源。默认`false`
-  - `true`。使用，且安装一系列命令，会有点耗时，大概10-15min
-  - `false`。不使用，也不安装命令，超快，5min左右。(确保自己基础命令安装好了，而且你自己的镜像源中有docker/containerd/kubelet/kubeadm/kubectl)
+  - `true`。使用, 且安装一系列命令, 会有点耗时, 大概10-15min
+  - `false`。不使用, 也不安装命令, 超快, 5min左右。(确保自己基础命令安装好了, 而且你自己的镜像源中有docker/containerd/kubelet/kubeadm/kubectl)
 
 [Note] 手动安装怎么装？
 ```bash

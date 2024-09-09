@@ -60,13 +60,13 @@ function f_check_os_supported() {
 
 function f_check_env_vars() {
   if [ -z ${kt_project_path} ]; then
-    printf "${err_msg}环境变量'kt_project_path'为空，请参考readme.md配置 \n"
+    printf "${err_msg}环境变量'kt_project_path'为空, 请参考readme.md配置 \n"
     return 0
   elif [ -z ${kt_main} ]; then
-    printf "${err_msg}环境变量'kt_main'为空，请参考readme.md配置 \n"
+    printf "${err_msg}环境变量'kt_main'为空, 请参考readme.md配置 \n"
     return 0
   elif [ -z "$(alias kt 2>/dev/null)" ]; then
-    printf "${err_msg}环境变量'alias kt'为空，请参考readme.md配置 \n"
+    printf "${err_msg}环境变量'alias kt'为空, 请参考readme.md配置 \n"
     return 0
   fi
   return 1
@@ -105,17 +105,17 @@ function f_init() {
 
   if [ ! -d ${script_directory} ]
   then
-    printf "${warn_msg}该目录不存在，您的Linux系统不支持使用该脚本的自动补全功能，但不影响脚本使用。${script_directory} \n"
+    printf "${warn_msg}该目录不存在, 您的Linux系统不支持使用该脚本的自动补全功能, 但不影响脚本使用。${script_directory} \n"
   fi
 
-  # 如果支持，就写入自动补全脚本
+  # 如果支持, 就写入自动补全脚本
   if sudo -v &>/dev/null;
   then
     sudo cp ${kt_project_path}/utils/auto_tab.sh /etc/bash_completion.d/kt_auto_tab
-    . ${env_directory}  # 刷新自动补全的环境配置，使立即生效
-    printf "${info_msg}${font_green1}k8s-autotest初始化成功，请重新打开终端窗口使配置生效！${cend}\n"
+    . ${env_directory}  # 刷新自动补全的环境配置, 使立即生效
+    printf "${info_msg}${font_green1}k8s-autotest初始化成功, 请重新打开终端窗口使配置生效！${cend}\n"
   else
-    printf "${err_msg}${font_red1}sudo密码不正确，初始化失败！${cend}\n"
+    printf "${err_msg}${font_red1}sudo密码不正确, 初始化失败！${cend}\n"
   fi
 }
 
@@ -150,3 +150,18 @@ function f_validate_build_cmd() {
   return 1
 }
 
+# 适用config
+function f_validate_config_cmd() {
+  if [[ ${2} == ${kt_help3} && -z ${3} ]]; then return 1; fi
+
+  if [ -z ${2} ]; then
+    printf "${err_msg}${1}后面必须跟有1个参数, 使用${font_green1}kt ${1} --help${cend}查看使用帮助 \n"
+    return 0
+  fi
+
+  if [ ! -z ${3} ]; then
+    printf "${err_msg}没有这个命令: ${kt} $* \n"
+    return 0
+  fi
+  return 1
+}

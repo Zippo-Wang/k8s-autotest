@@ -17,6 +17,7 @@ function f_help() {
   printf " ${font_green1}delete${cend}       ${font_blue1}删除用例创建的资源${cend} \n"
   printf " ${font_green1}build${cend}        ${font_blue1}打包推送${cend} \n"
   printf " ${font_green1}watch${cend}        ${font_blue1}监控资源${cend} \n"
+  printf " ${font_green1}config${cend}       ${font_blue1}配置命令${cend} \n"
   echo
 }
 

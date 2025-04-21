@@ -174,7 +174,7 @@ function f_build_obs() {
 function f_build_sfs_turbo() {
   dir="${kt_code_path}/${repo_csi_all}"
   printf "${info_msg}${font_green1}make images↓↓↓${cend} \n"
-  (cd ${dir} && VERSION=${1} make image-sfsturbo-plugin)
+  (cd ${dir} && VERSION=${1} make image-sfsturbo-csi-plugin)
   printf "${info_msg}${font_green1}push images↓↓↓${cend} \n"
   (cd ${dir} && VERSION=${1} make push-image-sfsturbo-csi-plugin)
 }

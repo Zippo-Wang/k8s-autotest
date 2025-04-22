@@ -5,5 +5,5 @@ metadata:
 provisioner: sfsturbo.csi.huaweicloud.com
 reclaimPolicy: Delete
 parameters:
+  # availability: eu-west-0a  # 这里可以加入可用区参数，为了跨region这里注释掉
   shareType: STANDARD
-  availability: eu-west-0a

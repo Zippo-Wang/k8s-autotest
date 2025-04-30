@@ -16,6 +16,7 @@ function progress_bar() {
     echo
 }
 
+# f_check_os_type 用来判断OS是哪种类型
 # centos:1  ubuntu:2    debian:3    fedora:4    euler:5
 function f_check_os_type() {
   if grep -i -q "EulerOS" /etc/os-release; then
@@ -50,6 +51,7 @@ function f_check_os_type() {
   fi
 }
 
+# f_check_os_supported 判断你的OS支不支持kt系统
 function f_check_os_supported() {
   if [ ${1} = 0 ]; then
     printf "${err_msg}你的系统不支持k8s-autotest \n"
@@ -58,6 +60,7 @@ function f_check_os_supported() {
   return 1
 }
 
+# f_check_env_vars 检查你配环境变量了不，不配不让用
 function f_check_env_vars() {
   if [ -z ${kt_project_path} ]; then
     printf "${err_msg}环境变量'kt_project_path'为空, 请参考readme.md配置 \n"
@@ -72,6 +75,7 @@ function f_check_env_vars() {
   return 1
 }
 
+# f_pre_check 脚本启动预检查
 function f_pre_check() {
   # 1、检查os类型
   f_check_os_type
@@ -89,6 +93,7 @@ function f_pre_check() {
   return 1
 }
 
+# 系统初始化必备步骤，不执行初始化就不能用自动补全，而且换行符还有可能有一些问题
 function f_init() {
   # 修改换行符
   printf "${info_msg}"
@@ -123,17 +128,17 @@ function f_init() {
 function f_validate_cmd() {
   if [[ -z ${2} ]]; then
     printf "${err_msg}${1}后面必须跟有一个参数, 使用${font_green1}kt ${1} --help${cend}查看使用帮助 \n"
-    return 0
+    return ${no_ok}
   fi
   if [[ ${3} == ${kt_ds} ]]; then
-    return 1
+    return ${ok}
   fi
 
   if [[ ! -z ${3} ]]; then
     printf "${err_msg}没有这个命令: ${kt} $* \n"
-    return 0
+    return ${no_ok}
   fi
-  return 1
+  return ${ok}
 }
 
 # 适用build

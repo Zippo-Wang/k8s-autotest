@@ -219,6 +219,7 @@ function f_update_precheck() {
 }
 
 # 用于获取 ${kt_docker_user} 这个人的某个仓库下，latest的image
+latestTag=""
 function f_update_get_latest() {
     serviceName=${1}
     latestTag=$(curl -s "https://hub.docker.com/v2/repositories/${kt_docker_user}/${serviceName}-csi-plugin/tags?page_size=100" \
@@ -238,7 +239,7 @@ f_update_obs() {
   new_version=${1}
   if [[ -z ${new_version} ]]; then
     f_update_get_latest ${service_obs}
-    new_version=$?;
+    new_version=${latestTag}
   fi
 
   kubectl patch deployment csi-obs-controller \
@@ -274,7 +275,7 @@ f_update_evs() {
   new_version=${1}
   if [[ -z ${new_version} ]]; then
     f_update_get_latest ${service_evs}
-    new_version=$?;
+    new_version=${latestTag}
   fi
 
   kubectl patch deployment csi-evs-controller \
@@ -303,14 +304,14 @@ f_update_evs() {
 }
 
 f_update_sfsturbo() {
-#   f_update_precheck ${service_sfs_turbo}
-#   valid=$?
-#   if [[ ${valid} = ${no_ok} ]]; then return; fi
+  f_update_precheck ${service_sfs_turbo}
+  valid=$?
+  if [[ ${valid} = ${no_ok} ]]; then return; fi
 
   new_version=${1}
   if [[ -z ${new_version} ]]; then
     f_update_get_latest ${service_sfs_turbo}
-    new_version=$?;
+    new_version=${latestTag}
   fi
 
   kubectl patch deployment csi-sfsturbo-controller \

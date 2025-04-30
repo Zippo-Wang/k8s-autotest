@@ -201,7 +201,7 @@ function f_update_precheck() {
         fi
     fi
 
-    # 检查有没有对应的 deployment
+    # 检查有没有对应的 deployment【if中的=0，就是这条命令没有报错，正常退出。即exit with 0】
     kubectl get deployment ${depName} >/dev/null 2>&1
     if [ $? ! -eq 0 ]; then
         printf "${err_msg} deployment: ${depName} not exist! \n"

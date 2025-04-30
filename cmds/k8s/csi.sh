@@ -237,7 +237,7 @@ f_update_obs() {
 
   new_version=${1}
   if [[ -z ${new_version} ]]; then
-    f_update_get_latest
+    f_update_get_latest ${service_obs}
     new_version=$?;
   fi
 
@@ -273,7 +273,7 @@ f_update_evs() {
 
   new_version=${1}
   if [[ -z ${new_version} ]]; then
-    f_update_get_latest
+    f_update_get_latest ${service_evs}
     new_version=$?;
   fi
 
@@ -303,13 +303,13 @@ f_update_evs() {
 }
 
 f_update_sfsturbo() {
-  f_update_precheck ${service_sfs_turbo}
-  valid=$?
-  if [[ ${valid} = ${no_ok} ]]; then return; fi
+#   f_update_precheck ${service_sfs_turbo}
+#   valid=$?
+#   if [[ ${valid} = ${no_ok} ]]; then return; fi
 
   new_version=${1}
   if [[ -z ${new_version} ]]; then
-    f_update_get_latest
+    f_update_get_latest ${service_sfs_turbo}
     new_version=$?;
   fi
 

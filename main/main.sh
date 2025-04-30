@@ -169,6 +169,20 @@ case ${operate1} in
       ${kt_help3}) f_build_help ;;
     esac ;;
 
+  # update
+  ${kt_update})
+    f_validate_cmd ${kt_update} ${operate2}
+    valid=$?
+    if [[ ${valid} = ${no_ok} ]]; then return; fi
+    case ${operate2} in
+      ${service_evs})       f_update_evs ${operate3} ;; # operate3是新image的version
+      ${service_obs})       f_update_obs ${operate3} ;;
+      ${service_sfs_turbo}) f_update_sfsturbo ${operate3} ;;
+
+      # update cmd help
+      ${kt_help3}) f_update_help ;;
+    esac ;;
+
   # watch
   ${kt_watch}) f_watch ${operate2} ;;
 

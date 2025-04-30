@@ -1,22 +1,14 @@
 # k8s-autotest
 
 ### 已经测试过的系统
-* centos 7.9
+* Linux
+  * CentOS
+  * Ubuntu
+* Windows不支持
 
 其他系统**可能**存在不兼容
 
-### 功能说明
-* **支持一键搭建k8s集群【爆火】**。详见[搭建k8s集群](docs/build-cluster.md)
-* 支持一键安装Huaweicloud CSI、CCM插件。
-* 支持一键运行Huaweicloud CSI、CCM用例。
-* 支持一键打包Huaweicloud CSI、CCM项目并推送到docker hub。
-* 支持一键监控k8s集群内对象状态。
-
-入门教程: [使用k8s-autotest](docs/usage.md) 
-
-更多详情: 使用`kt help`查看本系统支持的全部命令。
-
-### 如何安装
+### 如何使用
 
 1）直接clone仓库
 ```git
@@ -34,6 +26,9 @@ git clone git@github.com:Zippo-Wang/k8s-autotest.git
 export kt_project_path="/root/code/k8s-autotest"
 export kt_code_path="/root/code"
 export kt_main='kt'
+
+export kt_docker_user='your docker name'    # 想用'kt update xxx'必须配这个环境变量
+
 alias kt="source $kt_project_path/main/main.sh"
 ```
 

@@ -2,6 +2,9 @@
 
 source ${kt_project_path}/main/constants.sh
 
+#####################################################################################
+# create
+#####################################################################################
 function f_create() {
   yaml_dir=${1}
   daemonset=${2}
@@ -66,6 +69,9 @@ function f_create() {
 
 }
 
+#####################################################################################
+# delete
+#####################################################################################
 function f_delete() {
   yaml_dir=${1}
   daemonset=${2}
@@ -132,6 +138,9 @@ function f_delete() {
   printf "${info_msg}The cmd have been executed successfully, please wait for resources be deleted completely. \n"
 }
 
+#####################################################################################
+# watch
+#####################################################################################
 function f_watch() {
   f_validate_cmd ${kt_build} ${operate2} ${operate3}
   valid=$?
@@ -141,9 +150,10 @@ function f_watch() {
     ${k8s_pvc} ) watch -n 1 -d kubectl get pvc ;;
     ${k8s_pv} )  watch -n 1 -d kubectl get pv ;;
 
-    ${k8s_deployment} )  watch -n 1 -d kubectl get deployment ;;
-    ${k8s_daemonset1} )  watch -n 1 -d kubectl get daemonset ;;
-    ${k8s_daemonset2} )  watch -n 1 -d kubectl get daemonset ;;
+    ${k8s_deployment} )   watch -n 1 -d kubectl get deployment ;;
+    ${k8s_deployment2} )  watch -n 1 -d kubectl get deployment ;;
+    ${k8s_daemonset1} )   watch -n 1 -d kubectl get daemonset ;;
+    ${k8s_daemonset2} )   watch -n 1 -d kubectl get daemonset ;;
     ${k8s_service1} )  watch -n 1 -d kubectl get service ;;
     ${k8s_service2} )  watch -n 1 -d kubectl get service ;;
     ${k8s_sc} )  watch -n 1 -d kubectl get sc ;;
@@ -155,6 +165,173 @@ function f_watch() {
   esac
 }
 
+#####################################################################################
+# update
+#####################################################################################
+
+# f_update_help 检查是否有对应服务的Deployment和DaemonSet
+function f_update_precheck() {
+    serviceName=${1}
+    depName="csi-${serviceName}-controller"
+    dsName="csi-${serviceName}-plugin"
+
+    # 检查有没有配置 docker user 这个环境变量
+    if [[  ${kt_docker_user} == "" ]]; then
+        printf "${err_msg} the variable 'kt_docker_user' is empty, please reference Readme.md to config \n"
+        return ${no_ok}
+    fi
+
+    # 检查有没有 kubectl 这个命令
+    if ! command -v kubectl >/dev/null 2>&1 ; then
+        printf "${err_msg}failed to execute 'kubectl', please install manually and retry \n"
+        return ${no_ok}
+    fi
+
+    # 检查有没有jq这个命令
+    if ! command -v jq >/dev/null 2>&1 ; then
+        printf "${err_msg}failed to execute 'jq', try to install... \n"
+        f_check_os_type
+        osType=$?
+        if [[ ${osType} == 1 ]]; then
+            yum install -y epel-release
+            yum install -y jq
+        elif [[ ${osType} == 2 ]]; then
+            sudo apt update
+            sudo apt install -y jq
+        fi
+    fi
+
+    # 检查有没有对应的 deployment
+    kubectl get deployment ${depName} >/dev/null 2>&1
+    if [ $? ! -eq 0 ]; then
+        printf "${err_msg} deployment: ${depName} not exist! \n"
+        return ${no_ok}
+    fi
+
+    # 检查有没有对应的 daemonset
+    kubectl get daemonset ${dsName} >/dev/null 2>&1
+    if [ $? ! -eq 0 ]; then
+        printf "${err_msg} daemonset: ${dsName} not exist! \n"
+        return ${no_ok}
+    fi
+
+    return ${ok}
+}
+
+# 用于获取 ${kt_docker_user} 这个人的某个仓库下，latest的image
+function f_update_get_latest() {
+    serviceName=${1}
+    latestTag=$(curl -s "https://hub.docker.com/v2/repositories/${kt_docker_user}/${serviceName}-csi-plugin/tags?page_size=100" \
+      | jq -r ".results[].name" \
+      | sort -V \
+      | tail -n 1)
+
+    printf "${info_msg} latest image version: ${serviceName}:${latestTag} \n"
+}
+
+
+f_update_obs() {
+  f_update_precheck ${service_obs}
+  valid=$?
+  if [[ ${valid} = ${no_ok} ]]; then return; fi
+
+  new_version=${1}
+  if [[ -z ${new_version} ]]; then new_version=${latestTag}; fi
+
+  kubectl patch deployment csi-obs-controller \
+  --type="json" \
+  -p="[
+    {
+      \"op\": \"replace\",
+      \"path\": \"/spec/template/spec/containers/0/image\",
+      \"value\": \"${kt_docker_user}/obs-csi-plugin:${new_version}\"
+    }
+  ]"
+
+  sleep 1
+
+  kubectl patch daemonset csi-obs-plugin \
+  --type="json" \
+  -p="[
+    {
+      \"op\": \"replace\",
+      \"path\": \"/spec/template/spec/containers/0/image\",
+      \"value\": \"${kt_docker_user}/obs-csi-plugin:${new_version}\"
+    }
+  ]"
+
+  printf "${info_msg} command executed successfully! please wait 5s to check workload status \n"
+}
+
+f_update_evs() {
+  f_update_precheck ${service_evs}
+  valid=$?
+  if [[ ${valid} = ${no_ok} ]]; then return; fi
+
+  new_version=${1}
+  if [[ -z ${new_version} ]]; then new_version=${latestTag}; fi
+
+  kubectl patch deployment csi-evs-controller \
+  --type="json" \
+  -p="[
+    {
+      \"op\": \"replace\",
+      \"path\": \"/spec/template/spec/containers/0/image\",
+      \"value\": \"${kt_docker_user}/evs-csi-plugin:${new_version}\"
+    }
+  ]"
+
+  sleep 1
+
+  kubectl patch daemonset csi-evs-plugin \
+  --type="json" \
+  -p="[
+    {
+      \"op\": \"replace\",
+      \"path\": \"/spec/template/spec/containers/0/image\",
+      \"value\": \"${kt_docker_user}/evs-csi-plugin:${new_version}\"
+    }
+  ]"
+
+  printf "${info_msg} command executed successfully! please wait 5s to check workload status \n"
+}
+
+f_update_sfsturbo() {
+  f_update_precheck ${service_sfs_turbo}
+  valid=$?
+  if [[ ${valid} = ${no_ok} ]]; then return; fi
+
+  new_version=${1}
+  if [[ -z ${new_version} ]]; then new_version=${latestTag}; fi
+
+  kubectl patch deployment csi-sfsturbo-controller \
+  --type="json" \
+  -p="[
+    {
+      \"op\": \"replace\",
+      \"path\": \"/spec/template/spec/containers/0/image\",
+      \"value\": \"${kt_docker_user}/sfsturbo-csi-plugin:${new_version}\"
+    }
+  ]"
+
+  sleep 1
+
+  kubectl patch daemonset csi-sfsturbo-plugin \
+  --type="json" \
+  -p="[
+    {
+      \"op\": \"replace\",
+      \"path\": \"/spec/template/spec/containers/0/image\",
+      \"value\": \"${kt_docker_user}/sfsturbo-csi-plugin:${new_version}\"
+    }
+  ]"
+
+  printf "${info_msg} command executed successfully! please wait 5s to check workload status \n"
+}
+
+#####################################################################################
+# build
+#####################################################################################
 function f_build_evs() {
   dir="${kt_code_path}/${repo_csi_all}"
   printf "${info_msg}${font_green1}make images↓↓↓${cend} \n"
@@ -179,6 +356,10 @@ function f_build_sfs_turbo() {
   (cd ${dir} && VERSION=${1} make push-image-sfsturbo-csi-plugin)
 }
 
+
+#####################################################################################
+# install
+#####################################################################################
 function f_install_evs() {
 kubectl apply -f https://raw.githubusercontent.com/huaweicloud/huaweicloud-csi-driver/master/deploy/evs-csi-plugin/kubernetes/rbac-csi-evs-controller.yaml
 kubectl apply -f https://raw.githubusercontent.com/huaweicloud/huaweicloud-csi-driver/master/deploy/evs-csi-plugin/kubernetes/rbac-csi-evs-node.yaml
@@ -206,6 +387,9 @@ kubectl apply -f https://raw.githubusercontent.com/huaweicloud/huaweicloud-csi-d
 kubectl apply -f https://raw.githubusercontent.com/huaweicloud/huaweicloud-csi-driver/master/deploy/sfsturbo-csi-plugin/kubernetes/csi-sfsturbo-node.yaml
 }
 
+#####################################################################################
+# uninstall
+#####################################################################################
 function f_uninstall_evs() {
 kubectl delete -f https://raw.githubusercontent.com/huaweicloud/huaweicloud-csi-driver/master/deploy/evs-csi-plugin/kubernetes/rbac-csi-evs-controller.yaml
 kubectl delete -f https://raw.githubusercontent.com/huaweicloud/huaweicloud-csi-driver/master/deploy/evs-csi-plugin/kubernetes/rbac-csi-evs-node.yaml

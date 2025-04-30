@@ -96,6 +96,15 @@ function f_watch_help() {
   printf " ${font_green1}${k8s_pv}${cend}  \t      执行watch -n 1 -d kubectl get pv ${font_green} \t【不支持：${k8s_pv_all}】${cend}\n"
 }
 
+function f_update_help() {
+  printf "${font_yellow1}[${kt_update}] 更新指定服务的image, 不指定版本就去拉latest${cend}\n"
+  printf "${font_yellow1}用法: kt update obs 或 kt update obs v0.0.2${cend} \n"
+  printf "${font_yellow1}可选参数: ${cend}\n"
+  printf " ${font_green1}${service_obs}${cend}         更新 obs      的deployment和DaemonSet的image \n"
+  printf " ${font_green1}${service_evs}${cend}         更新 evs      的deployment和DaemonSet的image \n"
+  printf " ${font_green1}${service_sfs_turbo}${cend}    更新 sfsturbo 的deployment和DaemonSet的image \n"
+}
+
 function f_config_help() {
   printf "${font_yellow1}[${kt_config}] 一些不太好分类的命令${cend}\n"
   printf "${font_yellow1}可选参数: ${cend}\n"

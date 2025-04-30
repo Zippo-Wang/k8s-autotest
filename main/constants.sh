@@ -9,6 +9,7 @@ kt_create="create"       # 创建用例
 kt_delete="delete"       # 删除用例
 kt_install="install"     # 创建RBAC鉴权、安装插件【不包括cloud-config】
 kt_uninstall="uninstall" # 删除RBAC鉴权、安装插件【不包括cloud-config】
+kt_update="update"       # 更新deployment和DaemonSet的镜像
 kt_watch="watch"         # 监控资源
 kt_build="build"         # 构建csi包, 然后发布到docker hub
 kt_config="config"       # 新增一个命令, 但不知道该归于哪一类里面去，就放这
@@ -114,7 +115,7 @@ common_none=""
 common_init="init"
 
 cmd_list1=(
-    ${kt_create} ${kt_delete} ${kt_watch} ${kt_install} ${kt_uninstall} ${kt_build} ${kt_config}
+    ${kt_create} ${kt_delete} ${kt_watch} ${kt_install} ${kt_uninstall} ${kt_build} ${kt_config} ${kt_update}
     ${common_init} ${kt_help1} ${kt_help2} ${kt_help3}
     ${kt_version1} ${kt_version2} ${kt_version3} ${kt_version4} ${kt_version5}
 )
@@ -130,10 +131,13 @@ cmd_list2=(
 )
 
 # debug常量
-info_msg="\033[0;30;42m[INFO]${cend}" # 绿色加粗, INFO
-warn_msg="\033[0;30;43m[WARN]${cend}" # 黄色加粗, WARN
-err_msg="\033[0;30;41m[ERROR]${cend}" # 红色加粗, ERROR
+info_msg="\033[0;30;42m[INFO]${cend}"   # 绿色加粗, INFO
+warn_msg="\033[0;30;43m[WARN]${cend}"   # 黄色加粗, WARN
+err_msg="\033[0;30;41m[ERROR]${cend}"   # 红色加粗, ERROR
 debug_msg="\033[0;30;44m[DEBUG]${cend}" # 蓝色加粗, DEBUG
+
+ok=1
+no_ok=0
 
 
 # 颜色常量

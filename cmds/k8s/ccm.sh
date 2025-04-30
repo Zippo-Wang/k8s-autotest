@@ -2,6 +2,9 @@
 
 source ${kt_project_path}/main/constants.sh
 
+#####################################################################################
+# create
+#####################################################################################
 function f_create_ccm() {
   yaml_dir=${1}
   # 一般
@@ -22,6 +25,9 @@ function f_create_ccm() {
   printf "${info_msg}The cmd have been executed successfully, please wait for resources be created completely. \n"
 }
 
+#####################################################################################
+# delete
+#####################################################################################
 function f_delete_ccm() {
   yaml_dir=${1}
   # 一般
@@ -42,16 +48,25 @@ function f_delete_ccm() {
   printf "${info_msg}The cmd have been executed successfully, please wait for resources be deleted completely. \n"
 }
 
+#####################################################################################
+# install
+#####################################################################################
 function f_install_ccm() {
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/cloud-provider-huaweicloud/master/manifests/rbac-huawei-cloud-controller-manager.yaml
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/cloud-provider-huaweicloud/master/manifests/huawei-cloud-controller-manager.yaml
 }
 
+#####################################################################################
+# uninstall
+#####################################################################################
 function f_uninstall_ccm() {
 kubectl delete -f https://raw.githubusercontent.com/kubernetes-sigs/cloud-provider-huaweicloud/master/manifests/rbac-huawei-cloud-controller-manager.yaml
 kubectl delete -f https://raw.githubusercontent.com/kubernetes-sigs/cloud-provider-huaweicloud/master/manifests/huawei-cloud-controller-manager.yaml
 }
 
+#####################################################################################
+# build
+#####################################################################################
 function f_build_ccm() {
   dir="${kt_code_path}/${repo_ccm_all}"
   printf "${info_msg}${font_green1}make images↓↓↓${cend} \n"

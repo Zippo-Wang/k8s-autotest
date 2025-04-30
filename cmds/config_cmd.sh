@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# f_config_clear 安装一键清屏脚本，十分好用
 function f_config_clear() {
     env_dir="/etc/profile"
     script_dir="/root/scripts"
@@ -25,6 +26,10 @@ EOF
     printf "${info_msg}命令执行成功, 敲一个小写的${font_green}c${cend}试试 \n"
 }
 
+# f_config_cloud_config 修改CSI cloud-config文件的
+# 不好用别用了！
+# 不好用别用了！
+# 不好用别用了！
 function f_config_cloud_config() {
     default_dir="/root/build-k8s/cloud-config"
     cloud_config_dir=${1}

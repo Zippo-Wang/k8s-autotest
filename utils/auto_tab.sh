@@ -5,7 +5,7 @@
 # 每次执行init都会重写该文件, 如手动修改了本文件请及时保存
 
 _kt_auto_tab(){
-  opts1="create delete watch build install uninstall config init help -help --help version -version --version -v --v"
+  opts1="create delete watch build update install uninstall config init help -help --help version -version --version -v --v"
   config_opt="clear cloud-config"
   opts2="evs obs sfsturbo ccm"
   evs_cmd="evs-default evs-parameter evs-deny-resize evs-allow-resize evs-snapshot evs-rwo evs-rwx"
@@ -14,6 +14,7 @@ _kt_auto_tab(){
   ccm_cmd="ccm-normal ccm-eip ccm-affinity ccm-existing"
   opts3="pod pvc pv deployment daemonset service node dep ds svc"
   help_cmd="--help"
+  update_opt="evs obs sfsturbo"
 
 	case ${COMP_CWORD} in
 	1)
@@ -29,6 +30,8 @@ _kt_auto_tab(){
 		  COMPREPLY=($(compgen -W "${opts3} ${help_cmd}" -- ${COMP_WORDS[COMP_CWORD]}))
         elif [ ${COMP_WORDS[1]} == "config" ]; then
 		  COMPREPLY=($(compgen -W "${config_opt} ${help_cmd}" -- ${COMP_WORDS[COMP_CWORD]}))
+        elif [ ${COMP_WORDS[1]} == "update" ]; then
+		  COMPREPLY=($(compgen -W "${update_opt} ${help_cmd}" -- ${COMP_WORDS[COMP_CWORD]}))
 		fi
 	esac
 }

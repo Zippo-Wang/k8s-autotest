@@ -243,7 +243,7 @@ f_update_obs() {
   -p="[
     {
       \"op\": \"replace\",
-      \"path\": \"/spec/template/spec/containers/1/image\",
+      \"path\": \"/spec/template/spec/containers/2/image\",
       \"value\": \"${kt_docker_user}/obs-csi-plugin:${new_version}\"
     }
   ]"
@@ -255,7 +255,7 @@ f_update_obs() {
   -p="[
     {
       \"op\": \"replace\",
-      \"path\": \"/spec/template/spec/containers/1/image\",
+      \"path\": \"/spec/template/spec/containers/2/image\",
       \"value\": \"${kt_docker_user}/obs-csi-plugin:${new_version}\"
     }
   ]"
@@ -276,7 +276,7 @@ f_update_evs() {
   -p="[
     {
       \"op\": \"replace\",
-      \"path\": \"/spec/template/spec/containers/1/image\",
+      \"path\": \"/spec/template/spec/containers/2/image\",
       \"value\": \"${kt_docker_user}/evs-csi-plugin:${new_version}\"
     }
   ]"
@@ -288,7 +288,7 @@ f_update_evs() {
   -p="[
     {
       \"op\": \"replace\",
-      \"path\": \"/spec/template/spec/containers/1/image\",
+      \"path\": \"/spec/template/spec/containers/2/image\",
       \"value\": \"${kt_docker_user}/evs-csi-plugin:${new_version}\"
     }
   ]"
@@ -309,7 +309,7 @@ f_update_sfsturbo() {
   -p="[
     {
       \"op\": \"replace\",
-      \"path\": \"/spec/template/spec/containers/1/image\",
+      \"path\": \"/spec/template/spec/containers/2/image\",
       \"value\": \"${kt_docker_user}/sfsturbo-csi-plugin:${new_version}\"
     }
   ]"
@@ -321,7 +321,7 @@ f_update_sfsturbo() {
   -p="[
     {
       \"op\": \"replace\",
-      \"path\": \"/spec/template/spec/containers/1/image\",
+      \"path\": \"/spec/template/spec/containers/2/image\",
       \"value\": \"${kt_docker_user}/sfsturbo-csi-plugin:${new_version}\"
     }
   ]"

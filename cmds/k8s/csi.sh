@@ -202,13 +202,15 @@ function f_update_precheck() {
     fi
 
     # 检查有没有对应的 deployment
-    if kubectl get deployment ${depName} >/dev/null 2>&1; then
+    kubectl get deployment ${depName} >/dev/null 2>&1
+    if [ $? ! -eq 0 ]; then
         printf "${err_msg} deployment: ${depName} not exist! \n"
         return ${no_ok}
     fi
 
     # 检查有没有对应的 daemonset
-    if kubectl get daemonset ${dsName} >/dev/null 2>&1; then
+    kubectl get daemonset ${dsName} >/dev/null 2>&1
+    if [ $? ! -eq 0 ]; then
         printf "${err_msg} daemonset: ${dsName} not exist! \n"
         return ${no_ok}
     fi

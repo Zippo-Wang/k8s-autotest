@@ -236,7 +236,10 @@ f_update_obs() {
   if [[ ${valid} = ${no_ok} ]]; then return; fi
 
   new_version=${1}
-  if [[ -z ${new_version} ]]; then new_version=${latestTag}; fi
+  if [[ -z ${new_version} ]]; then
+    f_update_get_latest
+    new_version=$?;
+  fi
 
   kubectl patch deployment csi-obs-controller \
   --type="json" \
@@ -269,7 +272,10 @@ f_update_evs() {
   if [[ ${valid} = ${no_ok} ]]; then return; fi
 
   new_version=${1}
-  if [[ -z ${new_version} ]]; then new_version=${latestTag}; fi
+  if [[ -z ${new_version} ]]; then
+    f_update_get_latest
+    new_version=$?;
+  fi
 
   kubectl patch deployment csi-evs-controller \
   --type="json" \
@@ -302,7 +308,10 @@ f_update_sfsturbo() {
   if [[ ${valid} = ${no_ok} ]]; then return; fi
 
   new_version=${1}
-  if [[ -z ${new_version} ]]; then new_version=${latestTag}; fi
+  if [[ -z ${new_version} ]]; then
+    f_update_get_latest
+    new_version=$?;
+  fi
 
   kubectl patch deployment csi-sfsturbo-controller \
   --type="json" \

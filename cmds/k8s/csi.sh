@@ -170,6 +170,7 @@ function f_watch() {
 #####################################################################################
 
 # f_update_help 检查是否有对应服务的Deployment和DaemonSet
+# 参数1: 服务名[Required]
 function f_update_precheck() {
     serviceName=${1}
     depName="csi-${serviceName}-controller"
@@ -185,20 +186,6 @@ function f_update_precheck() {
     if ! command -v kubectl >/dev/null 2>&1 ; then
         printf "${err_msg}failed to execute 'kubectl', please install manually and retry \n"
         return ${no_ok}
-    fi
-
-    # 检查有没有jq这个命令
-    if ! command -v jq >/dev/null 2>&1 ; then
-        printf "${err_msg}failed to execute 'jq', try to install... \n"
-        f_check_os_type
-        osType=$?
-        if [[ ${osType} == 1 ]]; then   # 自定义的码, CentOS
-            yum install -y epel-release
-            yum install -y jq
-        elif [[ ${osType} == 2 ]]; then # 自定义的码, Ubuntu
-            sudo apt update
-            sudo apt install -y jq
-        fi
     fi
 
     # 检查有没有对应的 deployment【if中的=0，就是这条命令没有报错，正常退出。即exit with 0】
@@ -218,7 +205,8 @@ function f_update_precheck() {
     return ${ok}
 }
 
-# 用于获取 ${kt_docker_user} 这个人的某个仓库下，latest的image
+# f_update_get_latest 用于获取 ${kt_docker_user} 这个人的某个仓库下，latest的image
+# 参数1: 服务名[Required]
 latestTag=""
 function f_update_get_latest() {
     serviceName=${1}
@@ -230,111 +218,140 @@ function f_update_get_latest() {
     printf "${info_msg} latest image version: ${serviceName}:${latestTag} \n"
 }
 
+# f_update_deployment 修改deployment
+# 参数1: 服务名[Required]
+# 参数2: 新的版本号[Required]
+function f_update_deployment() {
+  # 1、获取函数参数
+  serviceName=${1}
+  newVersion=${2}
 
-f_update_obs() {
+  # 2、变量定义
+  oldImageNamePrefix1="swr.cn-north-4.myhuaweicloud.com/k8s-csi/${serviceName}-csi-plugin"
+  oldImageNamePrefix2="${kt_docker_user}/${serviceName}-csi-plugin"
+  newImageName="${kt_docker_user}/${serviceName}-csi-plugin:${new_version}"
+  directoryPath="/tmp/csi-${serviceName}"
+  tmpFileName="/tmp/csi-${serviceName}/${serviceName}-tmp-deployment.yaml"
+
+  # 3、检查目录是否存在，不存在就创建
+  if [[ ! -d ${directoryPath} ]]; then
+    mkdir -p ${directoryPath}
+  fi
+
+  # 4、导出deployment的yaml
+  kubectl get deployment "csi-${serviceName}-controller" -n "kube-system" -o yaml > ${tmpFileName}
+
+  # 5、替换以指定前缀开头的 image 字段
+  sed -i "s|image: ${oldImageNamePrefix1}.*|image: ${newImageName}|" ${tmpFileName}
+  sed -i "s|image: ${oldImageNamePrefix2}.*|image: ${newImageName}|" ${tmpFileName}
+  sleep 1
+
+  # 6、清理, 文件和目录同时删除
+  kubectl apply -f ${tmpFileName}
+  rm -rf ${directoryPath}
+}
+
+# f_update_daemonset 修改daemonset
+# 参数1: 服务名[Required]
+# 参数2: 新的版本号[Required]
+function f_update_daemonset() {
+  # 1、获取函数参数
+  serviceName=${1}
+  newVersion=${2}
+
+  # 2、变量定义
+  oldImageNamePrefix1="swr.cn-north-4.myhuaweicloud.com/k8s-csi/${serviceName}-csi-plugin"
+  oldImageNamePrefix2="${kt_docker_user}/${serviceName}-csi-plugin"
+  newImageName="${kt_docker_user}/${serviceName}-csi-plugin:${new_version}"
+  directoryPath="/tmp/csi-${serviceName}"
+  tmpFileName="/tmp/csi-${serviceName}/${serviceName}-tmp-daemonset.yaml"
+
+  # 3、检查目录是否存在，不存在就创建
+  if [[ ! -d ${directoryPath} ]]; then
+    mkdir -p ${directoryPath}
+  fi
+
+  # 4、导出 daemonset 的yaml
+  kubectl get daemonset "csi-${serviceName}-plugin" -n "kube-system" -o yaml > ${tmpFileName}
+
+  # 5、替换以指定前缀开头的 image 字段
+  sed -i "s|image: ${oldImageNamePrefix1}.*|image: ${newImageName}|" ${tmpFileName}
+  sed -i "s|image: ${oldImageNamePrefix2}.*|image: ${newImageName}|" ${tmpFileName}
+  sleep 1
+
+  # 6、清理, 文件和目录同时删除
+  kubectl apply -f ${tmpFileName}
+  rm -rf ${directoryPath}
+}
+
+# f_update_obs 更新obs的deployment和daemonSet
+# 参数1: 新的版本号[Optional]
+function f_update_obs() {
+  # 1、修改前预检查
   f_update_precheck ${service_obs}
   valid=$?
   if [[ ${valid} = ${no_ok} ]]; then return; fi
 
+  # 2、获取最新version。
+  # 如果用户手动输入了，那就用用户输入的
+  # 如果用户没有输入，那就去docker获取最新的
   new_version=${1}
   if [[ -z ${new_version} ]]; then
     f_update_get_latest ${service_obs}
     new_version=${latestTag}
   fi
 
-  kubectl patch deployment csi-obs-controller \
-  --type="json" \
-  -p="[
-    {
-      \"op\": \"replace\",
-      \"path\": \"/spec/template/spec/containers/2/image\",
-      \"value\": \"${kt_docker_user}/obs-csi-plugin:${new_version}\"
-    }
-  ]"
-
-  sleep 1
-
-  kubectl patch daemonset csi-obs-plugin \
-  --type="json" \
-  -p="[
-    {
-      \"op\": \"replace\",
-      \"path\": \"/spec/template/spec/containers/2/image\",
-      \"value\": \"${kt_docker_user}/obs-csi-plugin:${new_version}\"
-    }
-  ]"
+  # 3、更新 deployment 和 daemonset
+  f_update_deployment ${service_obs} ${new_version}
+  f_update_daemonset  ${service_obs} ${new_version}
 
   printf "${info_msg} command executed successfully! please wait 5s to check workload status \n"
 }
 
-f_update_evs() {
+# f_update_evs 更新evs的deployment和daemonSet
+# 参数1: 新的版本号[Optional]
+function f_update_evs() {
+  # 1、修改前预检查
   f_update_precheck ${service_evs}
   valid=$?
   if [[ ${valid} = ${no_ok} ]]; then return; fi
 
+  # 2、获取最新version。
+  # 如果用户手动输入了，那就用用户输入的
+  # 如果用户没有输入，那就去docker获取最新的
   new_version=${1}
   if [[ -z ${new_version} ]]; then
     f_update_get_latest ${service_evs}
     new_version=${latestTag}
   fi
 
-  kubectl patch deployment csi-evs-controller \
-  --type="json" \
-  -p="[
-    {
-      \"op\": \"replace\",
-      \"path\": \"/spec/template/spec/containers/2/image\",
-      \"value\": \"${kt_docker_user}/evs-csi-plugin:${new_version}\"
-    }
-  ]"
-
-  sleep 1
-
-  kubectl patch daemonset csi-evs-plugin \
-  --type="json" \
-  -p="[
-    {
-      \"op\": \"replace\",
-      \"path\": \"/spec/template/spec/containers/2/image\",
-      \"value\": \"${kt_docker_user}/evs-csi-plugin:${new_version}\"
-    }
-  ]"
+  # 3、更新 deployment 和 daemonset
+  f_update_deployment ${service_evs} ${new_version}
+  f_update_daemonset  ${service_evs} ${new_version}
 
   printf "${info_msg} command executed successfully! please wait 5s to check workload status \n"
 }
 
-f_update_sfsturbo() {
-  f_update_precheck ${service_sfs_turbo}
+# f_update_sfsturbo 更新sfs-turbo的deployment和daemonSet
+# 参数1: 新的版本号[Optional]
+function f_update_sfsturbo() {
+  # 1、修改前预检查
+  f_update_precheck ${service_sfsturbo}
   valid=$?
   if [[ ${valid} = ${no_ok} ]]; then return; fi
 
+  # 2、获取最新version。
+  # 如果用户手动输入了，那就用用户输入的
+  # 如果用户没有输入，那就去docker获取最新的
   new_version=${1}
   if [[ -z ${new_version} ]]; then
-    f_update_get_latest ${service_sfs_turbo}
+    f_update_get_latest ${service_sfsturbo}
     new_version=${latestTag}
   fi
 
-  kubectl patch deployment csi-sfsturbo-controller \
-  --type="json" \
-  -p="[
-    {
-      \"op\": \"replace\",
-      \"path\": \"/spec/template/spec/containers/2/image\",
-      \"value\": \"${kt_docker_user}/sfsturbo-csi-plugin:${new_version}\"
-    }
-  ]"
-
-  sleep 1
-
-  kubectl patch daemonset csi-sfsturbo-plugin \
-  --type="json" \
-  -p="[
-    {
-      \"op\": \"replace\",
-      \"path\": \"/spec/template/spec/containers/2/image\",
-      \"value\": \"${kt_docker_user}/sfsturbo-csi-plugin:${new_version}\"
-    }
-  ]"
+  # 3、更新 deployment 和 daemonset
+  f_update_deployment ${service_sfsturbo} ${new_version}
+  f_update_daemonset  ${service_sfsturbo} ${new_version}
 
   printf "${info_msg} command executed successfully! please wait 5s to check workload status \n"
 }

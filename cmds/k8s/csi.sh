@@ -226,9 +226,6 @@ function f_update_deployment() {
   serviceName=${1}
   newVersion=${2}
 
-  echo ${serviceName}
-  echo ${newVersion}
-
   # 2、变量定义
   oldImageNamePrefix1="swr.cn-north-4.myhuaweicloud.com/k8s-csi/${serviceName}-csi-plugin"
   oldImageNamePrefix2="${kt_docker_user}/${serviceName}-csi-plugin"

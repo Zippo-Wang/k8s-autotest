@@ -188,6 +188,21 @@ function f_update_precheck() {
         return ${no_ok}
     fi
 
+    # 检查有没有 jq 这个命令
+    # # centos:1  ubuntu:2
+    if ! command -v jq >/dev/null 2>&1 ; then
+        printf "${err_msg}failed to execute 'jq', try to install... \n"
+        f_check_os_type
+        osType=$?
+        if [[ ${osType} == 1 ]]; then
+            yum install -y epel-release
+            yum install -y jq
+        elif [[ ${osType} == 2 ]]; then
+            sudo apt update
+            sudo apt install -y jq
+        fi
+    fi
+
     # 检查有没有对应的 deployment【if中的=0，就是这条命令没有报错，正常退出。即exit with 0】
     kubectl get deployment ${depName} >/dev/null 2>&1
     if [ $? ! -eq 0 ]; then

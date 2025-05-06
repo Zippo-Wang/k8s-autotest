@@ -110,6 +110,15 @@ dir_eip="${kt_project_path}/test-case/ccm/02_dynamic_elb_eip"
 dir_affinity="${kt_project_path}/test-case/ccm/03_session_affinity_elb"
 dir_existing="${kt_project_path}/test-case/ccm/04_existing_elb"
 
+
+# 操作系统 --------------------------------------------------------------------------------------------------------------
+centosCode="centosCode"
+ubuntuCode="ubuntuCode"
+debianCode="debianCode"
+fedoraCode="fedoraCode"
+eulerCode="eulerCode"
+
+
 # 其他常量 --------------------------------------------------------------------------------------------------------------
 common_none=""
 common_init="init"

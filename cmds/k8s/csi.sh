@@ -345,7 +345,7 @@ function f_update_sfsturbo() {
   # 如果用户没有输入，那就去docker获取最新的
   new_version=${1}
   if [[ -z ${new_version} ]]; then
-    f_update_get_latest ${service_sfsturbo}
+    f_update_get_latest ${service_sfs_turbo}
     new_version=${latestTag}
   fi
 

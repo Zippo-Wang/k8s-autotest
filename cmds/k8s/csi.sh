@@ -192,10 +192,10 @@ function f_update_precheck() {
         printf "${err_msg}failed to execute 'jq', try to install... \n"
         f_check_os_type
         osType=$?
-        if [[ ${osType} == 1 ]]; then
+        if [[ ${osType} == 1 ]]; then   # 自定义的码, CentOS
             yum install -y epel-release
             yum install -y jq
-        elif [[ ${osType} == 2 ]]; then
+        elif [[ ${osType} == 2 ]]; then # 自定义的码, Ubuntu
             sudo apt update
             sudo apt install -y jq
         fi

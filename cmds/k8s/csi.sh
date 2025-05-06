@@ -226,6 +226,9 @@ function f_update_deployment() {
   serviceName=${1}
   newVersion=${2}
 
+  echo ${serviceName}
+  echo ${newVersion}
+
   # 2、变量定义
   oldImageNamePrefix1="swr.cn-north-4.myhuaweicloud.com/k8s-csi/${serviceName}-csi-plugin"
   oldImageNamePrefix2="${kt_docker_user}/${serviceName}-csi-plugin"
@@ -336,9 +339,9 @@ function f_update_evs() {
 # 参数1: 新的版本号[Optional]
 function f_update_sfsturbo() {
   # 1、修改前预检查
-  f_update_precheck ${service_sfsturbo}
-  valid=$?
-  if [[ ${valid} = ${no_ok} ]]; then return; fi
+#   f_update_precheck ${service_sfs_turbo}
+#   valid=$?
+#   if [[ ${valid} = ${no_ok} ]]; then return; fi
 
   # 2、获取最新version。
   # 如果用户手动输入了，那就用用户输入的
@@ -350,8 +353,8 @@ function f_update_sfsturbo() {
   fi
 
   # 3、更新 deployment 和 daemonset
-  f_update_deployment ${service_sfsturbo} ${new_version}
-  f_update_daemonset  ${service_sfsturbo} ${new_version}
+  f_update_deployment ${service_sfs_turbo} ${new_version}
+  f_update_daemonset  ${service_sfs_turbo} ${new_version}
 
   printf "${info_msg} command executed successfully! please wait 5s to check workload status \n"
 }
